@@ -23,4 +23,5 @@ button.style.font="menu";
 button.style.fontSize = "16px";
 button.style.border="0";
 button.style.borderRadius="10px 0 0 0 ";
+button.style.zIndex = "9999";
 document.body.appendChild(button);
