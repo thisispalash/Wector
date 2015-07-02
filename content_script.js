@@ -1,3 +1,18 @@
+
+
+function checkHighlight() {
+	var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    if (text != "" && text.length < 50) {
+    	gText();
+    }
+}
+
+document.onmouseup = checkHighlight;
 function gText() {
     var text = "";
     if (window.getSelection) {
@@ -13,12 +28,9 @@ function gText() {
 	    type:     "GET",
 	    url:      "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN",
 	    success: function(data){
-	        console.log(data);
 	        var rows = data['rows'][0];
 		    var elements = rows['elements'][0];
-		    console.log(elements);
 		    var status = elements['status'];
-		    console.log(status);
 		    if (status == "ZERO_RESULTS") {
 		    	var a = data['destination_addresses'][0];
 		    	var b = data['origin_addresses'][0];
@@ -30,18 +42,15 @@ function gText() {
 		    		type:"GET",
 		    		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+a,
 		    		success: function (adata) {
-		    			console.log(adata);
 		    			lata = adata['results'][0]['geometry']['location']['lat'];
 		    			lona = adata['results'][0]['geometry']['location']['lng'];
 		    			$.ajax ({
 				    		type:"GET",
 				    		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+b,
 				    		success: function (bdata) {
-				    			console.log(bdata);
 				    			latb = bdata['results'][0]['geometry']['location']['lat'];
 				    			lonb = bdata['results'][0]['geometry']['location']['lng'];
-				    			console.log (lata, lona, latb, lonb);
-				    			alert ("Approximate flight time to " + a + " is "+getFlight(lata, lona, latb, lonb)+" hours");
+				    			alertUser ("Approximate flight time to " + a + " is "+getFlight(lata, lona, latb, lonb)+" hours");
 				    		}
 				    	});
 		    		}
@@ -50,16 +59,36 @@ function gText() {
 		    else if (status == 'OK') {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
-		    	alert ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+"\nDuration: "+dur['text']);
+		    	alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+"<br>Duration: "+dur['text']);
 		    }
 		    else {
-		    	alert ("Are you sure that's a place?!"); 
+		    	alertUser ("Are you sure that's a place?!"); 
 		    }
 	    }
 	});
 }
 
-var button = document.createElement("button");
+function alertUser (text) {
+	var a = document.createElement("div");
+	a.innerHTML = text;
+	a.style.position = "fixed";
+	a.style.bottom = "0";
+	a.style.left = "0";
+	a.style.width = "99%";
+	a.style.padding = "0.5%";
+	a.style.background = "black";
+	a.style.color = "white";
+	a.style.font="menu";
+	a.style.fontSize = "16px";
+	a.style.border="0";
+	a.style.borderRadius="10px 10px 0 0 ";
+	a.style.zIndex = "9999";
+	a.style.textAlign = "center";
+	document.body.appendChild(a);
+	setInterval(function(){ document.body.removeChild(a); }, 6000);
+}
+
+/*var button = document.createElement("button");
 button.innerHTML = "Wector It!"
 button.onmousedown = gText;
 button.setAttribute("unselectable","on");
@@ -75,7 +104,7 @@ button.style.fontSize = "16px";
 button.style.border="0";
 button.style.borderRadius="10px 0 0 0 ";
 button.style.zIndex = "9999";
-document.body.appendChild(button);
+document.body.appendChild(button);*/
 
 function getFlight (lat1, lon1, lat2, lon2) {
 	return Math.round((100*haversine(lat1, lon1, lat2, lon2)/800)/100);
