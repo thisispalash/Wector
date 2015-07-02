@@ -1,0 +1,13 @@
+{
+  "name": "Wector",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "How far are those places listed on your page?",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": [],
+      "js": ["content_script.js"]
+    }
+  ]
+}
