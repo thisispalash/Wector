@@ -84,8 +84,10 @@ function alertUser (text) {
 	a.style.borderRadius="10px 10px 0 0 ";
 	a.style.zIndex = "9999";
 	a.style.textAlign = "center";
+	a.style.display = "none";
 	document.body.appendChild(a);
-	setInterval(function(){ document.body.removeChild(a); }, 6000);
+	$(a).slideDown("slow");
+	setInterval(function(){ $(a).slideUp("slow") }, 5000);
 }
 
 /*var button = document.createElement("button");
