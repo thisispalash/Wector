@@ -18,17 +18,45 @@ function gText() {
 		    var elements = rows['elements'][0];
 		    console.log(elements);
 		    var status = elements['status'];
-		    if (status != "OK") {
-		    	alert ("Oops! There's nothing there!");
+		    console.log(status);
+		    if (status == "ZERO_RESULTS") {
+		    	var a = data['destination_addresses'][0];
+		    	var b = data['origin_addresses'][0];
+		    	var lata = -1;
+		    	var lona = -1;
+		    	var latb = -1;
+		    	var lonb = -1;
+		    	$.ajax ({
+		    		type:"GET",
+		    		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+a,
+		    		success: function (adata) {
+		    			console.log(adata);
+		    			lata = adata['results'][0]['geometry']['location']['lat'];
+		    			lona = adata['results'][0]['geometry']['location']['lng'];
+		    			$.ajax ({
+				    		type:"GET",
+				    		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+b,
+				    		success: function (bdata) {
+				    			console.log(bdata);
+				    			latb = bdata['results'][0]['geometry']['location']['lat'];
+				    			lonb = bdata['results'][0]['geometry']['location']['lng'];
+				    			console.log (lata, lona, latb, lonb);
+				    			alert ("Approximate flight time to " + a + " is "+getFlight(lata, lona, latb, lonb)+" hours");
+				    		}
+				    	});
+		    		}
+		    	});		    	
 		    }
-		    else {
+		    else if (status == 'OK') {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
 		    	alert ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+"\nDuration: "+dur['text']);
 		    }
+		    else {
+		    	alert ("Are you sure that's a place?!"); 
+		    }
 	    }
 	});
-    
 }
 
 var button = document.createElement("button");
@@ -49,21 +77,17 @@ button.style.borderRadius="10px 0 0 0 ";
 button.style.zIndex = "9999";
 document.body.appendChild(button);
 
-function getDistance (lat1, lon1, lat2, lon2) {
-	Number.prototype.toRad = function() {
-	   return this * Math.PI / 180;
-	}
+function getFlight (lat1, lon1, lat2, lon2) {
+	return Math.round((100*haversine(lat1, lon1, lat2, lon2)/800)/100);
+}
 
-	var R = 6371; // km 
-	var x1 = lat2-lat1;
-	var dLat = x1.toRad();  
-	var x2 = lon2-lon1;
-	var dLon = x2.toRad();  
-	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
-	                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
-	                Math.sin(dLon/2) * Math.sin(dLon/2);  
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-	var d = R * c; 
-
-	alert(d);
+function haversine() {
+       var radians = Array.prototype.map.call(arguments, function(deg) { return deg/180.0 * Math.PI; });
+       var lat1 = radians[0], lon1 = radians[1], lat2 = radians[2], lon2 = radians[3];
+       var R = 6372.8; // km
+       var dLat = lat2 - lat1;
+       var dLon = lon2 - lon1;
+       var a = Math.sin(dLat / 2) * Math.sin(dLat /2) + Math.sin(dLon / 2) * Math.sin(dLon /2) * Math.cos(lat1) * Math.cos(lat2);
+       var c = 2 * Math.asin(Math.sqrt(a));
+       return R * c;
 }
