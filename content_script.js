@@ -9,6 +9,10 @@ Walk: "<i class='fa fa-street-view'></i>  "
 */
 
 
+var link = document.createElement("link");
+link.rel = "stylesheet";
+link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+document.getElementsByTagName( "head" )[0].appendChild( link );
 document.onmouseup = checkHighlight;
 
 function checkHighlight() {
