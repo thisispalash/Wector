@@ -1,4 +1,15 @@
+// DOM
 
+/*
+Icon list (from Font-Awesome) :
+Flight: "<i class='fa fa-paper-plane-o'></i>  "
+Car: "<i class='fa fa-car'></i>  "
+Bike: "<i class='fa fa-bicycle'></i>  "
+Walk: "<i class='fa fa-street-view'></i>  "
+*/
+
+
+document.onmouseup = checkHighlight;
 
 function checkHighlight() {
 	var text = "";
@@ -8,19 +19,20 @@ function checkHighlight() {
         text = document.selection.createRange().text;
     }
     if (text != "" && text.length < 50) {
-    	gText();
+    	gText(text);
     }
 }
 
-document.onmouseup = checkHighlight;
 
-function gText() {
+function gText(txt) {
+	
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString(); 
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
+
     var dest = text;
     var home = "Ithaca, NY";
     //var resp = httpGet("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN");
@@ -48,11 +60,11 @@ function gText() {
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-						text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+						var flight = "<i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 						if (flightTime != 1) {
-							text+="s";
+							flight+="s";
 						}
-						alertUser(text);
+						alertUser(dst, "", flight, "", "", 0, 1, 0, 0);
 					}
 				});				
 	    	}
@@ -60,7 +72,8 @@ function gText() {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
 		    	if(dur['value']<7200) {
-		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
+		    		var car = "<i class='fa fa-car'></i>  " + dur['text'];
+		    		alertUser (dst, car, "", "", "", 1, 0, 0, 0);
 		    	}
 		    	else {
 		    		var latdst = -1;
@@ -74,30 +87,73 @@ function gText() {
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-							text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+							var flight = " <i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 							if (flightTime != 1) {
-								text+="s";
+								flight+="s";
 							}
 							if(dur['value']<36000) {
-					    		alertUser ("Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']+"<br>"+text);
+								var car = "<i class='fa fa-car'></i>  " + dur['text'];
+					    		alertUser (dst, car, flight, "", "", 1, 2, 0, 0);
 					    	}
 					    	else {
-					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
+								var car = "<i class='fa fa-car'></i>  " + dur['text'];
+					    		alertUser (dst, car, flight, "", "", 2, 1, 0, 0);
 					    	}
 						}
 					});
 			    }
 		    }
 		    else {
-		    	//That's not a place
+		    	; //That's not a place
 		    }
 	    }
 	});
 }
 
-function alertUser (text) {
+function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
+	var text = dst + "<br>| ";
+	// Add the display to (var)text according to priority
+	if(priority_c == 1) {
+		text += car + " | ";
+	} else if(priority_f == 1) {
+		text += flight + " | ";
+	} else if(priority_b == 1) {
+		text += bike + " | ";
+	} else if(priority_w == 1) {
+		text += walk + " | ";
+	}
+	if(priority_c == 2) {
+		text += car + " | ";
+	} else if(priority_f == 2) {
+		text += flight + " | ";
+	} else if(priority_b == 2) {
+		text += bike + " | ";
+	} else if(priority_w == 2) {
+		text += walk + " | ";
+	}
+	if(priority_c == 3) {
+		text += car + " | ";
+	} else if(priority_f == 3) {
+		text += flight + " | ";
+	} else if(priority_b == 3) {
+		text += bike + " | ";
+	} else if(priority_w == 3) {
+		text += walk + " | ";
+	}
+	if(priority_c == 4) {
+		text += car + " | ";
+	} else if(priority_f == 4) {
+		text += flight + " | ";
+	} else if(priority_b == 4) {
+		text += bike + " | ";
+	} else if(priority_w == 4) {
+		text += walk + " | ";
+	} 
+	console.log(text);
+	// Display Text
 	var a = document.createElement("div");
 	a.innerHTML = text;
+	a.id = "Wector"
 	a.style.position = "fixed";
 	a.style.bottom = "0";
 	a.style.left = "0";
@@ -109,7 +165,7 @@ function alertUser (text) {
 	a.style.fontSize = "16px";
 	a.style.border="0";
 	a.style.borderRadius="10px 10px 0 0 ";
-	a.style.zIndex = "9999";
+	a.style.zIndex = "2147483647";
 	a.style.textAlign = "center";
 	a.style.display = "none";
 	document.body.appendChild(a);
