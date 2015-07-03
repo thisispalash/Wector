@@ -30,6 +30,7 @@ function checkHighlight() {
 var latsrc;
 var lonsrc;
 var home;
+var lastQuery = "";
 
 function gText(txt) {
     var text = "";
@@ -38,6 +39,8 @@ function gText(txt) {
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
+    if (text == lastQuery) return;
+    lastQuery = text;
     var dest = text;
     $.ajax({
 	    type:     "GET",
@@ -165,12 +168,27 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	a.style.fontSize = "16px";
 	a.style.border="0";
 	a.style.borderRadius="10px 10px 0 0 ";
-	a.style.zIndex = "2147483647";
+	a.style.zIndex = "2147483648";
 	a.style.textAlign = "center";
 	a.style.display = "none";
-	document.body.appendChild(a);
-	$(a).slideDown("slow");
-	setInterval(function(){ $(a).slideUp("slow") }, 5000);
+	a.onclick = function () {
+		lastQuery = "";
+		$(a).slideUp("fast", function() {document.body.removeChild(a);});
+	}
+	var previous = document.getElementById("Wector");
+	if (previous == null) {
+		document.body.appendChild(a);
+		$(a).slideDown("fast");
+		setInterval(function(){ $(a).slideUp("fast", function(){document.body.removeChild(a);}); }, 5000);
+	}
+	else {
+		$(previous).slideUp("fast", function() {
+			document.body.removeChild(previous);
+			document.body.appendChild(a);
+			$(a).slideDown("fast");
+			setInterval(function(){ $(a).slideUp("fast", function(){document.body.removeChild(a);}); }, 5000);							
+		});
+	}
 }
 
 function initialize () {
