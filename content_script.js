@@ -1,13 +1,14 @@
 // DOM
 
-//$("head").append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>');
 /*
-link = document.createElement( "link" );
-link.href = "./font-awesome/css/font-awesome.min.css"
-link.type = "text/css";
-link.rel = "stylesheet";
-document.getElementsByTagName( "head" )[0].appendChild( link );
+Icon list (from Font-Awesome) :
+Flight: "<i class='fa fa-paper-plane-o'></i>  "
+Car: "<i class='fa fa-car'></i>  "
+Bike: "<i class='fa fa-bicycle'></i>  "
+Walk: "<i class='fa fa-street-view'></i>  "
 */
+
+
 document.onmouseup = checkHighlight;
 
 function checkHighlight() {
