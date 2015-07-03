@@ -13,7 +13,9 @@
       "css": [],
       "js": ["content_script.js", "jquery-1.11.3.min.js"]
     }
-  ]
+  ],
+  "permissions":["storage"]
 }
 
 /*Material Design Font Package: "fonts/material-design-iconic-font/css/material-design-iconic-font.min.css"*/
+  

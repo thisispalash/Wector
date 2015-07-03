@@ -4,7 +4,9 @@
 	<title>Wector Options</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <script src = "jquery-1.11.3.min.js"> </script>
     <script src = "options.js"> </script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <style>
     	#whereAmIInput {
     		width:59.7%;
@@ -18,8 +20,9 @@
 			color: white;
 			box-shadow: none;
 			border: 0px;
-			border-radius: 0px 10px 10px 0px;
+			border-radius: 0px 3px 3px 0px;
 			margin:0;
+            cursor:pointer;
     	}
     	#submit {
     		width:20%;
@@ -30,18 +33,41 @@
 			border: 0px;
 			border-radius: 0px;
 			margin:0;
+            cursor:pointer;
     	}
     	#map {
     		margin-top:5px;
+            border-radius:3px;
     	}
+        #saveAlert {
+            width:97%;
+            background:rgb(230, 230, 230);
+            font-size: 12px;
+            float: left;
+            text-align: left;
+            color: grey;
+            border-radius: 0px 0px 3px 3px;
+            margin-bottom:10px;
+            padding: 10px 1.5%;
+            display:none;
+        }
+        #head {
+            width:100%;
+            float:left;
+            font-size:22px;
+            margin-bottom:5px;
+        }
     </style>
+
 </head>
 <body>
+    <div id = "head">Set Home</div>
 	<form action="" method = "POST" id = "form">
 		<input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
 		<button type = "button" id = "submit">Refresh</button>
 		<button type = "button" id = "save">Save</button>
 	</form>
 	<img src = "" id = "map" />
+    <div id = "saveAlert">Saved!</div>
 </body>
 </html>
