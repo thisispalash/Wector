@@ -1,13 +1,13 @@
 // DOM
 
 //$("head").append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>');
-
+/*
 link = document.createElement( "link" );
-link.href = "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+link.href = "./font-awesome/css/font-awesome.min.css"
 link.type = "text/css";
 link.rel = "stylesheet";
 document.getElementsByTagName( "head" )[0].appendChild( link );
-
+*/
 document.onmouseup = checkHighlight;
 
 function checkHighlight() {
@@ -59,7 +59,7 @@ function gText(txt) {
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-						text = "Approximate direct flight time to" + dst + " is "+ flightTime + " hour";
+						text = " <i class='fa fa-paper-plane-o'></i>     " + dst + " is "+ flightTime + " hour";
 						if (flightTime != 1) {
 							text+="s";
 						}
@@ -71,7 +71,7 @@ function gText(txt) {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
 		    	if(dur['value']<7200) {
-		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: &#xf1d9; "+dur['text']);
+		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']);
 		    	}
 		    	else {
 		    		var latdst = -1;
@@ -85,15 +85,15 @@ function gText(txt) {
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-							text = "  " + dst + " is "+ flightTime + " hour";
+							text = " <i class='fa fa-paper-plane-o'></i>   " + dst + " is "+ flightTime + " hour";
 							if (flightTime != 1) {
 								text+="s";
 							}
 							if(dur['value']<36000) {
-					    		alertUser ("Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: &#xf1d9; "+dur['text']+"<br>"+text);
+					    		alertUser ("Distance to "+dst+" by Road: "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']+"<br>"+text);
 					    	}
 					    	else {
-					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
+					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']);
 					    	}
 						}
 					});
@@ -108,9 +108,6 @@ function gText(txt) {
 
 function alertUser (text) {
 	var a = document.createElement("div");
-	var i = document.createElement("i");
-	i.class = "fa fa-paper-plane-o"
-	a.appendChild(i);
 	a.innerHTML = text;
 	a.id = "Wector"
 	a.style.position = "fixed";
