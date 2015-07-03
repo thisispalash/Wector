@@ -13,6 +13,7 @@ function checkHighlight() {
 }
 
 document.onmouseup = checkHighlight;
+
 function gText() {
     var text = "";
     if (window.getSelection) {
@@ -33,8 +34,27 @@ function gText() {
 	 	    var status = elements['status'];
 	    	var dst = data['destination_addresses'][0];
 	    	var src = data['origin_addresses'][0];
+	    	var latsrc = 42.4439614; // SET THROUGH SETTINGS
+			var lonsrc = -76.5018807; // SAME
 		    if (status == "ZERO_RESULTS") {
-		    	alertUser(flightTime(dst, src));
+		    	var latdst = -1;
+				var londst = -1;
+				var text = "";
+				$.ajax ({
+					type:"GET",
+					url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
+					success: function (dstdata) {
+						latdst = dstdata['results'][0]['geometry']['location']['lat'];
+						londst = dstdata['results'][0]['geometry']['location']['lng'];
+						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
+						text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+						if (flightTime != 1) {
+							text+="s";
+						}
+						alertUser(text);
+					}
+				});				
 	    	}
 		    else if (status == 'OK') {
 		    	var dist = elements['distance'];
@@ -42,44 +62,38 @@ function gText() {
 		    	if(dur['value']<7200) {
 		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
 		    	}
-		    	else if(dur['value']<36000) {
-		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']+"<br>"+flightTime(dst, src));
-		    	}
 		    	else {
-		    		alertUser (flightTime(dst, src) + "<br>" + "Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
-		    	}
+		    		var latdst = -1;
+					var londst = -1;
+					var text = "";
+					$.ajax ({
+						type:"GET",
+						url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
+						success: function (dstdata) {
+							latdst = dstdata['results'][0]['geometry']['location']['lat'];
+							londst = dstdata['results'][0]['geometry']['location']['lng'];
+							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
+							text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+							if (flightTime != 1) {
+								text+="s";
+							}
+							if(dur['value']<36000) {
+					    		alertUser ("Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']+"<br>"+text);
+					    	}
+					    	else {
+					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
+					    	}
+						}
+					});
+			    }
 		    }
 		    else {
-		    	;
-		    	//alertUser ("Are you sure that's a place?!"); 
+		    	//That's not a place
 		    }
 	    }
 	});
 }
-
-
-/* Issue: Doesn't return "Approximate direct flight time to " + dst + " is "+ getFlight(latdst, londst, latsrc, lonsrc) + " hours"
-returns "".
-*/
-function flightTime(dst, src) {
-	var latdst = -1;
-	var londst = -1;
-	var latsrc = 42.4439614;
-	var lonsrc = -76.5018807;
-	var text = "";
-	$.ajax ({
-		type:"GET",
-		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
-		success: function (dstdata) {
-			latdst = dstdata['results'][0]['geometry']['location']['lat'];
-			londst = dstdata['results'][0]['geometry']['location']['lng'];
-			console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
-			text = "Approximate direct flight time to " + dst + " is "+ getFlight(latdst, londst, latsrc, lonsrc) + " hours";
-		}
-	});
-	return text;
-}
-
 
 function alertUser (text) {
 	var a = document.createElement("div");
@@ -102,27 +116,15 @@ function alertUser (text) {
 	$(a).slideDown("slow");
 	setInterval(function(){ $(a).slideUp("slow") }, 5000);
 }
-/*
-var button = document.createElement("button");
-button.innerHTML = "Wector It!"
-button.onmousedown = gText;
-button.setAttribute("unselectable","on");
-button.style.position = "fixed";
-button.style.bottom = "0";
-button.style.right = "0";
-button.style.padding = "5px";
-button.style.color = "yellow";
-button.style.background = "black";
-button.style.cursor = "pointer";
-button.style.font="Calibiri";
-button.style.fontSize = "16px";
-button.style.border="0";
-button.style.borderRadius="10px 0 0 0 ";
-button.style.zIndex = "9999";
-document.body.appendChild(button);
-*/
+
 function getFlight (lat1, lon1, lat2, lon2) {
-	return Math.round((100*haversine(lat1, lon1, lat2, lon2)/800)/100);
+	var distance = haversine(lat1, lon1, lat2, lon2);
+	var slowDistance = Math.min(distance, 300);
+	var remDistance = distance-slowDistance;
+	var slowTime = slowDistance/400;
+	var cruiseTime = remDistance/800;
+	var totalTime = slowTime+cruiseTime;
+	return Math.ceil((totalTime*100)/100);
 }
 
 function haversine() {
