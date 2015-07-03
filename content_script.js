@@ -1,4 +1,14 @@
+// DOM
 
+//$("head").append('<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>');
+
+link = document.createElement( "link" );
+link.href = "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+link.type = "text/css";
+link.rel = "stylesheet";
+document.getElementsByTagName( "head" )[0].appendChild( link );
+
+document.onmouseup = checkHighlight;
 
 function checkHighlight() {
 	var text = "";
@@ -8,19 +18,20 @@ function checkHighlight() {
         text = document.selection.createRange().text;
     }
     if (text != "" && text.length < 50) {
-    	gText();
+    	gText(text);
     }
 }
 
-document.onmouseup = checkHighlight;
 
-function gText() {
+function gText(txt) {
+	
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString(); 
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
+
     var dest = text;
     var home = "Ithaca, NY";
     //var resp = httpGet("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN");
@@ -48,7 +59,7 @@ function gText() {
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-						text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+						text = "Approximate direct flight time to" + dst + " is "+ flightTime + " hour";
 						if (flightTime != 1) {
 							text+="s";
 						}
@@ -60,7 +71,7 @@ function gText() {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
 		    	if(dur['value']<7200) {
-		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
+		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+";&nbsp;&nbsp;Duration: &#xf1d9; "+dur['text']);
 		    	}
 		    	else {
 		    		var latdst = -1;
@@ -74,12 +85,12 @@ function gText() {
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-							text = "Approximate direct flight time to " + dst + " is "+ flightTime + " hour";
+							text = "  " + dst + " is "+ flightTime + " hour";
 							if (flightTime != 1) {
 								text+="s";
 							}
 							if(dur['value']<36000) {
-					    		alertUser ("Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']+"<br>"+text);
+					    		alertUser ("Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: &#xf1d9; "+dur['text']+"<br>"+text);
 					    	}
 					    	else {
 					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+";&nbsp;&nbsp;Duration: "+dur['text']);
@@ -97,7 +108,11 @@ function gText() {
 
 function alertUser (text) {
 	var a = document.createElement("div");
+	var i = document.createElement("i");
+	i.class = "fa fa-paper-plane-o"
+	a.appendChild(i);
 	a.innerHTML = text;
+	a.id = "Wector"
 	a.style.position = "fixed";
 	a.style.bottom = "0";
 	a.style.left = "0";
