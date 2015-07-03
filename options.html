@@ -5,10 +5,43 @@
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src = "options.js"> </script>
+    <style>
+    	#whereAmIInput {
+    		width:59.7%;
+    		float:left;
+    		padding: 0px 5px;
+    	}
+    	#save {
+    		width:20%;
+    		float:left;
+    		background: black;
+			color: white;
+			box-shadow: none;
+			border: 0px;
+			border-radius: 0px 10px 10px 0px;
+			margin:0;
+    	}
+    	#submit {
+    		width:20%;
+    		float:left;
+    		background: rgb(23, 101, 166);
+			color: white;
+			box-shadow: none;
+			border: 0px;
+			border-radius: 0px;
+			margin:0;
+    	}
+    	#map {
+    		margin-top:5px;
+    	}
+    </style>
 </head>
 <body>
-	<input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
-	<button type = "button" id = "submit">Refresh</button><br>
+	<form action="" method = "POST" id = "form">
+		<input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
+		<button type = "button" id = "submit">Refresh</button>
+		<button type = "button" id = "save">Save</button>
+	</form>
 	<img src = "" id = "map" />
 </body>
 </html>
