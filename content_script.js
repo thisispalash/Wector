@@ -13,6 +13,9 @@ function checkHighlight() {
 }
 
 document.onmouseup = checkHighlight;
+var latsrc;
+var lonsrc;
+var home;
 
 function gText() {
     var text = "";
@@ -22,9 +25,6 @@ function gText() {
         text = document.selection.createRange().text;
     }
     var dest = text;
-    var home = "Ithaca, NY";
-    //var resp = httpGet("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN");
-    
     $.ajax({
 	    type:     "GET",
 	    url:      "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN",
@@ -34,8 +34,6 @@ function gText() {
 	 	    var status = elements['status'];
 	    	var dst = data['destination_addresses'][0];
 	    	var src = data['origin_addresses'][0];
-	    	var latsrc = 42.4439614; // SET THROUGH SETTINGS
-			var lonsrc = -76.5018807; // SAME
 		    if (status == "ZERO_RESULTS") {
 		    	var latdst = -1;
 				var londst = -1;
@@ -94,6 +92,15 @@ function gText() {
 	    }
 	});
 }
+
+function initialize () {
+	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY"}, function(items) {
+		latsrc = items.latitude;
+		lonsrc = items.longitude;
+		home = items.address;
+	});
+}
+initialize();
 
 function alertUser (text) {
 	var a = document.createElement("div");
