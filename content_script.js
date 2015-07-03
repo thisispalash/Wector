@@ -59,11 +59,11 @@ function gText(txt) {
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-						text = " <i class='fa fa-paper-plane-o'></i>     " + dst + " is "+ flightTime + " hour";
+						var flight = "<i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 						if (flightTime != 1) {
-							text+="s";
+							flight+="s";
 						}
-						alertUser(text);
+						alertUser(dst, "", flight, "", "", 0, 1, 0, 0);
 					}
 				});				
 	    	}
@@ -71,7 +71,8 @@ function gText(txt) {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
 		    	if(dur['value']<7200) {
-		    		alertUser ("Distance to "+data['destination_addresses'][0]+": "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']);
+		    		var car = "<i class='fa fa-car'></i>  " + dur['text'];
+		    		alertUser (dst, car, "", "", "", 1, 0, 0, 0);
 		    	}
 		    	else {
 		    		var latdst = -1;
@@ -85,28 +86,70 @@ function gText(txt) {
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-							text = " <i class='fa fa-paper-plane-o'></i>   " + dst + " is "+ flightTime + " hour";
+							var flight = " <i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 							if (flightTime != 1) {
-								text+="s";
+								flight+="s";
 							}
 							if(dur['value']<36000) {
-					    		alertUser ("Distance to "+dst+" by Road: "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']+"<br>"+text);
+								var car = "<i class='fa fa-car'></i>  " + dur['text'];
+					    		alertUser (dst, car, flight, "", "", 1, 2, 0, 0);
 					    	}
 					    	else {
-					    		alertUser (text + "<br>" + "Distance to "+dst+" by road: "+dist['text']+"<br><i class='fa fa-car'/> "+dur['text']);
+								var car = "<i class='fa fa-car'></i>  " + dur['text'];
+					    		alertUser (dst, car, flight, "", "", 2, 1, 0, 0);
 					    	}
 						}
 					});
 			    }
 		    }
 		    else {
-		    	//That's not a place
+		    	; //That's not a place
 		    }
 	    }
 	});
 }
 
-function alertUser (text) {
+function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
+	var text = dst + "<br>| ";
+	// Add the display to (var)text according to priority
+	if(priority_c == 1) {
+		text += car + " | ";
+	} else if(priority_f == 1) {
+		text += flight + " | ";
+	} else if(priority_b == 1) {
+		text += bike + " | ";
+	} else if(priority_w == 1) {
+		text += walk + " | ";
+	}
+	if(priority_c == 2) {
+		text += car + " | ";
+	} else if(priority_f == 2) {
+		text += flight + " | ";
+	} else if(priority_b == 2) {
+		text += bike + " | ";
+	} else if(priority_w == 2) {
+		text += walk + " | ";
+	}
+	if(priority_c == 3) {
+		text += car + " | ";
+	} else if(priority_f == 3) {
+		text += flight + " | ";
+	} else if(priority_b == 3) {
+		text += bike + " | ";
+	} else if(priority_w == 3) {
+		text += walk + " | ";
+	}
+	if(priority_c == 4) {
+		text += car + " | ";
+	} else if(priority_f == 4) {
+		text += flight + " | ";
+	} else if(priority_b == 4) {
+		text += bike + " | ";
+	} else if(priority_w == 4) {
+		text += walk + " | ";
+	} 
+	console.log(text);
+	// Display Text
 	var a = document.createElement("div");
 	a.innerHTML = text;
 	a.id = "Wector"
@@ -121,7 +164,7 @@ function alertUser (text) {
 	a.style.fontSize = "16px";
 	a.style.border="0";
 	a.style.borderRadius="10px 10px 0 0 ";
-	a.style.zIndex = "9999";
+	a.style.zIndex = "2147483647";
 	a.style.textAlign = "center";
 	a.style.display = "none";
 	document.body.appendChild(a);
