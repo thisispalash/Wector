@@ -5,16 +5,22 @@ Icon list (from Font-Awesome) :
 Flight: "<i class='fa fa-paper-plane-o'></i>  "
 Car: "<i class='fa fa-car'></i>  "
 Bike: "<i class='fa fa-bicycle'></i>  "
-Walk: "<i class='fa fa-street-view'></i>  "
+Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
 */
 
+// Icon Links
+var fa_link = document.createElement("link");
+fa_link.rel = "stylesheet";
+fa_link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+document.getElementsByTagName( "head" )[0].appendChild( fa_link );
+var md_link = document.createElement("link");
+md_link.rel = "stylesheet";
+md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
+document.getElementsByTagName( "head" )[0].appendChild( md_link );
 
-var link = document.createElement("link");
-link.rel = "stylesheet";
-link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
-document.getElementsByTagName( "head" )[0].appendChild( link );
 document.onmouseup = checkHighlight;
 
+// Why is this there?
 function checkHighlight() {
 	var text = "";
     if (window.getSelection) {
@@ -34,6 +40,7 @@ var lastQuery = "";
 
 function gText(txt) {
     var text = "";
+    // Repeated?
     if (window.getSelection) {
         text = window.getSelection().toString(); 
     } else if (document.selection && document.selection.type != "Control") {
@@ -74,14 +81,49 @@ function gText(txt) {
 		    else if (status == 'OK') {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
-		    	if(dur['value']<7200) {
-		    		var car = "<i class='fa fa-car'></i>  " + dur['text'];
-		    		alertUser (dst, car, "", "", "", 1, 0, 0, 0);
-		    	}
-		    	else {
+
+		    	// Set Text
+		    	var car=" <i class='fa fa-car'></i>  " + dur['text'];
+		    	var flight=" <i class='fa fa-paper-plane-o'></i>  ";
+		    	var walk=" <i class='zmdi zmdi-directions-walk'></i>  ";
+		    	var bike=" <i class='fa fa-bicycle'></i>  ";
+
+		    	// Walking && Biking (Max: 3hours)
+		    	if(dist['value']<=15750) {
+		    		// Walking
+		    		var walkTime = dist['value']/6000;
+		    		var wH = walkTime|0;
+		    		var walkHour;
+		    		if(walkTime < 1.0) {
+		    			walkHour = " ";
+		    		} else if(walkTime <2.0) {
+		    			walkHour = " " + wH + " hour";
+		    		} else {
+		    			walkHour = " " + wH + " hours";
+		    		}
+		    		var wM = Math.ceil((walkTime-wH)*100);
+		    		var walkMin = " " + wM + " mins";
+		    		walk += walkHour + walkMin;
+
+		    		// Biking
+
+
+		    		// Priorities
+		    		// TODO: Make better for biking
+		    		if(wH < 1 && wM < 30) {
+		    			alertUser(dst, car, flight, bike, walk, 3, 0, 2, 1);
+		    		} else if(wH < 1) {
+		    			alertUser(dst, car, flight, bike, walk, 3, 0, 1, 2);
+		    		} else if(wH < 2) {
+		    			alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
+		    		} else if(wH < 3) {
+		    			alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
+		    		}
+		    	} else if(dur['value']<7200) {
+		    		alertUser (dst, car, flight, bike, walk, 1, 0, 0, 0);
+		    	} else {
 		    		var latdst = -1;
 					var londst = -1;
-					var text = "";
 					$.ajax ({
 						type:"GET",
 						url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
@@ -89,18 +131,17 @@ function gText(txt) {
 							latdst = dstdata['results'][0]['geometry']['location']['lat'];
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
-							var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-							var flight = " <i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
+							var flightTime = getFlight(latdst, londst, latsrc, lonsrc)
+							flight += flightTime + " hour";
 							if (flightTime != 1) {
 								flight+="s";
 							}
+
 							if(dur['value']<36000) {
-								var car = "<i class='fa fa-car'></i>  " + dur['text'];
-					    		alertUser (dst, car, flight, "", "", 1, 2, 0, 0);
+					    		alertUser (dst, car, flight, bike, walk, 1, 2, 0, 0);
 					    	}
 					    	else {
-								var car = "<i class='fa fa-car'></i>  " + dur['text'];
-					    		alertUser (dst, car, flight, "", "", 2, 1, 0, 0);
+					    		alertUser (dst, car, flight, bike, walk, 2, 1, 0, 0);
 					    	}
 						}
 					});
