@@ -186,42 +186,12 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	bike = "<div class = 'mode'>"+bike+"</div>";
 	walk = "<div class = 'mode'>"+walk+"</div>";
 	// Add the display to (var)text according to priority
-	if(priority_c == 1) {
-		text += car;
-	} else if(priority_f == 1) {
-		text += flight;
-	} else if(priority_b == 1) {
-		text += bike;
-	} else if(priority_w == 1) {
-		text += walk;
-	}
-	if(priority_c == 2) {
-		text += car;
-	} else if(priority_f == 2) {
-		text += flight;
-	} else if(priority_b == 2) {
-		text += bike;
-	} else if(priority_w == 2) {
-		text += walk;
-	}
-	if(priority_c == 3) {
-		text += car;
-	} else if(priority_f == 3) {
-		text += flight;
-	} else if(priority_b == 3) {
-		text += bike;
-	} else if(priority_w == 3) {
-		text += walk;
-	}
-	if(priority_c == 4) {
-		text += car;
-	} else if(priority_f == 4) {
-		text += flight;
-	} else if(priority_b == 4) {
-		text += bike;
-	} else if(priority_w == 4) {
-		text += walk;
-	}
+
+	text += (priority_c == 1) ? car : (priority_f == 1) ? flight : (priority_b == 1) ? bike : (priority_w == 1) ? walk : "";
+	text += (priority_c == 2) ? car : (priority_f == 2) ? flight : (priority_b == 2) ? bike : (priority_w == 2) ? walk : "";
+	text += (priority_c == 3) ? car : (priority_f == 3) ? flight : (priority_b == 3) ? bike : (priority_w == 3) ? walk : "";
+	text += (priority_c == 4) ? car : (priority_f == 4) ? flight : (priority_b == 4) ? bike : (priority_w == 4) ? walk : "";
+	
 	text+="</div>";
 	console.log(text);
 	// Display Text
