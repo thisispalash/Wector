@@ -227,7 +227,7 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 			document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
 		});
 		
-		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 111115000);
+		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 666 :O
 	}
 	else {
 		$(previous).slideUp("fast", function() {
@@ -239,7 +239,7 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 				var style = window.getComputedStyle(document.getElementById("address"), null);
 				document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
 			});
-			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 5000);							
+			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 666 :O						
 		});
 	}
 }
