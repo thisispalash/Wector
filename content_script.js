@@ -231,14 +231,14 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	if (previous == null) {
 		document.body.appendChild(a);
 		$(a).slideDown("fast");
-		setInterval(function(){ $(a).slideUp("fast", function(){document.body.removeChild(a);}); }, 5000);
+		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 5000);
 	}
 	else {
 		$(previous).slideUp("fast", function() {
 			document.body.removeChild(previous);
 			document.body.appendChild(a);
 			$(a).slideDown("fast");
-			setInterval(function(){ $(a).slideUp("fast", function(){document.body.removeChild(a);}); }, 5000);							
+			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 5000);							
 		});
 	}
 }
