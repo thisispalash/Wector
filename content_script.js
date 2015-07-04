@@ -89,7 +89,7 @@ function gText(txt) {
 		    	var bike=" <i class='fa fa-bicycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
-		    	if(dist['value']<=15750) {
+		    	if(dist['value']<=40000) {
 		    		// Walking
 		    		var walkTime = dist['value']/6000;
 		    		var wH = walkTime|0;
@@ -101,15 +101,27 @@ function gText(txt) {
 		    		} else {
 		    			walkHour = " " + wH + " hours";
 		    		}
-		    		var wM = Math.ceil((walkTime-wH)*100);
+		    		var wM = Math.ceil((walkTime-wH)*60);
 		    		var walkMin = " " + wM + " mins";
 		    		walk += walkHour + walkMin;
 
 		    		// Biking
-
+		    		var bikeTime = dist['value']/15000;
+		    		var bH = bikeTime|0;
+		    		console.log(bH);
+		    		var bikeHour;
+		    		if(bikeTime < 1.0) {
+		    			bikeHour = " ";
+		    		} else if(bikeTime <2.0) {
+		    			bikeHour = " " + bH + " hour";
+		    		} else {
+		    			bikeHour = " " + bH + " hours";
+		    		}
+		    		var bM = Math.ceil((bikeTime-bH)*60);
+		    		var bikeMin = " " + bM + " mins";
+		    		bike += bikeHour + bikeMin;
 
 		    		// Priorities
-		    		// TODO: Make better for biking
 		    		if(wH < 1 && wM < 30) {
 		    			alertUser(dst, car, flight, bike, walk, 3, 0, 2, 1);
 		    		} else if(wH < 1) {
@@ -117,7 +129,11 @@ function gText(txt) {
 		    		} else if(wH < 2) {
 		    			alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
 		    		} else if(wH < 3) {
-		    			alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
+		    			if(bH < 2 && bM < 30) {
+		    				alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
+		    			} else {
+		    				alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
+		    			}
 		    		}
 		    	} else if(dur['value']<7200) {
 		    		alertUser (dst, car, flight, bike, walk, 1, 0, 0, 0);
