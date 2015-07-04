@@ -12,23 +12,24 @@ Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
 var fa_link = document.createElement("link");
 fa_link.rel = "stylesheet";
 fa_link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
-document.getElementsByTagName( "head" )[0].appendChild( fa_link );
+document.getElementsByTagName("head")[0].appendChild( fa_link );
 var md_link = document.createElement("link");
 md_link.rel = "stylesheet";
 md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
-document.getElementsByTagName( "head" )[0].appendChild( md_link );
+document.getElementsByTagName("head")[0].appendChild( md_link );
 
 document.onmouseup = checkHighlight;
 
-// Why is this there?
 function checkHighlight() {
 	var text = "";
+	// TODO: Understand this!
     if (window.getSelection) {
         text = window.getSelection().toString();
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
-    if (text != "" && text.length < 50) {
+
+    if (text != "" && text.length < 50 && text != lastQuery) {
     	gText(text);
     }
 }
@@ -39,14 +40,7 @@ var home;
 var lastQuery = "";
 
 function gText(txt) {
-    var text = "";
-    // Repeated?
-    if (window.getSelection) {
-        text = window.getSelection().toString(); 
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
-    }
-    if (text == lastQuery) return;
+    var text = txt;
     lastQuery = text;
     var dest = text;
     $.ajax({
@@ -89,7 +83,7 @@ function gText(txt) {
 		    	var bike=" <i class='fa fa-bicycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
-		    	if(dist['value']<=40000) {
+		    	if(dist['value']<=25000) {
 		    		// Walking
 		    		var walkTime = dist['value']/6000;
 		    		var wH = walkTime|0;
@@ -102,7 +96,10 @@ function gText(txt) {
 		    			walkHour = " " + wH + " hours";
 		    		}
 		    		var wM = Math.ceil((walkTime-wH)*60);
-		    		var walkMin = " " + wM + " mins";
+		    		var walkMin = " " + wM + " min";
+		    		if(wM != 1) {
+		    			walkMin += "s";
+		    		}
 		    		walk += walkHour + walkMin;
 
 		    		// Biking
@@ -118,23 +115,21 @@ function gText(txt) {
 		    			bikeHour = " " + bH + " hours";
 		    		}
 		    		var bM = Math.ceil((bikeTime-bH)*60);
-		    		var bikeMin = " " + bM + " mins";
+		    		var bikeMin = " " + bM + " min";
+		    		if(bM != 1) {
+		    			bikeMin += "s";
+		    		}
 		    		bike += bikeHour + bikeMin;
 
 		    		// Priorities
-		    		if(wH < 1 && wM < 30) {
+		    		if(wH <= 0 && wM <= 30) {
 		    			alertUser(dst, car, flight, bike, walk, 3, 0, 2, 1);
-		    		} else if(wH < 1) {
-		    			alertUser(dst, car, flight, bike, walk, 3, 0, 1, 2);
-		    		} else if(wH < 2) {
+		    		} else if(bH <= 0 && bM <= 30) {
 		    			alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
-		    		} else if(wH < 3) {
-		    			if(bH < 2 && bM < 30) {
-		    				alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
-		    			} else {
-		    				alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
-		    			}
+		    		} else {
+		    			alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
 		    		}
+		    		
 		    	} else if(dur['value']<7200) {
 		    		alertUser (dst, car, flight, bike, walk, 1, 0, 0, 0);
 		    	} else {
