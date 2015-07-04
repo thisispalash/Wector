@@ -14,5 +14,6 @@
       "js": ["content_script.js", "jquery-1.11.3.min.js"]
     }
   ],
-  "permissions":["storage"]
+  "permissions":["storage"],
+  "icons": {"128": "logo128.png", "48":"logo48.png"}
 }
