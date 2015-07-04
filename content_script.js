@@ -165,45 +165,64 @@ function gText(txt) {
 	});
 }
 
+function findWidth (a, b, c, d) {
+	var sum = a+b+c+d;
+	return (sum == 10) ? "four" : (sum == 6) ? "three" : (sum == 3) ? "two" : "one";
+}
+
+function resetBodyClass () {
+	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bone\b/,'');
+	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\btwo\b/,'');
+	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bthree\b/,'');
+	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bfour\b/,'');
+}
+
 function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
-	var text = dst + "<br>| ";
+	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
+	dst = "<div id = 'address'>"+dst+"</div>";
+	var text = dst + "<div id = 'info'>";
+	car = "<div class = 'mode'>"+car+"</div>";
+	flight = "<div class = 'mode'>"+flight+"</div>";
+	bike = "<div class = 'mode'>"+bike+"</div>";
+	walk = "<div class = 'mode'>"+walk+"</div>";
 	// Add the display to (var)text according to priority
 	if(priority_c == 1) {
-		text += car + " | ";
+		text += car;
 	} else if(priority_f == 1) {
-		text += flight + " | ";
+		text += flight;
 	} else if(priority_b == 1) {
-		text += bike + " | ";
+		text += bike;
 	} else if(priority_w == 1) {
-		text += walk + " | ";
+		text += walk;
 	}
 	if(priority_c == 2) {
-		text += car + " | ";
+		text += car;
 	} else if(priority_f == 2) {
-		text += flight + " | ";
+		text += flight;
 	} else if(priority_b == 2) {
-		text += bike + " | ";
+		text += bike;
 	} else if(priority_w == 2) {
-		text += walk + " | ";
+		text += walk;
 	}
 	if(priority_c == 3) {
-		text += car + " | ";
+		text += car;
 	} else if(priority_f == 3) {
-		text += flight + " | ";
+		text += flight;
 	} else if(priority_b == 3) {
-		text += bike + " | ";
+		text += bike;
 	} else if(priority_w == 3) {
-		text += walk + " | ";
+		text += walk;
 	}
 	if(priority_c == 4) {
-		text += car + " | ";
+		text += car;
 	} else if(priority_f == 4) {
-		text += flight + " | ";
+		text += flight;
 	} else if(priority_b == 4) {
-		text += bike + " | ";
+		text += bike;
 	} else if(priority_w == 4) {
-		text += walk + " | ";
-	} 
+		text += walk;
+	}
+	text+="</div>";
 	console.log(text);
 	// Display Text
 	var a = document.createElement("div");
@@ -212,8 +231,8 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	a.style.position = "fixed";
 	a.style.bottom = "0";
 	a.style.left = "0";
-	a.style.width = "99%";
-	a.style.padding = "0.5%";
+	a.style.width = "100%";
+	//a.style.padding = "0.5%";
 	a.style.background = "black";
 	a.style.color = "white";
 	a.style.font="menu";
@@ -223,21 +242,33 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	a.style.zIndex = "2147483648";
 	a.style.textAlign = "center";
 	a.style.display = "none";
+
 	a.onclick = function () {
 		lastQuery = "";
 		$(a).slideUp("fast", function() {document.body.removeChild(a);});
 	}
 	var previous = document.getElementById("Wector");
 	if (previous == null) {
+		resetBodyClass();
+		document.getElementsByTagName("body")[0].className += widthOfEachMode;
 		document.body.appendChild(a);
-		$(a).slideDown("fast");
-		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 5000);
+		$(a).slideDown("fast", function () {
+			var style = window.getComputedStyle(document.getElementById("address"), null);
+			document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
+		});
+		
+		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 111115000);
 	}
 	else {
 		$(previous).slideUp("fast", function() {
 			document.body.removeChild(previous);
+			resetBodyClass();
+			document.getElementsByTagName("body")[0].className += widthOfEachMode;
 			document.body.appendChild(a);
-			$(a).slideDown("fast");
+			$(a).slideDown("fast", function () {
+				var style = window.getComputedStyle(document.getElementById("address"), null);
+				document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
+			});
 			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 5000);							
 		});
 	}

@@ -13,3 +13,34 @@
 .fa-bicycle {
 	color : #25BD25;
 }
+
+#info {
+	padding:0.5%;
+}
+
+#address {
+	padding:0.5%;
+	background:rgb(34,34,34);
+	float:left;
+	width:39%;
+}
+
+.mode {
+	float:left;
+}
+
+body.one .mode {
+	width:60%;
+}
+
+body.two .mode {
+	width:30%;
+}
+
+body.three .mode{
+	width:20%;
+}
+
+body.four .mode{
+	width:15%;
+}
