@@ -1,7 +1,9 @@
-//ALGORITHM:
-//1. Load existing location
-//2. If exists, all is good. Else, query IP and get an approximate. Set it.
-//3. Watch for the find button. When pressed
+/*
+ * ALGORITHM:
+  * Load existing location
+  * If exists, all is good. Else, query IP and get an approximate. Set it.
+  * Watch for the find button. When pressed
+ */
 
 var loc = "";
 

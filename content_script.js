@@ -1,12 +1,12 @@
 // DOM
 
 /*
-Icon list (from Font-Awesome) :
-Flight: "<i class='fa fa-paper-plane-o'></i>  "
-Car: "<i class='fa fa-car'></i>  "
-Bike: "<i class='fa fa-bicycle'></i>  "
-Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
-*/
+ * Icon list (from Font-Awesome and Material-Design-..) :
+  * Flight: "<i class='fa fa-paper-plane-o'></i>  "
+  * Car: "<i class='fa fa-car'></i>  "
+  * Bike: "<i class='fa fa-bicycle'></i>  "
+  * Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
+ */
 
 // Icon Links
 var fa_link = document.createElement("link");
@@ -18,8 +18,12 @@ md_link.rel = "stylesheet";
 md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
 document.getElementsByTagName("head")[0].appendChild( md_link );
 
+// Start our magic!
 document.onmouseup = checkHighlight;
 
+/*
+ * Takes the selected text and calls main() 
+ */
 function checkHighlight() {
 	var text = "";
 	// TODO: Understand this!
@@ -30,19 +34,37 @@ function checkHighlight() {
     }
 
     if (text != "" && text.length < 50 && text != lastQuery) {
-    	gText(text);
+    	main(text);
     }
 }
 
+// Home
 var latsrc;
 var lonsrc;
 var home;
+
+// Max Values (in meters/hr, HH, MM, meters)
+var maxWalkSpd = 5000;
+var maxBikeSpd = 14000;
+var maxWalkTimeH = 0;
+var maxBikeTimeH = 0;
+var maxWalkTimeM = 30;
+var maxBikeTimeM = 30;
+var maxWalkDist = (maxWalkSpd+1000)*(maxWalkTimeH+maxWalkTimeM/60.0);
+var maxBikeDist = (maxBikeSpd+1000)*(maxBikeTimeH+maxBikeTimeM/60.0);
+
 var lastQuery = "";
 
-function gText(txt) {
+/*
+ * Main function
+ * @params: txt - Selected text
+ */
+function main(txt) {
     var text = txt;
     lastQuery = text;
     var dest = text;
+
+    // Query Distance Matrix (Courtesy: Google)
     $.ajax({
 	    type:     "GET",
 	    url:      "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN",
@@ -52,10 +74,11 @@ function gText(txt) {
 	 	    var status = elements['status'];
 	    	var dst = data['destination_addresses'][0];
 	    	var src = data['origin_addresses'][0];
-		    if (status == "ZERO_RESULTS") {
+	    	// No possible way to drive to destination; Fly! 
+		    if(status == "ZERO_RESULTS") {
 		    	var latdst = -1;
 				var londst = -1;
-				var text = "";
+				// Query Geocode (Courtesy: Google)
 				$.ajax ({
 					type:"GET",
 					url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
@@ -68,10 +91,12 @@ function gText(txt) {
 						if (flightTime != 1) {
 							flight+="s";
 						}
+						// Call display function
 						alertUser(dst, "", flight, "", "", 0, 1, 0, 0);
 					}
 				});				
 	    	}
+	    	// There is a possible way to drive
 		    else if (status == 'OK') {
 		    	var dist = elements['distance'];
 		    	var dur = elements['duration'];
@@ -83,9 +108,9 @@ function gText(txt) {
 		    	var bike=" <i class='fa fa-bicycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
-		    	if(dist['value']<=25000) {
+		    	if(dist['value']<=Math.max(maxWalkDist, maxWalkDist)) {
 		    		// Walking
-		    		var walkTime = dist['value']/6000;
+		    		var walkTime = dist['value']/(maxWalkSpd+1000);
 		    		var wH = walkTime|0;
 		    		var walkHour;
 		    		if(walkTime < 1.0) {
@@ -103,7 +128,7 @@ function gText(txt) {
 		    		walk += walkHour + walkMin;
 
 		    		// Biking
-		    		var bikeTime = dist['value']/15000;
+		    		var bikeTime = dist['value']/(maxBikeSpd+1000);
 		    		var bH = bikeTime|0;
 		    		console.log(bH);
 		    		var bikeHour;
@@ -121,20 +146,23 @@ function gText(txt) {
 		    		}
 		    		bike += bikeHour + bikeMin;
 
-		    		// Priorities
-		    		if(wH <= 0 && wM <= 30) {
+		    		// Priority Display
+		    		if(wH <= maxWalkTimeH && wM <= maxWalkTimeM) {
 		    			alertUser(dst, car, flight, bike, walk, 3, 0, 2, 1);
-		    		} else if(bH <= 0 && bM <= 30) {
+		    		} else if(bH <= maxBikeTimeH && bM <= maxBikeTimeM) {
 		    			alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
 		    		} else {
 		    			alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
 		    		}
-		    		
-		    	} else if(dur['value']<7200) {
+		    		return;
+		    	}
+		    	// If no biking or walking
+		    	if(dur['value'] < 7200) {
 		    		alertUser (dst, car, flight, bike, walk, 1, 0, 0, 0);
 		    	} else {
 		    		var latdst = -1;
 					var londst = -1;
+					// Query Geocode (Courtesy: Google)
 					$.ajax ({
 						type:"GET",
 						url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
@@ -147,53 +175,61 @@ function gText(txt) {
 							if (flightTime != 1) {
 								flight+="s";
 							}
-
+							// Priority Display
 							if(dur['value']<36000) {
 					    		alertUser (dst, car, flight, bike, walk, 1, 2, 0, 0);
-					    	}
-					    	else {
+					    	} else {
 					    		alertUser (dst, car, flight, bike, walk, 2, 1, 0, 0);
 					    	}
-						}
+						} // Success Function (Geocode)
 					});
-			    }
-		    }
+			    } // Duration > HH:02
+		    } // Found driving time
 		    else {
-		    	; //That's not a place
+		    	; // status == "NOT_FOUND"
 		    }
-	    }
+	    } // Success Function ()
 	});
-}
+} // main()
 
+/*
+ * Finds width for mode of transport display
+ */
 function findWidth (a, b, c, d) {
 	var sum = a+b+c+d;
 	return (sum == 10) ? "four" : (sum == 6) ? "three" : (sum == 3) ? "two" : "one";
 }
 
+/*
+ * Reset function
+ */
 function resetBodyClass () {
-	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bone\b/,'');
-	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\btwo\b/,'');
-	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bthree\b/,'');
-	document.getElementsByTagName("body")[0].className =document.getElementsByTagName("body")[0].className.replace(/\bfour\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bone\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\btwo\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bthree\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bfour\b/,'');
 }
 
+/*
+ * Displays the information on a beautiful sliding div at the bottom of the screen
+ */
 function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
-	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	dst = "<div id = 'address'>"+dst+"</div>";
+	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	var text = dst + "<div id = 'info'>";
+
 	car = "<div class = 'mode'>"+car+"</div>";
 	flight = "<div class = 'mode'>"+flight+"</div>";
 	bike = "<div class = 'mode'>"+bike+"</div>";
 	walk = "<div class = 'mode'>"+walk+"</div>";
-	// Add the display to (var)text according to priority
 
+	// Add the display to (var)text according to priority
 	text += (priority_c == 1) ? car : (priority_f == 1) ? flight : (priority_b == 1) ? bike : (priority_w == 1) ? walk : "";
 	text += (priority_c == 2) ? car : (priority_f == 2) ? flight : (priority_b == 2) ? bike : (priority_w == 2) ? walk : "";
 	text += (priority_c == 3) ? car : (priority_f == 3) ? flight : (priority_b == 3) ? bike : (priority_w == 3) ? walk : "";
 	text += (priority_c == 4) ? car : (priority_f == 4) ? flight : (priority_b == 4) ? bike : (priority_w == 4) ? walk : "";
-	
 	text+="</div>";
-	console.log(text);
+
 	// Display Text
 	var a = document.createElement("div");
 	a.innerHTML = text;
@@ -202,7 +238,6 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	a.style.bottom = "0";
 	a.style.left = "0";
 	a.style.width = "100%";
-	//a.style.padding = "0.5%";
 	a.style.background = "black";
 	a.style.color = "white";
 	a.style.font="menu";
@@ -213,10 +248,12 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 	a.style.textAlign = "center";
 	a.style.display = "none";
 
+	// Remove display on click
 	a.onclick = function () {
 		lastQuery = "";
 		$(a).slideUp("fast", function() {document.body.removeChild(a);});
 	}
+
 	var previous = document.getElementById("Wector");
 	if (previous == null) {
 		resetBodyClass();
@@ -227,7 +264,7 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 			document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
 		});
 		
-		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 666 :O
+		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
 	}
 	else {
 		$(previous).slideUp("fast", function() {
@@ -239,20 +276,33 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 				var style = window.getComputedStyle(document.getElementById("address"), null);
 				document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
 			});
-			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 666 :O						
+			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
 		});
 	}
 }
 
+/* 
+ * Initialize custom variables
+ */
 function initialize () {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY"}, function(items) {
-		latsrc = items.latitude;
-		lonsrc = items.longitude;
-		home = items.address;
+	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30},
+		function(items) {
+			latsrc = items.latitude;
+			lonsrc = items.longitude;
+			home = items.address;
+			maxWalkSpd = items.mWS;
+			maxBikeSpd = items.mBS;
+			maxWalkTimeH = items.mWTH;
+			maxBikeTimeH = items.mBTH;
+			maxWalkTimeM = items.mWTM;
+			maxBikeTimeM = items.mBTM;
 	});
 }
 initialize();
 
+/*
+ * Calculates flight time by using preset formula
+ */
 function getFlight (lat1, lon1, lat2, lon2) {
 	var distance = haversine(lat1, lon1, lat2, lon2);
 	var slowDistance = Math.min(distance, 300);
@@ -263,6 +313,10 @@ function getFlight (lat1, lon1, lat2, lon2) {
 	return Math.ceil((totalTime*100)/100);
 }
 
+/*
+ * Haversine function to calculate "great-circle" distance between two points
+ * src: http://www.movable-type.co.uk/scripts/latlong.html
+ */
 function haversine() {
        var radians = Array.prototype.map.call(arguments, function(deg) { return deg/180.0 * Math.PI; });
        var lat1 = radians[0], lon1 = radians[1], lat2 = radians[2], lon2 = radians[3];

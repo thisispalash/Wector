@@ -45,7 +45,7 @@
             font-size: 12px;
             float: left;
             text-align: left;
-            color: grey;
+            color: "grey";
             border-radius: 0px 0px 3px 3px;
             margin-bottom:10px;
             padding: 10px 1.5%;
@@ -56,6 +56,10 @@
             float:left;
             font-size:22px;
             margin-bottom:5px;
+        }
+        /* TODO */
+        .slideInput {
+
         }
     </style>
 
@@ -69,5 +73,31 @@
 	</form>
 	<img src = "" id = "map" />
     <div id = "saveAlert">Saved!</div>
+    <br><br><br><br>
+    <div id = "maxVals"> Select Max Values </div>
+    <form action="" method = "POST" id = "maxForm">
+        <input class = "slideInput" id = "maxWS" type = "range" min = "1.0" max = "10.0" step = "0.1" value = "5.0">
+            Walking Speed
+        </input><br><br>
+        <div>Max Waking Time:</div>
+        <input class = "slideInput" id = "maxWTH" type = "range" min = "1" max = "5" step = "1" value = "0">
+            Hour
+        </input>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class = "slideInput" id = "maxWTM" type = "range" min = "0" max = "59" step = "1" value = "30">
+            Minute
+        </input>
+        <br><br><br><br>
+        <input class = "slideInput" id = "maxBS" type = "range" min = "1.0" max = "25.0" step = "0.1" value = "14.0">
+            Biking Speed
+        </input><br><br>
+        <div>Max Biking Time:</div>
+        <input class = "slideInput" id = "maxBTH" type = "range" min = "1" max = "5" step = "1" value = "0">
+            Hour
+        </input>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class = "slideInput" id = "maxBTM" type = "range" min = "0" max = "59" step = "1" value = "30">
+            Minute
+        </input>
 </body>
 </html>
