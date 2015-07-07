@@ -51,16 +51,37 @@ function save() {
 	});		
 }
 
+function saveVals() {
+	document.getElementById("saveMax").innerHTML = 'Saving <i class="fa fa-spinner fa-spin"></i>';
+	var maxWS = parseInt(document.getElementById("maxWS").value);
+	var maxBS = parseInt(document.getElementById("maxBS").value);
+	var maxWTH = parseInt(document.getElementById("maxWTH").value);
+	var maxBTH = parseInt(document.getElementById("maxBTH").value);
+	var maxWTM = parseInt(document.getElementById("maxWTM").value);
+	var maxBTM = parseInt(document.getElementById("maxBTM").value);
+	// TODO: Display values in the slider
+	//document.getElementById("Disp").innerHTML = " " + maxWS + " " + maxWTH + ":" + maxWTM + "    " + maxBS + " " + maxBTH + ":" + maxBTM;
+	chrome.storage.sync.set({mWS:maxWS*1000, mBS:maxBS*1000, mWTH:maxWTH, mBTH:maxBTH, mWTM:maxWTM, mBTM:maxBTM}, function () {
+		document.getElementById("saveMax").innerHTML = "Save";
+		var a = document.getElementById("savedMax");
+		a.innerHTML = "Saved values as:<br>" + "<br>Walking Speed: " + maxWS + "<br>Max Walk Time: " + maxWTH + ":" + maxWTM + "<br>Biking Speed: " + maxBS + "<br>Max Bike Time: " + maxBTH + ":" + maxBTH;
+		$(a).fadeIn();
+		setInterval(function(){ $(a).fadeOut(); }, 5000);
+	});
+}
+
 // Find current location that has been set, and send it over to the map.
 function preInitialize() {
 	// retrieve lat lon loc
 	document.getElementById("submit").addEventListener("click",refreshMap);
 	document.getElementById("save").addEventListener("click",save);
+	document.getElementById("saveMax").addEventListener("click",saveVals);
 	document.getElementById("form").addEventListener("submit",function (event) {
 		event.preventDefault();
 		refreshMap();
 	});
-	chrome.storage.sync.get({address:"Ithaca, NY", latitude:42.4433, longitude:-76.5000}, function(items) {
+	document.getElementById("maxForm").addEventListener("submit",function (event) {event.preventDefault();});
+	chrome.storage.sync.get({address:"Ithaca, NY", latitude:42.4433, longitude:-76.5000, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
 	});

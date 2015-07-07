@@ -44,14 +44,14 @@ var lonsrc;
 var home;
 
 // Max Values (in meters/hr, HH, MM, meters)
-var maxWalkSpd = 5000;
-var maxBikeSpd = 14000;
-var maxWalkTimeH = 0;
-var maxBikeTimeH = 0;
-var maxWalkTimeM = 30;
-var maxBikeTimeM = 30;
-var maxWalkDist = (maxWalkSpd+1000)*(maxWalkTimeH+maxWalkTimeM/60.0);
-var maxBikeDist = (maxBikeSpd+1000)*(maxBikeTimeH+maxBikeTimeM/60.0);
+var maxWalkSpd;
+var maxBikeSpd;
+var maxWalkTimeH;
+var maxBikeTimeH;
+var maxWalkTimeM;
+var maxBikeTimeM;
+var maxWalkDist;
+var maxBikeDist;
 
 var lastQuery = "";
 
@@ -60,6 +60,7 @@ var lastQuery = "";
  * @params: txt - Selected text
  */
 function main(txt) {
+	console.log("  " + latsrc + "," + lonsrc + "    " + home + "\n" + maxWalkSpd + "  " + (maxWalkTimeH*60+maxWalkTimeM)/60.0 + " " + maxWalkDist + " " + maxWalkTimeH+":"+maxWalkTimeM + "\n" + maxBikeSpd + "  " + (maxBikeTimeH*60+maxBikeTimeM)/60.0 + " " + maxBikeDist + " " + maxBikeTimeH+":"+maxBikeTimeM + "\n")
     var text = txt;
     lastQuery = text;
     var dest = text;
@@ -108,7 +109,7 @@ function main(txt) {
 		    	var bike=" <i class='fa fa-bicycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
-		    	if(dist['value']<=Math.max(maxWalkDist, maxWalkDist)) {
+		    	if(dist['value']<=Math.max(maxWalkDist, maxBikeDist)) {
 		    		// Walking
 		    		var walkTime = dist['value']/(maxWalkSpd+1000);
 		    		var wH = walkTime|0;
@@ -285,7 +286,7 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
  * Initialize custom variables
  */
 function initialize () {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30},
+	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, mwT:30},
 		function(items) {
 			latsrc = items.latitude;
 			lonsrc = items.longitude;
@@ -296,6 +297,8 @@ function initialize () {
 			maxBikeTimeH = items.mBTH;
 			maxWalkTimeM = items.mWTM;
 			maxBikeTimeM = items.mBTM;
+			maxWalkDist = (maxWalkSpd+1000)*(maxWalkTimeH+maxWalkTimeM/60.0);
+			maxBikeDist = (maxBikeSpd+1000)*(maxBikeTimeH+maxBikeTimeM/60.0);
 	});
 }
 initialize();

@@ -7,31 +7,43 @@
     <script src = "jquery-1.11.3.min.js"> </script>
     <script src = "options.js"> </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css">
     <style>
     	#whereAmIInput {
     		width:59.7%;
     		float:left;
     		padding: 0px 5px;
     	}
-    	#save {
-    		width:20%;
-    		float:left;
-    		background: black;
-			color: white;
-			box-shadow: none;
-			border: 0px;
-			border-radius: 0px 3px 3px 0px;
-			margin:0;
+        #saveMax {
+            width:100%;
+            float:left;
+            background: black;
+            color:#FFCC00;
+            /*box-shadow: none;*/
+            border: 0px;
+            border-radius: 0px 3px 3px 0px;
+            margin:0;
             cursor:pointer;
-    	}
+        }
+    	#save {
+            width:20%;
+            float:left;
+            background:#003333;
+            color:#D4D7FE;
+            box-shadow:none;
+            border:0px;
+            border-radius: 0px 3px 3px 0px;
+            margin:0;
+            cursor:pointer;
+        }
     	#submit {
     		width:20%;
     		float:left;
-    		background: rgb(23, 101, 166);
-			color: white;
-			box-shadow: none;
-			border: 0px;
-			border-radius: 0px;
+    		background:#669999;
+			color:#FFFFBE;
+			/*box-shadow: none;*/
+			border:0px;
+			border-radius:0px;
 			margin:0;
             cursor:pointer;
     	}
@@ -51,21 +63,35 @@
             padding: 10px 1.5%;
             display:none;
         }
-        #head {
+        .head {
             width:100%;
             float:left;
             font-size:22px;
-            margin-bottom:5px;
+            margin-bottom:15px;;
+            text-align:center;
+            color:#666699;
         }
         /* TODO */
         .slideInput {
 
         }
+        #walk {
+            float:left;
+            width:50%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        #bike {
+            float:left;
+            width:50%;
+            margin: 0 auto;
+            text-align: left;
+        }
     </style>
 
 </head>
-<body>
-    <div id = "head">Set Home</div>
+<body bgcolor="#999999">
+    <div id = "head" class = "head">Set Home</div>
 	<form action="" method = "POST" id = "form">
 		<input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
 		<button type = "button" id = "submit">Refresh</button>
@@ -74,30 +100,43 @@
 	<img src = "" id = "map" />
     <div id = "saveAlert">Saved!</div>
     <br><br><br><br>
-    <div id = "maxVals"> Select Max Values </div>
+    <div id = "maxVals" class = "head"> Select Max Values </div>
     <form action="" method = "POST" id = "maxForm">
-        <input class = "slideInput" id = "maxWS" type = "range" min = "1.0" max = "10.0" step = "0.1" value = "5.0">
-            Walking Speed
-        </input><br><br>
-        <div>Max Waking Time:</div>
-        <input class = "slideInput" id = "maxWTH" type = "range" min = "1" max = "5" step = "1" value = "0">
-            Hour
-        </input>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input class = "slideInput" id = "maxWTM" type = "range" min = "0" max = "59" step = "1" value = "30">
-            Minute
-        </input>
-        <br><br><br><br>
-        <input class = "slideInput" id = "maxBS" type = "range" min = "1.0" max = "25.0" step = "0.1" value = "14.0">
-            Biking Speed
-        </input><br><br>
-        <div>Max Biking Time:</div>
-        <input class = "slideInput" id = "maxBTH" type = "range" min = "1" max = "5" step = "1" value = "0">
-            Hour
-        </input>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input class = "slideInput" id = "maxBTM" type = "range" min = "0" max = "59" step = "1" value = "30">
-            Minute
-        </input>
+        <div id = "walk">
+            <input class = "slideInput" id = "maxWS" type = "range" min = "1.0" max = "10.0" step = "0.1" value = "5.0">
+                Walking Speed
+            </input>
+            <br><br>
+            <div>Max Waking Time:</div>
+            <input class = "slideInput" id = "maxWTH" type = "range" min = "0" max = "5" step = "1" value = "0">
+                Hour
+            </input>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br>
+            <input class = "slideInput" id = "maxWTM" type = "range" min = "00" max = "59" step = "1" value = "30">
+                Minute
+            </input>
+        </div>
+        <!--<br><br><br><br>-->
+        <div id = "bike">
+            <input class = "slideInput" id = "maxBS" type = "range" min = "1.0" max = "25.0" step = "0.1" value = "14.0">
+                Biking Speed
+            </input>
+            <br><br>
+            <div>Max Biking Time:</div>
+            <input class = "slideInput" id = "maxBTH" type = "range" min = "0" max = "5" step = "1" value = "0">
+                Hour
+            </input>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br>
+            <input class = "slideInput" id = "maxBTM" type = "range" min = "00" max = "59" step = "1" value = "30">
+                Minute
+            </input> 
+        </div>
+        <br>
+        <button type = "button" id = "saveMax" >Save</button>
+    </form>
+    <div id = "savedMax"> Saved! </div>
+    <div id = "Disp"></div>
 </body>
 </html>
