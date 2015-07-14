@@ -93,7 +93,7 @@ function main(txt) {
 							flight+="s";
 						}
 						// Call display function
-						alertUser(dst, "", flight, "", "", 0, 1, 0, 0);
+						alertUser(src, dst, "", flight, "", "", 0, 1, 0, 0);
 					}
 				});				
 	    	}
@@ -148,18 +148,19 @@ function main(txt) {
 		    		bike += bikeHour + bikeMin;
 
 		    		// Priority Display
+		    		// Add check for max times for bike and walk
 		    		if(wH <= maxWalkTimeH && wM <= maxWalkTimeM) {
-		    			alertUser(dst, car, flight, bike, walk, 3, 0, 2, 1);
+		    			alertUser(src, dst, car, flight, bike, walk, 3, 0, 2, 1);
 		    		} else if(bH <= maxBikeTimeH && bM <= maxBikeTimeM) {
-		    			alertUser(dst, car, flight, bike, walk, 2, 0, 1, 3);
+		    			alertUser(src, dst, car, flight, bike, walk, 2, 0, 1, 3);
 		    		} else {
-		    			alertUser(dst, car, flight, bike, walk, 1, 0, 2, 3);
+		    			alertUser(src, dst, car, flight, bike, walk, 1, 0, 2, 3);
 		    		}
 		    		return;
 		    	}
 		    	// If no biking or walking
 		    	if(dur['value'] < 7200) {
-		    		alertUser (dst, car, flight, bike, walk, 1, 0, 0, 0);
+		    		alertUser (src, dst, car, flight, bike, walk, 1, 0, 0, 0);
 		    	} else {
 		    		var latdst = -1;
 					var londst = -1;
@@ -178,9 +179,9 @@ function main(txt) {
 							}
 							// Priority Display
 							if(dur['value']<36000) {
-					    		alertUser (dst, car, flight, bike, walk, 1, 2, 0, 0);
+					    		alertUser (src, dst, car, flight, bike, walk, 1, 2, 0, 0);
 					    	} else {
-					    		alertUser (dst, car, flight, bike, walk, 2, 1, 0, 0);
+					    		alertUser (src, dst, car, flight, bike, walk, 2, 1, 0, 0);
 					    	}
 						} // Success Function (Geocode)
 					});
@@ -214,10 +215,29 @@ function resetBodyClass () {
 /*
  * Displays the information on a beautiful sliding div at the bottom of the screen
  */
-function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
+function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
+	var map_link = "https://www.google.com/maps/dir/"+src+"/"+dst;
 	dst = "<div id = 'address'>"+dst+"</div>";
 	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
-	var text = dst + "<div id = 'info'>";
+	var text = dst;
+
+	
+	// No need for directions
+	if(priority_c == 0) {
+		map_link = "";
+		//show_link = "  ";
+	}
+
+var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
+
+
+	show_link = "<div id = 'links'>" + show_link + "</div>";
+
+
+	text += show_link;
+	text += "<div id = 'info'>";
+
+	console.log(map_link+ "\n" + show_link);
 
 	car = "<div class = 'mode'>"+car+"</div>";
 	flight = "<div class = 'mode'>"+flight+"</div>";
@@ -262,7 +282,11 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 		document.body.appendChild(a);
 		$(a).slideDown("fast", function () {
 			var style = window.getComputedStyle(document.getElementById("address"), null);
-			document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
+			//document.getElementById("address").style.lineHeight = style.getPropertyValue("height");
+			console.log(style.getPropertyValue("height"));
+			// TODO: Bad Hack, See if can change
+			document.getElementById("info").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
+			document.getElementById("links").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
 		});
 		
 		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
@@ -275,7 +299,10 @@ function alertUser (dst, car, flight, bike, walk, priority_c, priority_f, priori
 			document.body.appendChild(a);
 			$(a).slideDown("fast", function () {
 				var style = window.getComputedStyle(document.getElementById("address"), null);
-				document.getElementById("info").style.lineHeight = style.getPropertyValue("height"); 
+				//document.getElementById("address").style.lineHeight = style.getPropertyValue("height");
+				// TODO: Bad Hack, See if can change
+				document.getElementById("info").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
+				document.getElementById("links").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
 			});
 			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
 		});

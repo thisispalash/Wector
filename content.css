@@ -14,19 +14,31 @@
 	color : #25BD25;
 }
 
+.fa-external-link {
+	color : #000000;
+}
+
 #info {
-	padding:0.5%;
+	padding:0;
 }
 
 #address {
 	padding:0.5%;
 	background:rgb(34,34,34);
 	float:left;
-	width:39%;
+	width:35%;
+}
+
+#links {
+	background: rgb(255,255,0);
+	float:right;
+	width:3%;
+	padding:0.5%;
 }
 
 .mode {
 	float:left;
+	padding-top: 0.5%;
 }
 
 body.one .mode {

@@ -48,7 +48,24 @@ function save() {
 				setInterval(function(){ $(a).fadeOut(); }, 5000);
 			});
 		}
-	});		
+	});
+}
+
+function refreshVals(maxWS, maxBS, maxWTH, maxBTH, maxWTM, maxBTM) {
+	// Sliders
+	document.getElementById("maxWS").value = maxWS;
+	document.getElementById("maxWTH").value = maxWTH;
+	document.getElementById("maxWTM").value = maxWTM;
+	document.getElementById("maxBS").value = maxBS;
+	document.getElementById("maxBTH").value = maxBTH;
+	document.getElementById("maxBTM").value = maxBTM;
+	// Texts
+	document.getElementById("TFmaxWS").value = maxWS;
+	document.getElementById("TFmaxWTH").value = maxWTH;
+	document.getElementById("TFmaxWTM").value = maxWTM;
+	document.getElementById("TFmaxBS").value = maxBS;
+	document.getElementById("TFmaxBTH").value = maxBTH;
+	document.getElementById("TFmaxBTM").value = maxBTM;
 }
 
 function saveVals() {
@@ -59,6 +76,12 @@ function saveVals() {
 	var maxBTH = parseInt(document.getElementById("maxBTH").value);
 	var maxWTM = parseInt(document.getElementById("maxWTM").value);
 	var maxBTM = parseInt(document.getElementById("maxBTM").value);
+	document.getElementById("TFmaxWS").value = maxWS;
+	document.getElementById("TFmaxWTH").value = maxWTH;
+	document.getElementById("TFmaxWTM").value = maxWTM;
+	document.getElementById("TFmaxBS").value = maxBS;
+	document.getElementById("TFmaxBTH").value = maxBTH;
+	document.getElementById("TFmaxBTM").value = maxBTM;
 	// TODO: Display values in the slider
 	//document.getElementById("Disp").innerHTML = " " + maxWS + " " + maxWTH + ":" + maxWTM + "    " + maxBS + " " + maxBTH + ":" + maxBTM;
 	chrome.storage.sync.set({mWS:maxWS*1000, mBS:maxBS*1000, mWTH:maxWTH, mBTH:maxBTH, mWTM:maxWTM, mBTM:maxBTM}, function () {
@@ -68,6 +91,10 @@ function saveVals() {
 		$(a).fadeIn();
 		setInterval(function(){ $(a).fadeOut(); }, 5000);
 	});
+}
+
+function updateVals() {
+
 }
 
 // Find current location that has been set, and send it over to the map.
@@ -80,7 +107,10 @@ function preInitialize() {
 		event.preventDefault();
 		refreshMap();
 	});
-	document.getElementById("maxForm").addEventListener("submit",function (event) {event.preventDefault();});
+	document.getElementById("maxForm").addEventListener("submit",function (event) {
+		event.preventDefault();
+		refreshVals(5000, 14000, 0, 0, 30, 30);
+	});
 	chrome.storage.sync.get({address:"Ithaca, NY", latitude:42.4433, longitude:-76.5000, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
