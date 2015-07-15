@@ -34,7 +34,7 @@ function checkHighlight() {
     }
 
     if (text != "" && text.length < 50 && text != lastQuery) {
-    	initializeHome();
+    	initializeHome(1);
     	if (hasSet) {
     		main(text);
     	}
@@ -144,7 +144,7 @@ function main(txt) {
 		    	// Walking && Biking (Max: 3hours)
 		    	if(dist['value']<=Math.max(maxWalkDist, maxBikeDist)) {
 		    		// Walking
-		    		var walkTime = dist['value']/(maxWalkSpd+1000);
+		    		var walkTime = dist['value']/(maxWalkSpd);
 		    		var wH = walkTime|0;
 		    		var walkHour;
 		    		if(walkTime < 1.0) {
@@ -162,7 +162,7 @@ function main(txt) {
 		    		walk += walkHour + walkMin;
 
 		    		// Biking
-		    		var bikeTime = dist['value']/(maxBikeSpd+1000);
+		    		var bikeTime = dist['value']/(maxBikeSpd);
 		    		var bH = bikeTime|0;
 		    		console.log(bH);
 		    		var bikeHour;
@@ -254,21 +254,10 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	var text = dst;
 
-	
-	// It looks fine even with flight directions. It links them to flight bookings through Google Flights
-	// as well, which is nice. Also, our estimates aren't bad.
-	// No need for directions
-	// if(priority_c == 0) {
-		//map_link = "";
-		//show_link = "  ";
-	//}
-
 	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
 	show_link = "<div id = 'links'>" + show_link + "</div>";
 
 	text += "<div id = 'info'>";
-
-	console.log(map_link+ "\n" + show_link);
 
 	car = "<div class = 'mode'>"+car+"</div>";
 	flight = "<div class = 'mode'>"+flight+"</div>";
@@ -355,8 +344,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 /* 
  * Initialize custom variables from Settings
  */
-function initializeHome () {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, mwT:30, exists:false},
+function initializeHome (highlighted) {
+	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, exists:false},
 		function(items) {
 			latsrc = items.latitude;
 			lonsrc = items.longitude;
@@ -367,15 +356,15 @@ function initializeHome () {
 			maxBikeTimeH = items.mBTH;
 			maxWalkTimeM = items.mWTM;
 			maxBikeTimeM = items.mBTM;
-			maxWalkDist = (maxWalkSpd+1000)*(maxWalkTimeH+maxWalkTimeM/60.0);
-			maxBikeDist = (maxBikeSpd+1000)*(maxBikeTimeH+maxBikeTimeM/60.0);
+			maxWalkDist = (maxWalkSpd)*(maxWalkTimeH+maxWalkTimeM/60.0);
+			maxBikeDist = (maxBikeSpd)*(maxBikeTimeH+maxBikeTimeM/60.0);
 			hasSet = items.exists;
-			if(!hasSet) {
+			if(!hasSet && highlighted == 1) {
 				displaySettingsAlert();
 			}
 	});
 }
-initializeHome();
+initializeHome(0);
 
 /*
  * Calculates flight time by using preset formula

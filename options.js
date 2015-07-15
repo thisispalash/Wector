@@ -1,11 +1,71 @@
-/*
- * ALGORITHM:
-  * Load existing location
-  * If exists, all is good. Else, query IP and get an approximate. Set it.
-  * Watch for the find button. When pressed
- */
+//ALGORITHM:
+//1. Load existing location
+//2. If exists, all is good. Else, query IP and get an approximate. Set it.
+//3. Watch for the find button. When pressed
 
 var loc = "";
+
+function getH(t) {
+	return Math.round(Math.floor(t/60));
+}
+
+function getM(t){
+	return t%60;
+}
+
+function formatTime(t) {
+	var h = getH(t);
+	var m = getM(t);
+	var time = "";
+	if (h != 0) {
+		time += h;
+		time += " hour";
+		if (h != 1) {
+			time += "s";
+		}
+		time += " ";
+	}
+	if (m != 0) {
+		time = time + "" + m + " minute";
+		if (m != 1) {
+			time += "s";
+		}
+	}
+	return time;
+}
+
+function updateSpeeds() {
+	var walkingSpeed = document.getElementById("walkingSpeedSlider").value;
+	var inMPH = (Math.round(walkingSpeed*0.62*10))/10.0;
+	document.getElementById("walkingSpeedInfo").innerHTML = walkingSpeed+" kmph ("+inMPH+" mph)";
+
+	var bikingSpeed = document.getElementById("bikingSpeedSlider").value;
+	inMPH = (Math.round(bikingSpeed*0.62*10))/10.0;
+	document.getElementById("bikingSpeedInfo").innerHTML = bikingSpeed+" kmph ("+inMPH+" mph)";
+
+	saveSpeedTimeSettings();
+}
+
+function updateTimes() {
+	var walkingTime = document.getElementById("walkingTimeSlider").value;
+	var showTime = formatTime(walkingTime);
+	document.getElementById("walkingTimeInfo").innerHTML = showTime;
+
+	var bikingTime = document.getElementById("bikingTimeSlider").value;
+	showTime = formatTime(bikingTime);
+	document.getElementById("bikingTimeInfo").innerHTML = showTime;
+
+	saveSpeedTimeSettings();
+}
+
+function refreshSliders(wS, wH, wM, bS, bH, bM) {
+	document.getElementById("bikingTimeSlider").value = bH*60 + bM;
+	document.getElementById("walkingTimeSlider").value = wH*60 + wM;
+	document.getElementById("walkingSpeedSlider").value = wS/1000;
+	document.getElementById("bikingSpeedSlider").value = bS/1000;
+	updateSpeeds();
+	updateTimes();
+}
 
 function refreshMapWithL(lat, lon) {
 	document.getElementById("map").style.opacity = "0.5";
@@ -28,6 +88,20 @@ function refreshMap() {
 	};
 }
 
+function saveSpeedTimeSettings() {
+	var mWS = document.getElementById("walkingSpeedSlider").value*1000;
+	var mBS = document.getElementById("bikingSpeedSlider").value*1000;
+	var walkingTime = document.getElementById("walkingTimeSlider").value;
+	var mWTH = getH(walkingTime);
+	var mWTM = getM(walkingTime);
+	var bikingTime = document.getElementById("bikingTimeSlider").value;
+	var mBTH = getH(bikingTime);
+	var mBTM = getM(bikingTime);
+	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM}, function () {
+		//saved
+	});
+}
+
 function save() {
 	document.getElementById("save").innerHTML = 'Saving <i class="fa fa-spinner fa-spin"></i>';
 	var address = document.getElementById("whereAmIInput").value;
@@ -41,60 +115,14 @@ function save() {
 			var format = adddata['results'][0]['formatted_address'];
 			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
 				document.getElementById("save").innerHTML = "Save";
-				var a = document.getElementById("saveAlert");
-				a.innerHTML = "Saved Home as "+format+"!";
+				var a = document.getElementById("homeSaveAlert");
+				a.innerHTML = "Saved Home as "+format+"! <i class = 'fa fa-thumbs-up'></i>";
 				document.getElementById("whereAmIInput").value = format;
 				$(a).fadeIn();
 				setInterval(function(){ $(a).fadeOut(); }, 5000);
 			});
 		}
-	});
-}
-
-function refreshVals(maxWS, maxBS, maxWTH, maxBTH, maxWTM, maxBTM) {
-	// Sliders
-	document.getElementById("maxWS").value = maxWS;
-	document.getElementById("maxWTH").value = maxWTH;
-	document.getElementById("maxWTM").value = maxWTM;
-	document.getElementById("maxBS").value = maxBS;
-	document.getElementById("maxBTH").value = maxBTH;
-	document.getElementById("maxBTM").value = maxBTM;
-	// Texts
-	document.getElementById("TFmaxWS").value = maxWS;
-	document.getElementById("TFmaxWTH").value = maxWTH;
-	document.getElementById("TFmaxWTM").value = maxWTM;
-	document.getElementById("TFmaxBS").value = maxBS;
-	document.getElementById("TFmaxBTH").value = maxBTH;
-	document.getElementById("TFmaxBTM").value = maxBTM;
-}
-
-function saveVals() {
-	document.getElementById("saveMax").innerHTML = 'Saving <i class="fa fa-spinner fa-spin"></i>';
-	var maxWS = parseInt(document.getElementById("maxWS").value);
-	var maxBS = parseInt(document.getElementById("maxBS").value);
-	var maxWTH = parseInt(document.getElementById("maxWTH").value);
-	var maxBTH = parseInt(document.getElementById("maxBTH").value);
-	var maxWTM = parseInt(document.getElementById("maxWTM").value);
-	var maxBTM = parseInt(document.getElementById("maxBTM").value);
-	document.getElementById("TFmaxWS").value = maxWS;
-	document.getElementById("TFmaxWTH").value = maxWTH;
-	document.getElementById("TFmaxWTM").value = maxWTM;
-	document.getElementById("TFmaxBS").value = maxBS;
-	document.getElementById("TFmaxBTH").value = maxBTH;
-	document.getElementById("TFmaxBTM").value = maxBTM;
-	// TODO: Display values in the slider
-	//document.getElementById("Disp").innerHTML = " " + maxWS + " " + maxWTH + ":" + maxWTM + "    " + maxBS + " " + maxBTH + ":" + maxBTM;
-	chrome.storage.sync.set({mWS:maxWS*1000, mBS:maxBS*1000, mWTH:maxWTH, mBTH:maxBTH, mWTM:maxWTM, mBTM:maxBTM, exists:true}, function () {
-		document.getElementById("saveMax").innerHTML = "Save";
-		var a = document.getElementById("savedMax");
-		a.innerHTML = "Saved values as:<br>" + "<br>Walking Speed: " + maxWS + "<br>Max Walk Time: " + maxWTH + ":" + maxWTM + "<br>Biking Speed: " + maxBS + "<br>Max Bike Time: " + maxBTH + ":" + maxBTH;
-		$(a).fadeIn();
-		setInterval(function(){ $(a).fadeOut(); }, 5000);
-	});
-}
-
-function updateVals() {
-
+	});		
 }
 
 // Find current location that has been set, and send it over to the map.
@@ -102,19 +130,19 @@ function preInitialize() {
 	// retrieve lat lon loc
 	document.getElementById("submit").addEventListener("click",refreshMap);
 	document.getElementById("save").addEventListener("click",save);
-	document.getElementById("saveMax").addEventListener("click",saveVals);
-	document.getElementById("form").addEventListener("submit",function (event) {
+	document.getElementById("homeForm").addEventListener("submit",function (event) {
 		event.preventDefault();
 		refreshMap();
-	});
-	document.getElementById("maxForm").addEventListener("submit",function (event) {
-		event.preventDefault();
-		refreshVals(5000, 14000, 0, 0, 30, 30);
 	});
 	chrome.storage.sync.get({address:"Ithaca, NY", latitude:42.4433, longitude:-76.5000, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
+		refreshSliders(items.mWS, items.mWTH, items.mWTM, items.mBS, items.mBTH, items.mBTM);
 	});
+	document.getElementById("walkingSpeedSlider").addEventListener("change", updateSpeeds);
+	document.getElementById("bikingSpeedSlider").addEventListener("change", updateSpeeds);
+	document.getElementById("walkingTimeSlider").addEventListener("change", updateTimes);
+	document.getElementById("bikingTimeSlider").addEventListener("change", updateTimes);
 }
 
 window.addEventListener("load", preInitialize);

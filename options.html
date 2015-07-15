@@ -1,63 +1,52 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Wector Options</title>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>Wector Options</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src = "jquery-1.11.3.min.js"> </script>
     <script src = "options.js"> </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css">
     <style>
-    	#whereAmIInput {
-    		width:59.7%;
-    		float:left;
-    		padding: 0px 5px;
-    	}
-        #saveMax {
-            width:100%;
+        #whereAmIInput {
+            width:59.7%;
+            float:left;
+            padding: 0px 5px;
+        }
+        #save {
+            width:20%;
             float:left;
             background: black;
-            color:#FFCC00;
-            /*box-shadow: none;*/
+            color: white;
+            box-shadow: none;
             border: 0px;
             border-radius: 0px 3px 3px 0px;
             margin:0;
             cursor:pointer;
         }
-    	#save {
+        #submit {
             width:20%;
             float:left;
-            background:#003333;
-            color:#D4D7FE;
-            box-shadow:none;
-            border:0px;
-            border-radius: 0px 3px 3px 0px;
+            background: rgb(23, 101, 166);
+            color: white;
+            box-shadow: none;
+            border: 0px;
+            border-radius: 0px;
             margin:0;
             cursor:pointer;
         }
-    	#submit {
-    		width:20%;
-    		float:left;
-    		background:#669999;
-			color:#FFFFBE;
-			/*box-shadow: none;*/
-			border:0px;
-			border-radius:0px;
-			margin:0;
-            cursor:pointer;
-    	}
-    	#map {
-    		margin-top:5px;
+        #map {
+            margin-top:5px;
             border-radius:3px;
-    	}
-        #saveAlert {
+        }
+        .saveAlert {
             width:97%;
             background:rgb(230, 230, 230);
             font-size: 12px;
             float: left;
             text-align: left;
-            color: "grey";
+            color: grey;
             border-radius: 0px 0px 3px 3px;
             margin-bottom:10px;
             padding: 10px 1.5%;
@@ -66,71 +55,95 @@
         .head {
             width:100%;
             float:left;
-            font-size:22px;
-            margin-bottom:15px;;
-            text-align:center;
-            color:#666699;
+            font-size:20px;
+            margin-bottom:5px;
         }
-        /* TODO */
-        .slideInput {
-
-        }
-        #walk {
+        #headRow {
+            width:100%;
             float:left;
-            width:50%;
-            margin: 0 auto;
-            text-align: left;
+            font-size:20px;
+            text-align:left;
+            border-bottom:1px solid black;
+            padding-bottom:5px;
         }
-        #bike {
+        .col1 {
+            width:22%;
             float:left;
+        }
+        .col2 {
+            width:39%;
+            float:left;
+        }
+        .col3 {
+            width:39%;
+            float:left;
+        }
+        .col4, .col5 {
             width:50%;
-            margin: 0 auto;
-            text-align: left;
+            float:left;
+            font-size:13px;
+            line-height:26px;
+        }
+        .settingsRow {
+            width:100%;
+            float:left;
+            font-size:15px;
+            padding-top:5px;
+            padding-bottom:5px;
+        }
+        .sliders {
+            width:100px;
         }
     </style>
-
 </head>
-<body bgcolor="#999999">
-    <div id = "head" class = "head">Set Home</div>
-	<form action="" method = "POST" id = "form">
-		<input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
-		<button type = "button" id = "submit">Refresh</button>
-		<button type = "button" id = "save">Save</button>
-	</form>
-	<img src = "" id = "map" />
-    <div id = "saveAlert">Saved!</div>
-    <br><br><br><br>
-    <div id = "maxVals" class = "head"> Select Max Values </div>
-    <form action="" method = "POST" id = "maxForm">
-        <div id = "walk">
-            <input class = "slideInput" id = "maxWS" type = "range" min = "1.0" max = "10.0" step = "0.1" value = "5.0"/><input class = "slideInVals" id = "TFmaxWS" type = "text" value = ""/>
-                Walking Speed
-            <br><br>
-            <div>Max Waking Time:</div>
-            <input class = "slideInput" id = "maxWTH" type = "range" min = "0" max = "5" step = "1" value = "0"/><input class = "slideInVals" id = "TFmaxWTH" type = "text" value = ""/>
-                Hour
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br>
-            <input class = "slideInput" id = "maxWTM" type = "range" min = "00" max = "59" step = "1" value = "30"/><input class = "slideInVals" id = "TFmaxWTM" type = "text" value = ""/>
-                Minute
-        </div>
-        <!--<br><br><br><br>-->
-        <div id = "bike">
-            <input class = "slideInput" id = "maxBS" type = "range" min = "1.0" max = "25.0" step = "0.1" value = "14.0"/><input class = "slideInVals" id = "TFmaxBS" type = "text" value = ""/>
-                Biking Speed
-            <br><br>
-            <div>Max Biking Time:</div>
-            <input class = "slideInput" id = "maxBTH" type = "range" min = "0" max = "5" step = "1" value = "0"/><input class = "slideInVals" id = "TFmaxBTH" type = "text" value = ""/>
-                Hour
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br>
-            <input class = "slideInput" id = "maxBTM" type = "range" min = "00" max = "59" step = "1" value = "30"/><input class = "slideInVals" id = "TFmaxBTM" type = "text" value = ""/>
-                Minute
-        </div>
-        <br>
-        <button type = "button" id = "saveMax" >Save</button>
+<body>
+    <div class = "head">Set Home</div>
+    <form action="" method = "POST" id = "homeForm">
+        <input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
+        <button type = "button" id = "submit">Refresh</button>
+        <button type = "button" id = "save">Save</button>
     </form>
-    <div id = "savedMax"> Saved! </div>
-    <div id = "Disp"></div>
+    <img src = "" id = "map" />
+    <div class = "saveAlert" id = "homeSaveAlert">Saved!</div>
+    <br><br>
+    <form action="" method = "POST" id = "speedForm">
+        <div id = "headRow">
+            <div class = "col1">Options</div>
+            <div class = "col2">Walking <i class = "zmdi zmdi-directions-walk"></i></div>
+            <div class = "col3">Biking <i class = "fa fa-bicycle"></i></div>
+        </div>
+        <div class = "settingsRow">
+            <div class = "col1" style="line-height:26px;">Speed</div>
+            <div class = "col2">
+                <div class = "col4">
+                    <input type="range" id="walkingSpeedSlider" class="sliders" min="2" max="8" step="1" value="5"/>
+                </div>
+                <div class = "col5" id = "walkingSpeedInfo"></div>
+            </div>
+            <div class = "col3">
+                <div class = "col4">
+                    <input type="range" id="bikingSpeedSlider" class="sliders" min="8" max="25" step="1" value="14"/>
+                </div>
+                <div class = "col5" id = "bikingSpeedInfo"></div>
+            </div>
+        </div>
+        <div class = "settingsRow">
+            <div class = "col1" style="line-height:26px;">Maximum Time</div>
+            <div class = "col2">
+                <div class = "col4">
+                    <input type="range" id="walkingTimeSlider" class="sliders" min="2" max="60" step="2" value="30"/>
+                </div>
+                <div class = "col5" id = "walkingTimeInfo"></div>
+            </div>
+            <div class = "col3">
+                <div class = "col4">
+                    <input type="range" id="bikingTimeSlider" class="sliders" min="5" max="120" step="5" value="30"/>
+                </div>
+                <div class = "col5" id = "bikingTimeInfo"></div>
+            </div>
+        </div>
+    </form>
+    
+    <div class = "saveAlert" id = "optSaveAlert">Saved!</div>
 </body>
 </html>
