@@ -368,6 +368,7 @@ function initializeHome (highlighted) {
 function atWectorML() {
 	try {
 		if (document.getElementById("thisIsForTheExtension") != null) {
+			document.getElementById("install").style.display = "none";
 			document.getElementById("inst").innerHTML = "Thanks for using the Wector Chrome Extension!";
 			document.getElementById("places").style.display="none";
 			document.getElementById("placesalt").style.display="block";
@@ -378,9 +379,6 @@ function atWectorML() {
 				document.getElementById("p2a").innerHTML = "khaaliDimaag.io@gmail.com";
 				document.getElementById("p2a").style.cursor = "auto";
 			};
-		}
-		else {
-			document.getElementById("install").style.display = "block";
 		}
 	}
 	catch(err) {
