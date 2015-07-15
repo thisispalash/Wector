@@ -15,11 +15,13 @@
 }
 
 .fa-external-link {
-	color : #000000;
+	color : silver;
 }
 
 #info {
-	padding:0;
+	padding:0.5%;
+	width:59%;
+	float:left;
 }
 
 #address {
@@ -30,29 +32,33 @@
 }
 
 #links {
-	background: rgb(255,255,0);
-	float:right;
+	background: rgb(24, 31, 56);
+	float:left;
 	width:3%;
 	padding:0.5%;
 }
 
+#setAlert {
+	background:rgba(0,0,0,0.85);
+	cursor:pointer;
+}
+
 .mode {
 	float:left;
-	padding-top: 0.5%;
 }
 
 body.one .mode {
-	width:60%;
+	width:100%;
 }
 
 body.two .mode {
-	width:30%;
+	width:50%;
 }
 
 body.three .mode{
-	width:20%;
+	width:33%;
 }
 
 body.four .mode{
-	width:15%;
+	width:25%;
 }

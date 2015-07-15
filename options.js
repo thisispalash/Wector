@@ -39,7 +39,7 @@ function save() {
 			var latadd = adddata['results'][0]['geometry']['location']['lat'];
 			var lonadd = adddata['results'][0]['geometry']['location']['lng'];
 			var format = adddata['results'][0]['formatted_address'];
-			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format}, function () {
+			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
 				document.getElementById("save").innerHTML = "Save";
 				var a = document.getElementById("saveAlert");
 				a.innerHTML = "Saved Home as "+format+"!";
@@ -84,7 +84,7 @@ function saveVals() {
 	document.getElementById("TFmaxBTM").value = maxBTM;
 	// TODO: Display values in the slider
 	//document.getElementById("Disp").innerHTML = " " + maxWS + " " + maxWTH + ":" + maxWTM + "    " + maxBS + " " + maxBTH + ":" + maxBTM;
-	chrome.storage.sync.set({mWS:maxWS*1000, mBS:maxBS*1000, mWTH:maxWTH, mBTH:maxBTH, mWTM:maxWTM, mBTM:maxBTM}, function () {
+	chrome.storage.sync.set({mWS:maxWS*1000, mBS:maxBS*1000, mWTH:maxWTH, mBTH:maxBTH, mWTM:maxWTM, mBTM:maxBTM, exists:true}, function () {
 		document.getElementById("saveMax").innerHTML = "Save";
 		var a = document.getElementById("savedMax");
 		a.innerHTML = "Saved values as:<br>" + "<br>Walking Speed: " + maxWS + "<br>Max Walk Time: " + maxWTH + ":" + maxWTM + "<br>Biking Speed: " + maxBS + "<br>Max Bike Time: " + maxBTH + ":" + maxBTH;

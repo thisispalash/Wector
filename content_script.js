@@ -34,14 +34,47 @@ function checkHighlight() {
     }
 
     if (text != "" && text.length < 50 && text != lastQuery) {
-    	main(text);
+    	initializeHome();
+    	if (hasSet) {
+    		main(text);
+    	}
     }
+}
+
+/**
+* Blah
+*/
+function displaySettingsAlert() {
+	var a = document.createElement("div");
+	var iconURL = chrome.extension.getURL("/logo48w.png");
+	a.innerHTML = "<img src = '"+iconURL+"' style='width:40px; vertical-align:middle;' /> needs to know where you are to show you travel estimates. Click here to set it up!";
+	a.id = "setAlert"
+	a.style.position = "fixed";
+	a.style.bottom = "0";
+	a.style.left = "0";
+	a.style.width = "100%";
+	a.style.color = "white";
+	a.style.font="menu";
+	a.style.fontSize = "16px";
+	a.style.border="0";
+	a.style.borderRadius="0px";
+	a.style.zIndex = "2147483648";
+	a.style.textAlign = "center";
+	a.style.display = "none";
+	a.style.padding = "0.5%";
+	$(a).on('click', function() {
+		chrome.runtime.sendMessage({message:"showOptions"});
+	});
+	document.body.appendChild(a);
+	$(a).slideDown("fast");
+	setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660);
 }
 
 // Home
 var latsrc;
 var lonsrc;
 var home;
+var hasSet;
 
 // Max Values (in meters/hr, HH, MM, meters)
 var maxWalkSpd;
@@ -222,19 +255,17 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	var text = dst;
 
 	
+	// It looks fine even with flight directions. It links them to flight bookings through Google Flights
+	// as well, which is nice. Also, our estimates aren't bad.
 	// No need for directions
-	if(priority_c == 0) {
-		map_link = "";
+	// if(priority_c == 0) {
+		//map_link = "";
 		//show_link = "  ";
-	}
+	//}
 
-var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
-
-
+	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
 	show_link = "<div id = 'links'>" + show_link + "</div>";
 
-
-	text += show_link;
 	text += "<div id = 'info'>";
 
 	console.log(map_link+ "\n" + show_link);
@@ -250,6 +281,7 @@ var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-externa
 	text += (priority_c == 3) ? car : (priority_f == 3) ? flight : (priority_b == 3) ? bike : (priority_w == 3) ? walk : "";
 	text += (priority_c == 4) ? car : (priority_f == 4) ? flight : (priority_b == 4) ? bike : (priority_w == 4) ? walk : "";
 	text+="</div>";
+	text+= show_link;
 
 	// Display Text
 	var a = document.createElement("div");
@@ -259,12 +291,12 @@ var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-externa
 	a.style.bottom = "0";
 	a.style.left = "0";
 	a.style.width = "100%";
-	a.style.background = "black";
+	a.style.background = "rgba(0,0,0,0.9)";
 	a.style.color = "white";
 	a.style.font="menu";
 	a.style.fontSize = "16px";
 	a.style.border="0";
-	a.style.borderRadius="10px 10px 0 0 ";
+	a.style.borderRadius="0px";
 	a.style.zIndex = "2147483648";
 	a.style.textAlign = "center";
 	a.style.display = "none";
@@ -281,12 +313,17 @@ var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-externa
 		document.getElementsByTagName("body")[0].className += widthOfEachMode;
 		document.body.appendChild(a);
 		$(a).slideDown("fast", function () {
-			var style = window.getComputedStyle(document.getElementById("address"), null);
-			//document.getElementById("address").style.lineHeight = style.getPropertyValue("height");
-			console.log(style.getPropertyValue("height"));
-			// TODO: Bad Hack, See if can change
-			document.getElementById("info").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
-			document.getElementById("links").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
+			var setHeightTo = $("#address").height();
+			document.getElementById("info").style.lineHeight = setHeightTo+"px";
+			document.getElementById("links").style.lineHeight = setHeightTo+"px";
+			//fix for corner case websites:
+			var ourBar = $("#address").width() + $("#info").width() + $("#links").width();
+			var wholeScreen = $(this).width();
+			if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
+				document.getElementById("address").style.width = "36%";
+				document.getElementById("info").style.width = "60%";
+				document.getElementById("links").style.width = "4%";
+			}
 		});
 		
 		setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
@@ -298,11 +335,17 @@ var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-externa
 			document.getElementsByTagName("body")[0].className += widthOfEachMode;
 			document.body.appendChild(a);
 			$(a).slideDown("fast", function () {
-				var style = window.getComputedStyle(document.getElementById("address"), null);
-				//document.getElementById("address").style.lineHeight = style.getPropertyValue("height");
-				// TODO: Bad Hack, See if can change
-				document.getElementById("info").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
-				document.getElementById("links").style.lineHeight = parseInt(style.getPropertyValue("height"))-12 + "px"; 
+				var setHeightTo = $("#address").height();
+				document.getElementById("info").style.lineHeight = setHeightTo+"px";
+				document.getElementById("links").style.lineHeight = setHeightTo+"px";
+				//fix for corner case websites:
+				var ourBar = $("#address").width() + $("#info").width() + $("#links").width();
+				var wholeScreen = $(this).width();
+				if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
+					document.getElementById("address").style.width = "36%";
+					document.getElementById("info").style.width = "60%";
+					document.getElementById("links").style.width = "4%";
+				}
 			});
 			setInterval(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
 		});
@@ -310,10 +353,10 @@ var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-externa
 }
 
 /* 
- * Initialize custom variables
+ * Initialize custom variables from Settings
  */
-function initialize () {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, mwT:30},
+function initializeHome () {
+	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, mwT:30, exists:false},
 		function(items) {
 			latsrc = items.latitude;
 			lonsrc = items.longitude;
@@ -326,9 +369,13 @@ function initialize () {
 			maxBikeTimeM = items.mBTM;
 			maxWalkDist = (maxWalkSpd+1000)*(maxWalkTimeH+maxWalkTimeM/60.0);
 			maxBikeDist = (maxBikeSpd+1000)*(maxBikeTimeH+maxBikeTimeM/60.0);
+			hasSet = items.exists;
+			if(!hasSet) {
+				displaySettingsAlert();
+			}
 	});
 }
-initialize();
+initializeHome();
 
 /*
  * Calculates flight time by using preset formula
