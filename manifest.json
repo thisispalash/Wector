@@ -1,8 +1,8 @@
 {
   "name": "Wector",
-  "version": "1.0",
+  "version": "0.1",
   "manifest_version": 2,
-  "description": "How far are those places listed on your page?",
+  "description": "Highlight anything to know how far it is!",
   "options_ui": {
     "page": "options.html",
     "chrome_style": true

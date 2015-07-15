@@ -18,35 +18,37 @@
             width:20%;
             float:left;
             background: black;
-            color: white;
+            color: whitesmoke;
             box-shadow: none;
             border: 0px;
             border-radius: 0px 3px 3px 0px;
             margin:0;
             cursor:pointer;
+            text-shadow:none;
         }
         #submit {
             width:20%;
             float:left;
-            background: rgb(23, 101, 166);
-            color: white;
+            background: lightgrey;
+            color: black;
             box-shadow: none;
             border: 0px;
             border-radius: 0px;
             margin:0;
             cursor:pointer;
+            text-shadow:none;
         }
         #map {
             margin-top:5px;
             border-radius:3px;
         }
-        .saveAlert {
+        #saveAlert {
             width:97%;
             background:rgb(230, 230, 230);
             font-size: 12px;
             float: left;
             text-align: left;
-            color: grey;
+            color: black;
             border-radius: 0px 0px 3px 3px;
             margin-bottom:10px;
             padding: 10px 1.5%;
@@ -104,13 +106,13 @@
         <button type = "button" id = "save">Save</button>
     </form>
     <img src = "" id = "map" />
-    <div class = "saveAlert" id = "homeSaveAlert">Saved!</div>
+    <div id = "saveAlert">Saved!</div>
     <br><br>
     <form action="" method = "POST" id = "speedForm">
         <div id = "headRow">
-            <div class = "col1">Options</div>
+            <div class = "col1">&nbsp;</div>
             <div class = "col2">Walking <i class = "zmdi zmdi-directions-walk"></i></div>
-            <div class = "col3">Biking <i class = "fa fa-bicycle"></i></div>
+            <div class = "col3">Cycling <i class = "fa fa-bicycle"></i></div>
         </div>
         <div class = "settingsRow">
             <div class = "col1" style="line-height:26px;">Speed</div>
@@ -143,7 +145,5 @@
             </div>
         </div>
     </form>
-    
-    <div class = "saveAlert" id = "optSaveAlert">Saved!</div>
 </body>
 </html>

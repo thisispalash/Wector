@@ -115,8 +115,8 @@ function save() {
 			var format = adddata['results'][0]['formatted_address'];
 			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
 				document.getElementById("save").innerHTML = "Save";
-				var a = document.getElementById("homeSaveAlert");
-				a.innerHTML = "Saved Home as "+format+"! <i class = 'fa fa-thumbs-up'></i>";
+				var a = document.getElementById("saveAlert");
+				a.innerHTML = "Saved Home as "+format+"!  <i class = 'fa fa-thumbs-up'></i>";
 				document.getElementById("whereAmIInput").value = format;
 				$(a).fadeIn();
 				setInterval(function(){ $(a).fadeOut(); }, 5000);
