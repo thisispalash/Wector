@@ -1,0 +1,100 @@
+body {
+	padding:0;
+	margin:0;
+	background:#EFEFEF;
+	text-align:center;
+	font-family: 'Didact Gothic', sans-serif;
+}
+
+#logo {
+	width:450px;
+}
+
+#tagline {
+	font-size:32px;
+	margin:10px;
+}
+
+#try {
+	background:#222;
+	color:white;
+	width:100%;
+	float:left;
+	margin-top:20px;
+}
+
+#inst {
+	font-size:24px;
+	padding:10px;
+	float:left;
+	width:100%;
+	background:black;
+}
+
+#places {
+	width:100%;
+	float:left;
+	padding:10px;
+}
+
+#placesalt {
+	display:none;
+	width:100%;
+	float:left;
+	padding:10px;
+}
+
+.place {
+	width:25%;
+	text-align:center;
+	float:left;
+}
+
+a {
+	text-decoration:none;
+	color:inherit;
+}
+
+#p1, #p1a {
+	color:#FFFF00;
+}
+
+#p2, #p2a {
+	color:#25BD25
+}
+
+#p3, #p3a {
+	color:#00B2FF;
+}
+
+#p4, #p4a {
+	color:#FF8800;
+}
+
+#p1a, #p2a, #p3a {
+	cursor:pointer;
+}
+
+a:hover {
+	color:silver;
+}
+
+#install {
+	margin:10px auto;
+	float:center;
+	width:300px;
+	background:black;
+	color:white;
+	border-radius:5px;
+	padding:10px;
+	font-size:32px;
+	cursor:pointer;
+	height:50px;
+	line-height:50px;
+	display:none;
+}
+
+#install img {
+	width:38px;
+	vertical-align: sub;
+}

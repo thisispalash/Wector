@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wector Chrome Extension</title>
+	<link rel="stylesheet" href="static/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
+	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/dcjnfaoifoefmnbhhlbppaebgnccfddf">
+	<link rel="icon" href="/static/favicon.png" type="image/png" />
+</head>
+<body>
+	<img src = "static/FullResLogo.png" id = "logo" />
+	<div id = "tagline">the quickest way to find out where places are.</div>
+	<div id = "install" onclick = "chrome.webstore.install()">
+		Add to Chrome <img src = "static/chrome128.png" />
+	</div>
+	<div id = "try">
+		<div id = "inst">Try it out! Highlight any of these places to know how far it is from you!</div>
+		<div id = "places">
+			<div class = "place" id = "p1">Cornell University</div>
+			<div class = "place" id = "p2">Melbourne, Australia</div>
+			<div class = "place" id = "p3">London Heathrow Airport</div>
+			<div class = "place" id = "p4">The White House</div>
+		</div>
+		<div id = "placesalt">
+			<div class = "place" id = "p1a">Change your settings</div>
+			<div class = "place" id = "p2a">Send us feedback</div>
+			<div class = "place" id = "p3a"><a href="#" target="_blank">Our code on GitHub</a></div>
+			<div class = "place" id = "p4a">Made by <a href="#" target="_blank">Karun</a> and <a href="#" target="_blank">Palash</a></div>
+		</div>
+	</div>
+	<div id = "thisIsForTheExtension" style = "visibility:hidden;"></div>
+	<script>
+		
+	</script>
+</body>
+</html>
