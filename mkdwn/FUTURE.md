@@ -1,7 +1,7 @@
 **Next Versions**
 ================
 
-Plans for the future versions:
+Plans for the future versions of Wector:
 
 - Add Pause Button
 - Blacklist some places so results are not shown
