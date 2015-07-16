@@ -1,7 +1,7 @@
 **README**
 ================
 
-![Wector Logo][http://wector-io.appspot.com/static/FullResLogo.png]
+![Wector Logo](http://wector-io.appspot.com/static/FullResLogo.png)
 
 # **Wector** 
 
