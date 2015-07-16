@@ -180,15 +180,27 @@ function main(txt) {
 		    		}
 		    		bike += bikeHour + bikeMin;
 
-		    		// Priority Display
-		    		// Add check for max times for bike and walk
-		    		if(wH <= maxWalkTimeH && wM <= maxWalkTimeM) {
-		    			alertUser(src, dst, car, flight, bike, walk, 3, 0, 2, 1);
-		    		} else if(bH <= maxBikeTimeH && bM <= maxBikeTimeM) {
-		    			alertUser(src, dst, car, flight, bike, walk, 2, 0, 1, 3);
-		    		} else {
-		    			alertUser(src, dst, car, flight, bike, walk, 1, 0, 2, 3);
+		    		var showBike = true;
+		    		if (bH > maxBikeTimeH || (bH == maxBikeTimeH && bM > maxBikeTimeM)) showBike = false;
+		    		var showWalk = true;
+		    		if (wH > maxWalkTimeH || (wH == maxWalkTimeH && wM > maxWalkTimeM)) showWalk = false;
+		    		var carPriority = 1;
+		    		var bikePriority = 0;
+		    		var walkPriority = 0;
+		    		if (showBike) {
+		    			bikePriority = 1;
+		    			carPriority = 2;
+		    			if (showWalk) {
+		    				walkPriority = 1;
+		    				bikePriority = 2;
+		    				carPriority = 3;
+		    			}
 		    		}
+		    		else if (showWalk) {
+		    			walkPriority = 1;
+		    			carPriority = 2;
+		    		}
+		    		alertUser(src, dst, car, flight, bike, walk, carPriority, 0, bikePriority, walkPriority);
 		    		return;
 		    	}
 		    	// If no biking or walking
