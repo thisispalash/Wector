@@ -9,13 +9,13 @@ Welcome to extension that tells you how much time it'll take you to get somewher
 ***
 
 ## Sections 
-* [About Wector](#About) 
-	* [Recent Updates](#Updates)
-	* [Copyright and Licensing Information](#License)
-	* [Creators of Wector](#Authors)
-* [News](#News)
-* [Known Bugs](#Known-Bugs "Resolved and unresolved")
-* [Plans for Future Versions](#Next-Versions "Suggest something!")
+* [About Wector](#about) 
+	* [Recent Updates](#updates)
+	* [Copyright and Licensing Information](#license)
+	* [Creators of Wector](#authors)
+* [News](#news)
+* [Known Bugs](#known-bugs "Resolved and unresolved")
+* [Plans for Future Versions](#next-versions "Suggest something!")
 
 
 ## About  
