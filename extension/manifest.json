@@ -1,6 +1,6 @@
 {
   "name": "Wector Chrome Extension",
-  "version": "0.1",
+  "version": "1.0.0",
   "manifest_version": 2,
   "description": "Highlight anything to find out how far it is!",
   "options_ui": {
