@@ -1,7 +1,7 @@
 **README**
 ================
 
-![Wector Logo][logo]
+![Wector Logo][http://wector-io.appspot.com/static/FullResLogo.png]
 
 # **Wector** 
 
@@ -49,5 +49,3 @@ See [Issues](src/mkdwn/ISSUES.md "Known solved and unsolved issues")
 ## Next Versions  
 See [Future](src/mkdwn/FUTURE.md "Plans for future versions")
 * * * 
-
-[logo] http://wector-io.appspot.com/static/FullResLogo.png
