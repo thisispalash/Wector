@@ -30,8 +30,8 @@ License: [MIT License](src/mkdwn/LICENSE.md "View License")
 
 ##### Authors 
 Made with <3 by
-+ [Karun Singh](https://github.com/karunsingh "GitHub")
-+ [Palash Agarwal](https://github.com/palash96rox "GitHub"){:target="_blank"}
+* [Karun Singh](https://github.com/karunsingh "GitHub")
+* [Palash Agarwal](https://github.com/palash96rox "GitHub")
 * * *
 
 ## News 
