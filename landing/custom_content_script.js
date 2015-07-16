@@ -8,16 +8,6 @@
   * Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
  */
 
-// Icon Links
-var fa_link = document.createElement("link");
-fa_link.rel = "stylesheet";
-fa_link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
-document.getElementsByTagName("head")[0].appendChild( fa_link );
-var md_link = document.createElement("link");
-md_link.rel = "stylesheet";
-md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
-document.getElementsByTagName("head")[0].appendChild( md_link );
-
 // Start our magic!
 document.onmouseup = checkHighlight;
 
@@ -25,6 +15,10 @@ document.onmouseup = checkHighlight;
  * Takes the selected text and calls main() 
  */
 function checkHighlight() {
+	if (queried >= 4) return;
+	if (weknowhome != true) {
+		return;
+	}
 	var text = "";
 	// TODO: Understand this!
     if (window.getSelection) {
@@ -34,43 +28,16 @@ function checkHighlight() {
     }
 
     if (text != "" && text.length < 50 && text != lastQuery) {
-    	initializeHome(1);
-    	if (hasSet) {
-    		main(text);
-    	}
+		queried++;
+    	main(text);
+    	if (queried >= 4) {
+    		setTimeout(function(){displayLimitAlert();}, 1000);
+		}
     }
 }
 
-/**
-* Blah
-*/
-function displaySettingsAlert() {
-	var a = document.createElement("div");
-	var iconURL = chrome.extension.getURL("/logo48w.png");
-	a.innerHTML = "<img src = '"+iconURL+"' style='width:40px; vertical-align:middle;' /> needs to know where you are to show you travel estimates. Click here to set it up!";
-	a.id = "setAlert"
-	a.style.position = "fixed";
-	a.style.bottom = "0";
-	a.style.left = "0";
-	a.style.width = "100%";
-	a.style.color = "white";
-	a.style.font="menu";
-	a.style.fontSize = "16px";
-	a.style.border="0";
-	a.style.borderRadius="0px";
-	a.style.zIndex = "2147483648";
-	a.style.textAlign = "center";
-	a.style.display = "none";
-	a.style.padding = "0.5%";
-	$(a).on('click', function() {
-		chrome.runtime.sendMessage({message:"showOptions"});
-	});
-	document.body.appendChild(a);
-	$(a).slideDown("fast");
-	setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660);
-}
-
 // Home
+var weknowhome = false;
 var latsrc;
 var lonsrc;
 var home;
@@ -100,9 +67,11 @@ function main(txt) {
 
     // Query Distance Matrix (Courtesy: Google)
     $.ajax({
-	    type:     "GET",
-	    url:      "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+home+"&destinations="+dest+"&language=en-EN",
+    	type:"GET",
+	    url:      "/distance?lat="+latsrc+"&lon="+lonsrc+"&dst="+dest,
 	    success: function(data){
+	    	data = JSON.parse(data);
+	    	console.log(data);
 	        var rows = data['rows'][0];
 		    var elements = rows['elements'][0];
 	 	    var status = elements['status'];
@@ -115,8 +84,10 @@ function main(txt) {
 				// Query Geocode (Courtesy: Google)
 				$.ajax ({
 					type:"GET",
-					url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
+					url: "/geocode?dst="+dst,
 					success: function (dstdata) {
+						dstdata = JSON.parse(dstdata);
+						console.log(dstdata);
 						latdst = dstdata['results'][0]['geometry']['location']['lat'];
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
@@ -200,8 +171,9 @@ function main(txt) {
 					// Query Geocode (Courtesy: Google)
 					$.ajax ({
 						type:"GET",
-						url: "https://maps.googleapis.com/maps/api/geocode/json?address="+dst,
+						url: "/geocode?dst="+dst,
 						success: function (dstdata) {
+							dstdata = JSON.parse(dstdata);
 							latdst = dstdata['results'][0]['geometry']['location']['lat'];
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
 							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
@@ -243,6 +215,16 @@ function resetBodyClass () {
 	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\btwo\b/,'');
 	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bthree\b/,'');
 	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bfour\b/,'');
+}
+
+/*
+ * Displays the limit alert
+ */
+function displayLimitAlert() {
+	document.getElementById("try").style.display="none";
+	document.getElementById("trialdone").style.display="block";
+	document.getElementById("install").style.display = "none";
+	document.getElementById("installpl").style.display = "block";
 }
 
 /*
@@ -315,7 +297,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			}
 		});
 		
-		setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
+		setTimeout(function(){$(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);});}, 6660); // 6.66Os
 	}
 	else {
 		$(previous).slideUp("fast", function() {
@@ -336,56 +318,48 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 					document.getElementById("links").style.width = "4%";
 				}
 			});
-			setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
+			setTimeout(function(){$(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);});}, 6660); // 6.66Os						
 		});
 	}
 }
 
-/* 
- * Initialize custom variables from Settings
- */
-function initializeHome (highlighted) {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, exists:false},
-		function(items) {
-			latsrc = items.latitude;
-			lonsrc = items.longitude;
-			home = items.address;
-			maxWalkSpd = items.mWS;
-			maxBikeSpd = items.mBS;
-			maxWalkTimeH = items.mWTH;
-			maxBikeTimeH = items.mBTH;
-			maxWalkTimeM = items.mWTM;
-			maxBikeTimeM = items.mBTM;
-			maxWalkDist = (maxWalkSpd)*(maxWalkTimeH+maxWalkTimeM/60.0);
-			maxBikeDist = (maxBikeSpd)*(maxBikeTimeH+maxBikeTimeM/60.0);
-			hasSet = items.exists;
-			if(!hasSet && highlighted == 1) {
-				displaySettingsAlert();
-			}
-	});
+function initializeHome () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        document.getElementById("inst").innerHTML = "It looks like your browser doesn't allow us to get your location :/";
+        document.getElementById("inst").style.cursor = "auto";
+    }
 }
 
-function atWectorML() {
-	try {
-		if (document.getElementById("thisIsForTheExtension") != null) {
-			document.getElementById("install").style.display = "none";
-			document.getElementById("try").style.display = "none"
-			document.getElementById("alreadyhave").style.display="block";
-			document.getElementById("p1a").onclick = function() {
-				chrome.runtime.sendMessage({message:"showOptions"});
-			};
-			document.getElementById("p2a").onclick = function() {
-				document.getElementById("p2a").innerHTML = "khaaliDimaag.io@gmail.com";
-				document.getElementById("p2a").style.cursor = "auto";
-			};
-		}
+function showError(error) {
+    console.log(error.code);
+    document.getElementById("inst").innerHTML = "Oops, something went wrong. Your browser didn't tell us where you are :(";
+    	document.getElementById("inst").style.cursor = "auto";
+}
+
+function showPosition(position) {
+    latsrc = position.coords.latitude;
+    lonsrc = position.coords.longitude;
+    maxWalkSpd = 5000;
+	maxBikeSpd = 14000;
+	maxWalkTimeH = 0;
+	maxBikeTimeH = 0;
+	maxWalkTimeM = 30;
+	maxBikeTimeM = 30;
+	maxWalkDist = (maxWalkSpd)*(maxWalkTimeH+maxWalkTimeM/60.0);
+	maxBikeDist = (maxBikeSpd)*(maxBikeTimeH+maxBikeTimeM/60.0);
+	weknowhome = true;
+	if (latsrc && lonsrc) {
+		document.getElementById("inst").innerHTML = "Awesome! Now highlight any of these places to find out how far they are from you:";
+		document.getElementById("inst").style.cursor = "auto";
+        document.getElementById("places").style.display = "block";
 	}
-	catch(err) {
-		console.log(err);
+	else {
+		showError(null);
 	}
 }
-atWectorML();
-initializeHome(0);
+var queried = 0;
 
 
 /*

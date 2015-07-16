@@ -15,7 +15,7 @@ body {
 	margin:10px;
 }
 
-#try {
+#try, #alreadyhave {
 	background:#222;
 	color:white;
 	width:100%;
@@ -23,22 +23,40 @@ body {
 	margin-top:20px;
 }
 
-#inst {
+#alreadyhave {
+	display:none;
+}
+
+#trialdone {
+	display:none;
+ 	font-size: 24px;
+  	padding: 0.8%;
+  	float: left;
+  	width: 98.4%;
+  	background: black;
+  	color: white;
+}
+
+#inst, #insta {
 	font-size:24px;
-	padding:10px;
+	padding:0.8%;
 	float:left;
-	width:100%;
+	width:98.4%;
 	background:black;
+}
+
+#inst {
+	cursor:pointer;
 }
 
 #places {
 	width:100%;
 	float:left;
 	padding:10px;
+	display:none;
 }
 
 #placesalt {
-	display:none;
 	width:100%;
 	float:left;
 	padding:10px;
@@ -79,9 +97,47 @@ a:hover {
 	color:silver;
 }
 
-#install {
+#installpl {
+	display:none;
+	animation-name: blinkCycle; 
+	animation-duration:6s; 
+	animation-direction:normal; 
+	animation-iteration-count:infinite; 
+
+	-webkit-animation-name: blinkCycle; 
+	-webkit-animation-duration:6s; 
+	-webkit-animation-direction:normal; 
+	-webkit-animation-iteration-count:infinite;
+}
+
+@keyframes blinkCycle 
+{
+	0% {color:#fff;}
+	12% {color:#FFFF00;}
+	25% {color:#fff;}
+	37% {color:#25BD25;}
+	50% {color:#fff;}
+	63% {color:#00B2FF;}
+	75% {color:#fff;}
+	87% {color:#FF8800;}
+	100% {color:#fff;} 
+} 
+
+@-webkit-keyframes homeCycle 
+{ 
+	0% {color:#fff;}
+	12% {color:#FFFF00;}
+	25% {color:#fff;}
+	37% {color:#25BD25;}
+	50% {color:#fff;}
+	63% {color:#00B2FF;}
+	75% {color:#fff;}
+	87% {color:#FF8800;}
+	100% {color:#fff;} 
+}
+
+#install, #installpl {
 	margin:10px auto;
-	float:center;
 	width:300px;
 	background:black;
 	color:white;
@@ -93,7 +149,7 @@ a:hover {
 	line-height:50px;
 }
 
-#install img {
+#install img, #installpl img {
 	width:38px;
 	vertical-align: sub;
 }

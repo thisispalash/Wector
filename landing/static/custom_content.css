@@ -1,0 +1,64 @@
+.zmdi-directions-walk {
+	color : #FFFF00;
+}
+
+.fa-paper-plane-o {
+	color : #FF8800;
+}
+
+.fa-car {
+	color : #00B2FF;
+}
+
+.fa-bicycle {
+	color : #25BD25;
+}
+
+.fa-external-link {
+	color : ghostwhite;
+}
+
+#info {
+	padding:0.5%;
+	width:59%;
+	float:left;
+}
+
+#address {
+	padding:0.5%;
+	background:rgb(34,34,34);
+	float:left;
+	width:35%;
+}
+
+#links {
+	background: rgb(24, 31, 56);
+	float:left;
+	width:3%;
+	padding:0.5%;
+}
+
+#setAlert {
+	background:rgba(0,0,0,0.85);
+	cursor:pointer;
+}
+
+.mode {
+	float:left;
+}
+
+body.one .mode {
+	width:100%;
+}
+
+body.two .mode {
+	width:50%;
+}
+
+body.three .mode{
+	width:33%;
+}
+
+body.four .mode{
+	width:25%;
+}
