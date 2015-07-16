@@ -34,10 +34,11 @@ function checkHighlight() {
     }
 
     if (text != "" && text.length < 50 && text != lastQuery) {
-    	initializeHome(1);
-    	if (hasSet) {
-    		main(text);
-    	}
+    	initializeHome(1, function() {
+    		if (hasSet) {
+	    		main(text);
+	    	}
+    	});
     }
 }
 
@@ -142,19 +143,19 @@ function main(txt) {
 		    	var bike=" <i class='fa fa-bicycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
-		    	if(dist['value']<=Math.max(maxWalkDist, maxBikeDist)) {
+		    	if((0.95*dist['value'])<=Math.max(maxWalkDist, maxBikeDist)) {
 		    		// Walking
-		    		var walkTime = dist['value']/(maxWalkSpd);
-		    		var wH = walkTime|0;
+		    		var walkTime = (0.95*dist['value'])/(maxWalkSpd);
+		    		var wH = Math.floor(walkTime);
 		    		var walkHour;
-		    		if(walkTime < 1.0) {
+		    		if(wH == 0) {
 		    			walkHour = " ";
-		    		} else if(walkTime <2.0) {
+		    		} else if(wH == 1) {
 		    			walkHour = " " + wH + " hour";
 		    		} else {
 		    			walkHour = " " + wH + " hours";
 		    		}
-		    		var wM = Math.ceil((walkTime-wH)*60);
+		    		var wM = Math.floor((walkTime-wH)*60);
 		    		var walkMin = " " + wM + " min";
 		    		if(wM != 1) {
 		    			walkMin += "s";
@@ -162,18 +163,17 @@ function main(txt) {
 		    		walk += walkHour + walkMin;
 
 		    		// Biking
-		    		var bikeTime = dist['value']/(maxBikeSpd);
-		    		var bH = bikeTime|0;
-		    		console.log(bH);
+		    		var bikeTime = (0.95*dist['value'])/(maxBikeSpd);
+		    		var bH = Math.floor(bikeTime);
 		    		var bikeHour;
-		    		if(bikeTime < 1.0) {
+		    		if(bH == 0) {
 		    			bikeHour = " ";
-		    		} else if(bikeTime <2.0) {
+		    		} else if(bH == 1) {
 		    			bikeHour = " " + bH + " hour";
 		    		} else {
 		    			bikeHour = " " + bH + " hours";
 		    		}
-		    		var bM = Math.ceil((bikeTime-bH)*60);
+		    		var bM = Math.floor((bikeTime-bH)*60);
 		    		var bikeMin = " " + bM + " min";
 		    		if(bM != 1) {
 		    			bikeMin += "s";
@@ -356,8 +356,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 /* 
  * Initialize custom variables from Settings
  */
-function initializeHome (highlighted) {
-	chrome.storage.sync.get({latitude:42.4433, longitude:-76.5000, address:"Ithaca, NY", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, exists:false},
+function initializeHome (highlighted, callback) {
+	chrome.storage.sync.get({latitude:42.4534492, longitude:-76.4735027, address:"Cornell University", mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, exists:false},
 		function(items) {
 			latsrc = items.latitude;
 			lonsrc = items.longitude;
@@ -374,6 +374,7 @@ function initializeHome (highlighted) {
 			if(!hasSet && highlighted == 1) {
 				displaySettingsAlert();
 			}
+			callback();
 	});
 }
 
@@ -397,7 +398,7 @@ function atWectorML() {
 	}
 }
 atWectorML();
-initializeHome(0);
+initializeHome(0, function() {});
 
 
 /*

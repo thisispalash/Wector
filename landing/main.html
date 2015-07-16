@@ -11,23 +11,24 @@
 	<link rel="icon" href="static/favicon.png" type="image/png" />
 	<script src="static/jquery-1.11.3.min.js"></script>
 	<script src="jss"></script>
+	<meta name="google-site-verification" content="dsiEE_zjwduAKxJZORt6RZqv4ZXS7fdx7Pf7MMve3SE" />
 </head>
 <body>
 	<img src = "static/FullResLogo.png" id = "logo" />
 	<div id = "tagline">the quickest way to find out where places are.</div>
-	<div id = "install" onclick = "chrome.webstore.install()">
+	<div id = "install" onclick = "chrome.webstore.install(); ga('send', 'event', 'button', 'install', 'without trying all 4');">
 		Add to Chrome <img src = "static/chrome128.png" />
 	</div>
-	<div id = "installpl" onclick = "chrome.webstore.install()">
+	<div id = "installpl" onclick = "chrome.webstore.install(); ga('send', 'event', 'button', 'install', 'after trying all 4');">
 		Add to Chrome <img src = "static/chrome128.png" />
 	</div>
 	<div id = "try">
 		<div id = "inst" onclick = "initializeHome()">Try it out! Click here to let us use your location for a demo.</div>
 		<div id = "places">
-			<div class = "place" id = "p1">Beijing, China</div>
-			<div class = "place" id = "p2">Cornell University</div>
-			<div class = "place" id = "p3">Statue of Liberty</div>
-			<div class = "place" id = "p4">Leaning Tower of Pisa</div>
+			<div class = "place" id = "p1">Taj Mahal</div>
+			<div class = "place" id = "p2">Heathrow Airport</div>
+			<div class = "place" id = "p3">Empire State Building</div>
+			<div class = "place" id = "p4">Paris, France</div>
 		</div>
 	</div>
 	<div id = "alreadyhave">
@@ -44,7 +45,14 @@
 	</div>
 	<div id = "thisIsForTheExtension" style = "visibility:hidden;"></div>
 	<script>
-		
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-65210998-1', 'auto');
+	  ga('send', 'pageview');
+
 	</script>
 </body>
 </html>

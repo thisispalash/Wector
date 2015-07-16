@@ -134,7 +134,7 @@ function preInitialize() {
 		event.preventDefault();
 		refreshMap();
 	});
-	chrome.storage.sync.get({address:"Ithaca, NY", latitude:42.4433, longitude:-76.5000, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
+	chrome.storage.sync.get({address:"Cornell University", latitude:42.4534492, longitude:-76.4735027, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
 		refreshSliders(items.mWS, items.mWTH, items.mWTM, items.mBS, items.mBTH, items.mBTM);

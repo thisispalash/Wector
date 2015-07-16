@@ -30,6 +30,7 @@ function checkHighlight() {
     if (text != "" && text.length < 50 && text != lastQuery) {
 		queried++;
     	main(text);
+    	ga('send', 'event', 'body', 'highlight', text, queried);
     	if (queried >= 4) {
     		setTimeout(function(){displayLimitAlert();}, 1000);
 		}
@@ -84,7 +85,7 @@ function main(txt) {
 				// Query Geocode (Courtesy: Google)
 				$.ajax ({
 					type:"GET",
-					url: "/geocode?dst="+dst,
+					url: "/geocode?dst="+dest,
 					success: function (dstdata) {
 						dstdata = JSON.parse(dstdata);
 						console.log(dstdata);
@@ -171,7 +172,7 @@ function main(txt) {
 					// Query Geocode (Courtesy: Google)
 					$.ajax ({
 						type:"GET",
-						url: "/geocode?dst="+dst,
+						url: "/geocode?dst="+dest,
 						success: function (dstdata) {
 							dstdata = JSON.parse(dstdata);
 							latdst = dstdata['results'][0]['geometry']['location']['lat'];
@@ -237,7 +238,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	var text = dst;
 
 	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
-	show_link = "<div id = 'links'>" + show_link + "</div>";
+	show_link = "<div id = 'links' tooltip='See route' tooltip-persistent>" + show_link + "</div>";
 
 	text += "<div id = 'info'>";
 
