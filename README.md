@@ -15,7 +15,6 @@ Welcome to extension that tells you how much time it'll take you to get somewher
 * [News](#News)
 * [Known Bugs](#Known-Bugs "Resolved and unresolved")
 * [Plans for Future Versions](#Next-Versions "Suggest something!")
-* [Testing Markdown](#tasks)
 
 
 ## About  
@@ -50,9 +49,5 @@ See [Issues](src/mkdwn/ISSUES.md "Known solved and unsolved issues")
 ## Next Versions  
 See [Future](src/mkdwn/FUTURE.md "Plans for future versions")
 * * * 
-
-<a name="tasks">
-### Agile tasks (created by developer)
-</a>
 
 [logo] http://wector-io.appspot.com/static/FullResLogo.png
