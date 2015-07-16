@@ -52,14 +52,14 @@ body {
 #places {
 	width:100%;
 	float:left;
-	padding:10px;
+	padding:10px 0px;
 	display:none;
 }
 
 #placesalt {
 	width:100%;
 	float:left;
-	padding:10px;
+	padding:10px 0px;
 }
 
 .place {
@@ -156,4 +156,32 @@ a:hover {
 #install img, #installpl img {
 	width:38px;
 	vertical-align: sub;
+}
+
+[tooltip]:before {
+    /* needed - do not touch */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* customizable */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #333;
+    font-size:14px;
+    border-radius: 4px; 
+}
+
+[tooltip]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+    /* customizable */
+    background: black;
+    color:white;
+    margin-top: -50px;
+    margin-left: -60px;    
+}
+
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
 }

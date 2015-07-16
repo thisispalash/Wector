@@ -1,8 +1,8 @@
 {
-  "name": "Wector",
+  "name": "Wector Chrome Extension",
   "version": "0.1",
   "manifest_version": 2,
-  "description": "Highlight anything to know how far it is!",
+  "description": "Highlight anything to find out how far it is!",
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
@@ -19,5 +19,6 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "web_accessible_resources":["logo48w.png"]
+  "web_accessible_resources":["logo48w.png"],
+  "short_name": "Wector"
 }
