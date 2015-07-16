@@ -30,6 +30,7 @@ function checkHighlight() {
     if (text != "" && text.length < 50 && text != lastQuery) {
 		queried++;
     	main(text);
+    	ga('send', 'event', 'body', 'highlight', text, queried);
     	if (queried >= 4) {
     		setTimeout(function(){displayLimitAlert();}, 1000);
 		}
