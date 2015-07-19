@@ -8,6 +8,9 @@
   * Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
  */
 
+// Start our magic!
+document.onmouseup = checkHighlight;
+
 /*
  * Takes the selected text and calls main() 
  */
@@ -23,6 +26,7 @@ function checkHighlight() {
     } else if (document.selection && document.selection.type != "Control") {
         text = document.selection.createRange().text;
     }
+
     if (text != "" && text.length < 50 && text != lastQuery) {
 		queried++;
     	main(text);
@@ -32,6 +36,25 @@ function checkHighlight() {
 		}
     }
 }
+
+// Home
+var weknowhome = false;
+var latsrc;
+var lonsrc;
+var home;
+var hasSet;
+
+// Max Values (in meters/hr, HH, MM, meters)
+var maxWalkSpd;
+var maxBikeSpd;
+var maxWalkTimeH;
+var maxBikeTimeH;
+var maxWalkTimeM;
+var maxBikeTimeM;
+var maxWalkDist;
+var maxBikeDist;
+
+var lastQuery = "";
 
 /*
  * Main function
@@ -301,30 +324,21 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	}
 }
 
-/*
- * Initialses the home of the viewer by using geolocation
- */
 function initializeHome () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        document.getElementById("inst").innerHTML = "It looks like your browser doesn't allow us to get your location :(";
+        document.getElementById("inst").innerHTML = "It looks like your browser doesn't allow us to get your location :/";
         document.getElementById("inst").style.cursor = "auto";
     }
 }
 
-/*
- * Shows error message if geolocation is disabled
- */
 function showError(error) {
     console.log(error.code);
     document.getElementById("inst").innerHTML = "Oops, something went wrong. Your browser didn't tell us where you are :(";
     	document.getElementById("inst").style.cursor = "auto";
 }
 
-/*
- * Displays the places to demo the extension
- */
 function showPosition(position) {
     latsrc = position.coords.latitude;
     lonsrc = position.coords.longitude;
@@ -346,6 +360,7 @@ function showPosition(position) {
 		showError(null);
 	}
 }
+var queried = 0;
 
 
 /*
@@ -375,29 +390,3 @@ function haversine() {
        var c = 2 * Math.asin(Math.sqrt(a));
        return R * c;
 }
-
-
-// Start of custom_content_script.js
-/* Global Variables */
-// Getting home location
-var weknowhome = false;
-// Home
-var latsrc;
-var lonsrc;
-var home;
-var hasSet;
-// Max Values (in meters/hr, HH, MM, meters)
-var maxWalkSpd;
-var maxBikeSpd;
-var maxWalkTimeH;
-var maxBikeTimeH;
-var maxWalkTimeM;
-var maxBikeTimeM;
-var maxWalkDist;
-var maxBikeDist;
-// Stores the last text highlighted
-var lastQuery = "";
-// Stores the number of times location has been searched
-var queried = 0;
-// Start our magic!
-document.onmouseup = checkHighlight;

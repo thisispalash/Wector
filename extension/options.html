@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <script src = "jquery-1.11.3.min.js"> </script>
     <script src = "options.js"> </script>
+    <!-- TODO: Store icons on the server -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css">
     <style>
@@ -17,8 +18,8 @@
         #save {
             width:20%;
             float:left;
-            background: black;
-            color: whitesmoke;
+            background: #000000;
+            color: #F5F5F5;
             box-shadow: none;
             border: 0px;
             border-radius: 0px 3px 3px 0px;
@@ -29,8 +30,8 @@
         #submit {
             width:20%;
             float:left;
-            background: lightgrey;
-            color: black;
+            background: #D3D3D3;
+            color: #000000;
             box-shadow: none;
             border: 0px;
             border-radius: 0px;
@@ -44,11 +45,11 @@
         }
         #saveAlert {
             width:97%;
-            background:rgb(230, 230, 230);
+            background:#D6D6D6;
             font-size: 12px;
             float: left;
             text-align: left;
-            color: black;
+            color: #000000;
             border-radius: 0px 0px 3px 3px;
             margin-bottom:10px;
             padding: 10px 1.5%;
@@ -98,6 +99,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class = "head">Set Home</div>
     <form action="" method = "POST" id = "homeForm">

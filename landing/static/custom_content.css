@@ -15,7 +15,7 @@
 }
 
 .fa-external-link {
-	color : ghostwhite;
+	color : #F8F8FF;
 }
 
 #info {
@@ -26,13 +26,13 @@
 
 #address {
 	padding:0.5%;
-	background:rgb(34,34,34);
+	background:#222222;
 	float:left;
 	width:35%;
 }
 
 #links {
-	background: rgb(24, 31, 56);
+	background:#181F38;
 	float:left;
 	width:3%;
 	padding:0.5%;

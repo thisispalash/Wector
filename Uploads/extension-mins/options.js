@@ -1,20 +1,18 @@
-/*
- * Returns the hours in time 't'
- */
+//ALGORITHM:
+//1. Load existing location
+//2. If exists, all is good. Else, query IP and get an approximate. Set it.
+//3. Watch for the find button. When pressed
+
+var loc = "";
+
 function getH(t) {
 	return Math.round(Math.floor(t/60));
 }
 
-/*
- * Returns the minutes in time 't'
- */
 function getM(t){
 	return t%60;
 }
 
-/*
- * Formats the time into a human readable format
- */
 function formatTime(t) {
 	var h = getH(t);
 	var m = getM(t);
@@ -36,9 +34,6 @@ function formatTime(t) {
 	return time;
 }
 
-/*
- * Updates the speed beside the sliders in options.html
- */
 function updateSpeeds() {
 	var walkingSpeed = document.getElementById("walkingSpeedSlider").value;
 	var inMPH = (Math.round(walkingSpeed*0.62*10))/10.0;
@@ -51,9 +46,6 @@ function updateSpeeds() {
 	saveSpeedTimeSettings();
 }
 
-/*
- * Updates the time beside the sliders in options.html
- */
 function updateTimes() {
 	var walkingTime = document.getElementById("walkingTimeSlider").value;
 	var showTime = formatTime(walkingTime);
@@ -66,9 +58,6 @@ function updateTimes() {
 	saveSpeedTimeSettings();
 }
 
-/*
- * Refreshes the Speed and Time sliders with the given values
- */
 function refreshSliders(wS, wH, wM, bS, bH, bM) {
 	document.getElementById("bikingTimeSlider").value = bH*60 + bM;
 	document.getElementById("walkingTimeSlider").value = wH*60 + wM;
@@ -78,22 +67,14 @@ function refreshSliders(wS, wH, wM, bS, bH, bM) {
 	updateTimes();
 }
 
-/*
- * Refreshes the map with the given Coordinates
- */
 function refreshMapWithL(lat, lon) {
 	document.getElementById("map").style.opacity = "0.5";
-	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lon+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+lat+","+lon;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(docment.getElementById("map").src);
 }
 
-/* 
- * Refreshes the map with the entered address (Approximate)
- */
 function refreshMap() {
 	document.getElementById("map").style.opacity = "0.5";
 	var address = document.getElementById("whereAmIInput").value;
@@ -101,25 +82,12 @@ function refreshMap() {
 		document.getElementById("map").style.opacity="1.0";
 	}
 	loc = address;
-	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+address+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+address;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(docment.getElementById("map").src);
 }
 
-/*
- * Stores the map in Chrome, in case the user is offline
- */
-function storeMap(src) {
-	// TODO: This function
-	// TODO: Check if offline (possibly in another function)
-}
-
-/*
- * Saves the user's Walking and Biking maxSpeed and maxTime preferences
- */
 function saveSpeedTimeSettings() {
 	var mWS = document.getElementById("walkingSpeedSlider").value*1000;
 	var mBS = document.getElementById("bikingSpeedSlider").value*1000;
@@ -130,18 +98,14 @@ function saveSpeedTimeSettings() {
 	var mBTH = getH(bikingTime);
 	var mBTM = getM(bikingTime);
 	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM}, function () {
-		; //saved
+		//saved
 	});
 }
 
-/* 
- * Saves the Current Location into loc and refreshes the map
- */
 function save() {
 	document.getElementById("save").innerHTML = 'Saving <i class="fa fa-spinner fa-spin"></i>';
 	var address = document.getElementById("whereAmIInput").value;
 	if (address != loc) refreshMap();
-	// Query Geocode (Courtesy: Google)
 	$.ajax ({
 		type:"GET",
 		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+address,
@@ -149,7 +113,6 @@ function save() {
 			var latadd = adddata['results'][0]['geometry']['location']['lat'];
 			var lonadd = adddata['results'][0]['geometry']['location']['lng'];
 			var format = adddata['results'][0]['formatted_address'];
-			// Set the found address as the current location
 			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
 				document.getElementById("save").innerHTML = "Save";
 				var a = document.getElementById("saveAlert");
@@ -162,9 +125,7 @@ function save() {
 	});		
 }
 
-/*
- * Find current location that has been set, and send it over to the map.
- */
+// Find current location that has been set, and send it over to the map.
 function preInitialize() {
 	// retrieve lat lon loc
 	document.getElementById("submit").addEventListener("click",refreshMap);
@@ -184,7 +145,4 @@ function preInitialize() {
 	document.getElementById("bikingTimeSlider").addEventListener("change", updateTimes);
 }
 
-// Start of options.js
-// Current Location
-var loc = "";
 window.addEventListener("load", preInitialize);

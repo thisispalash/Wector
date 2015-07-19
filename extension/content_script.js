@@ -1,25 +1,10 @@
-// DOM
-
 /*
- * Icon list (from Font-Awesome and Material-Design-..) :
+ * Icon list (from Font-Awesome-4.0.3 and Material-Design-Iconic-Font) :
   * Flight: "<i class='fa fa-paper-plane-o'></i>  "
   * Car: "<i class='fa fa-car'></i>  "
   * Bike: "<i class='fa fa-bicycle'></i>  "
   * Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
  */
-
-// Icon Links
-var fa_link = document.createElement("link");
-fa_link.rel = "stylesheet";
-fa_link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
-document.getElementsByTagName("head")[0].appendChild( fa_link );
-var md_link = document.createElement("link");
-md_link.rel = "stylesheet";
-md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
-document.getElementsByTagName("head")[0].appendChild( md_link );
-
-// Start our magic!
-document.onmouseup = checkHighlight;
 
 /*
  * Takes the selected text and calls main() 
@@ -42,9 +27,9 @@ function checkHighlight() {
     }
 }
 
-/**
-* Blah
-*/
+/*
+ * Alert shown if location not set
+ */
 function displaySettingsAlert() {
 	var a = document.createElement("div");
 	var iconURL = chrome.extension.getURL("/logo48w.png");
@@ -70,24 +55,6 @@ function displaySettingsAlert() {
 	$(a).slideDown("fast");
 	setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660);
 }
-
-// Home
-var latsrc;
-var lonsrc;
-var home;
-var hasSet;
-
-// Max Values (in meters/hr, HH, MM, meters)
-var maxWalkSpd;
-var maxBikeSpd;
-var maxWalkTimeH;
-var maxBikeTimeH;
-var maxWalkTimeM;
-var maxBikeTimeM;
-var maxWalkDist;
-var maxBikeDist;
-
-var lastQuery = "";
 
 /*
  * Main function
@@ -180,10 +147,13 @@ function main(txt) {
 		    		}
 		    		bike += bikeHour + bikeMin;
 
+		    		// Check if maxBikeTime is crossed
 		    		var showBike = true;
 		    		if (bH > maxBikeTimeH || (bH == maxBikeTimeH && bM > maxBikeTimeM)) showBike = false;
+		    		// Check if maxWalkTime is crossed
 		    		var showWalk = true;
 		    		if (wH > maxWalkTimeH || (wH == maxWalkTimeH && wM > maxWalkTimeM)) showWalk = false;
+		    		// Display alert accordingly with appropriate priorities
 		    		var carPriority = 1;
 		    		var bikePriority = 0;
 		    		var walkPriority = 0;
@@ -199,6 +169,11 @@ function main(txt) {
 		    		else if (showWalk) {
 		    			walkPriority = 1;
 		    			carPriority = 2;
+		    			if (showBike) {
+		    				walkPriority = 1;
+		    				bikePriority = 2;
+		    				carPriority = 3;
+		    			}
 		    		}
 		    		alertUser(src, dst, car, flight, bike, walk, carPriority, 0, bikePriority, walkPriority);
 		    		return;
@@ -317,7 +292,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			var setHeightTo = $("#address").height();
 			document.getElementById("info").style.lineHeight = setHeightTo+"px";
 			document.getElementById("links").style.lineHeight = setHeightTo+"px";
-			//fix for corner case websites:
+			// Fix for corner case websites:
 			var ourBar = $("#address").width() + $("#info").width() + $("#links").width();
 			var wholeScreen = $(this).width();
 			if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
@@ -378,6 +353,10 @@ function initializeHome (highlighted, callback) {
 	});
 }
 
+/*
+ * For the Landing Page (Wector.ml)
+ * Checks if user has Extension installed (and enabled) or not
+ */
 function atWectorML() {
 	try {
 		if (document.getElementById("thisIsForTheExtension") != null) {
@@ -397,9 +376,6 @@ function atWectorML() {
 		console.log(err);
 	}
 }
-atWectorML();
-initializeHome(0, function() {});
-
 
 /*
  * Calculates flight time by using preset formula
@@ -428,3 +404,37 @@ function haversine() {
        var c = 2 * Math.asin(Math.sqrt(a));
        return R * c;
 }
+
+// Start of content_script.js
+// Icon Links
+var fa_link = document.createElement("link");
+fa_link.rel = "stylesheet";
+fa_link.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+document.getElementsByTagName("head")[0].appendChild( fa_link );
+var md_link = document.createElement("link");
+md_link.rel = "stylesheet";
+md_link.href = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css";
+document.getElementsByTagName("head")[0].appendChild( md_link );
+/* Global Variables */
+// Home
+var latsrc;
+var lonsrc;
+var home;
+var hasSet;
+// Max Values (in meters/hr, HH, MM, meters)
+var maxWalkSpd;
+var maxBikeSpd;
+var maxWalkTimeH;
+var maxBikeTimeH;
+var maxWalkTimeM;
+var maxBikeTimeM;
+var maxWalkDist;
+var maxBikeDist;
+// Stores last text highlighted.
+var lastQuery = "";
+// Check if Extentsion is installed
+atWectorML();
+// Initialise Home Settings
+initializeHome(0, function() {});
+// Start our magic!
+document.onmouseup = checkHighlight;
