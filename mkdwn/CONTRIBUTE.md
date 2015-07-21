@@ -10,7 +10,7 @@
 >> Contains the main source code of the extension
 
 >> _landing_
->> Contains the main source code and necessary files for the [landing page](www.wector.ml "Visit me!")
+>> Contains the main source code and necessary files for the [landing page](http://wector.ml "Visit me!")
 
 >>> _fonts_
 >>> Contains [Font Awesome](http://fortawesome.github.io/Font-Awesome/) and [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
