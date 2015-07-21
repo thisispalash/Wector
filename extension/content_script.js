@@ -61,7 +61,7 @@ function displaySettingsAlert() {
  * @params: txt - Selected text
  */
 function main(txt) {
-	console.log("  " + latsrc + "," + lonsrc + "    " + home + "\n" + maxWalkSpd + "  " + (maxWalkTimeH*60+maxWalkTimeM)/60.0 + " " + maxWalkDist + " " + maxWalkTimeH+":"+maxWalkTimeM + "\n" + maxBikeSpd + "  " + (maxBikeTimeH*60+maxBikeTimeM)/60.0 + " " + maxBikeDist + " " + maxBikeTimeH+":"+maxBikeTimeM + "\n")
+	//console.log("  " + latsrc + "," + lonsrc + "    " + home + "\n" + maxWalkSpd + "  " + (maxWalkTimeH*60+maxWalkTimeM)/60.0 + " " + maxWalkDist + " " + maxWalkTimeH+":"+maxWalkTimeM + "\n" + maxBikeSpd + "  " + (maxBikeTimeH*60+maxBikeTimeM)/60.0 + " " + maxBikeDist + " " + maxBikeTimeH+":"+maxBikeTimeM + "\n")
     var text = txt;
     lastQuery = text;
     var dest = text;
@@ -87,7 +87,7 @@ function main(txt) {
 					success: function (dstdata) {
 						latdst = dstdata['results'][0]['geometry']['location']['lat'];
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
-						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+						//console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
 						var flight = "<i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 						if (flightTime != 1) {
@@ -191,7 +191,7 @@ function main(txt) {
 						success: function (dstdata) {
 							latdst = dstdata['results'][0]['geometry']['location']['lat'];
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
-							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+							//console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc)
 							flight += flightTime + " hour";
 							if (flightTime != 1) {
@@ -406,6 +406,7 @@ function haversine() {
 }
 
 // Start of content_script.js
+console.log("Welcome to Wector! Visit us at wector.ml");
 // Icon Links
 var fa_link = document.createElement("link");
 fa_link.rel = "stylesheet";

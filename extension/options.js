@@ -88,7 +88,7 @@ function refreshMapWithL(lat, lon) {
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(docment.getElementById("map").src);
+	storeMap(document.getElementById("map").src);
 }
 
 /* 
@@ -106,7 +106,7 @@ function refreshMap() {
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(docment.getElementById("map").src);
+	storeMap(document.getElementById("map").src);
 }
 
 /*

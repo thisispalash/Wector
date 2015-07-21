@@ -13,6 +13,7 @@ Welcome to extension that tells you how much time it'll take you to get somewher
 	* [Recent Updates](#updates)
 	* [Copyright and Licensing Information](#license)
 	* [Creators of Wector](#authors)
+	* [Version Control](#release-information)
 * [News](#news)
 * [Known Bugs](#known-bugs "Resolved and unresolved")
 * [Plans for Future Versions](#next-versions "Suggest something!")
@@ -26,8 +27,9 @@ This project is chrome extension that tells the user how much time it will take 
 - [Changelog](src/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
 - [Commits](https://bitbucket.org/khaalidimaag/wector/commits/all "Commit History"): Completele Commit History of Wector
 
-### Version Control
+### Release Information
 
+The releases on Chrome Webstore will follow the following numbering convention:
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
 
 #### License 
