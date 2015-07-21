@@ -3,7 +3,7 @@
 # README
 ***
 
-# **Wector** 
+# **Wector Chrome Extension** 
 
 Welcome to extension that tells you how much time it'll take you to get somewhere!
 ***
@@ -16,6 +16,7 @@ Welcome to extension that tells you how much time it'll take you to get somewher
 	* [Version Control](#release-information)
 * [News](#news)
 * [Known Bugs](#known-bugs "Resolved and unresolved")
+* [Contributing](#contributing)
 * [Plans for Future Versions](#next-versions "Suggest something!")
 
 
@@ -46,12 +47,17 @@ Made with <3 by
 * * *
 
 ## News 
-- Release Date: 16th July, 2015
+- Release Date: 21st July, 2015
 
 * * *
 
 ## Known Bugs  
 See [Issues](src/mkdwn/ISSUES.md "Known solved and unsolved issues")
+
+* * *
+
+## Contributing
+See [Contribute](src/mkdwn/CONTRIBUTE.md "Contribute to our project")
 
 * * *
 
