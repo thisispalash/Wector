@@ -83,12 +83,15 @@ function refreshSliders(wS, wH, wM, bS, bH, bM) {
  */
 function refreshMapWithL(lat, lon) {
 	document.getElementById("map").style.opacity = "0.5";
+	document.getElementById("map").onerror = function () {
+		console.log("Found you asshole");
+		offlineMsg();
+	};
 	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lon+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+lat+","+lon;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(document.getElementById("map").src);
 }
 
 /* 
@@ -101,20 +104,22 @@ function refreshMap() {
 		document.getElementById("map").style.opacity="1.0";
 	}
 	loc = address;
+	document.getElementById("map").onerror = function () {
+		console.log("Found you asshole");
+		offlineMsg();
+	};
 	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+address+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+address;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
 	};
-	storeMap(document.getElementById("map").src);
 }
 
 /*
- * Stores the map in Chrome, in case the user is offline
+ * Called when the user is offline. Displays offline message
  */
-function storeMap(src) {
+function offlineMsg() {
 	// TODO: This function
-	// TODO: Check if offline (possibly in another function)
 }
 
 /*

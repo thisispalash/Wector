@@ -20,5 +20,6 @@
     "scripts": ["background.js"]
   },
   "web_accessible_resources":["logo48w.png"],
-  "short_name": "Wector"
+  "short_name": "Wector",
+  "offline_enabled": false
 }
