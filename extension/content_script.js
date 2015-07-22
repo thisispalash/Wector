@@ -366,10 +366,6 @@ function atWectorML() {
 			document.getElementById("p1a").onclick = function() {
 				chrome.runtime.sendMessage({message:"showOptions"});
 			};
-			document.getElementById("p2a").onclick = function() {
-				document.getElementById("p2a").innerHTML = "khaaliDimaag.io@gmail.com";
-				document.getElementById("p2a").style.cursor = "auto";
-			};
 		}
 	}
 	catch(err) {

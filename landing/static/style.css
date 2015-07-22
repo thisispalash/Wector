@@ -23,6 +23,10 @@ body {
 	margin-top:20px;
 }
 
+#try {
+	margin-bottom:47px;
+}
+
 #alreadyhave {
 	display:none;
 }
@@ -43,6 +47,7 @@ body {
 	float:left;
 	width:98.4%;
 	background:black;
+	color:#ededed;
 }
 
 #inst {
@@ -97,17 +102,72 @@ a:hover {
 	color:silver;
 }
 
+.lighter {
+	color:#ffffff;
+}
+
 #installpl {
 	display:none;
+	-webkit-animation-name: blinkCycle; 
+	-webkit-animation-duration:6s; 
+	-webkit-animation-direction:normal; 
+	-webkit-animation-iteration-count:infinite;
+
+	-moz-animation-name: blinkCycle; 
+	-moz-animation-duration:6s; 
+	-moz-animation-direction:normal; 
+	-moz-animation-iteration-count:infinite;
+
+	-o-animation-name: blinkCycle; 
+	-o-animation-duration:6s; 
+	-o-animation-direction:normal; 
+	-o-animation-iteration-count:infinite;
+
 	animation-name: blinkCycle; 
 	animation-duration:6s; 
 	animation-direction:normal; 
 	animation-iteration-count:infinite; 
 
-	-webkit-animation-name: blinkCycle; 
-	-webkit-animation-duration:6s; 
-	-webkit-animation-direction:normal; 
-	-webkit-animation-iteration-count:infinite;
+	
+}
+
+@-webkit-keyframes homeCycle 
+{ 
+	0% {color:#fff;}
+	12% {color:#FFFF00;}
+	25% {color:#fff;}
+	37% {color:#25BD25;}
+	50% {color:#fff;}
+	63% {color:#00B2FF;}
+	75% {color:#fff;}
+	87% {color:#FF8800;}
+	100% {color:#fff;} 
+}
+
+@-moz-keyframes homeCycle 
+{ 
+	0% {color:#fff;}
+	12% {color:#FFFF00;}
+	25% {color:#fff;}
+	37% {color:#25BD25;}
+	50% {color:#fff;}
+	63% {color:#00B2FF;}
+	75% {color:#fff;}
+	87% {color:#FF8800;}
+	100% {color:#fff;} 
+}
+
+@-o-keyframes homeCycle 
+{ 
+	0% {color:#fff;}
+	12% {color:#FFFF00;}
+	25% {color:#fff;}
+	37% {color:#25BD25;}
+	50% {color:#fff;}
+	63% {color:#00B2FF;}
+	75% {color:#fff;}
+	87% {color:#FF8800;}
+	100% {color:#fff;} 
 }
 
 @keyframes blinkCycle 
