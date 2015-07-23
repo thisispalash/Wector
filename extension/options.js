@@ -83,14 +83,18 @@ function refreshSliders(wS, wH, wM, bS, bH, bM) {
  */
 function refreshMapWithL(lat, lon) {
 	document.getElementById("map").style.opacity = "0.5";
+	var oldSrc = document.getElementById("map").src;
 	document.getElementById("map").onerror = function () {
-		console.log("Found you asshole");
+		document.getElementById("map").src = oldSrc;
 		offlineMsg();
 	};
 	// Get map from Static Maps API and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lon+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+lat+","+lon;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
+		if (document.getElementById("map").src == oldSrc) return;
+		document.getElementById("map").style.webkitFilter = "none";
+		document.getElementById("overlay").style.display = "none";
 	};
 }
 
@@ -104,14 +108,18 @@ function refreshMap() {
 		document.getElementById("map").style.opacity="1.0";
 	}
 	loc = address;
+	var oldSrc = document.getElementById("map").src;
 	document.getElementById("map").onerror = function () {
-		console.log("Found you asshole");
+		document.getElementById("map").src = oldSrc;
 		offlineMsg();
 	};
 	// Get map from Static Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+address+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+address;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
+		if (document.getElementById("map").src == oldSrc) return;
+		document.getElementById("map").style.webkitFilter = "none";
+		document.getElementById("overlay").style.display = "none";
 	};
 }
 
@@ -119,7 +127,8 @@ function refreshMap() {
  * Called when the user is offline. Displays offline message
  */
 function offlineMsg() {
-	// TODO: This function
+	document.getElementById("map").style.webkitFilter = "blur(5px)";
+	document.getElementById("overlay").style.display = "block";
 }
 
 /*
@@ -163,6 +172,9 @@ function save() {
 				$(a).fadeIn();
 				setInterval(function(){ $(a).fadeOut(); }, 5000);
 			});
+		},
+		error: function () {
+			document.getElementById("save").innerHTML = "Save";
 		}
 	});		
 }

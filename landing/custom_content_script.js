@@ -28,7 +28,7 @@ function checkHighlight() {
     	main(text);
     	ga('send', 'event', 'body', 'highlight', text, queried);
     	if (queried >= 4) {
-    		setTimeout(function(){displayLimitAlert();}, 1000);
+    		setTimeout(function(){displayLimitAlert();}, 2000);
 		}
     }
 }
@@ -338,9 +338,10 @@ function showPosition(position) {
 	maxBikeDist = (maxBikeSpd)*(maxBikeTimeH+maxBikeTimeM/60.0);
 	weknowhome = true;
 	if (latsrc && lonsrc) {
-		document.getElementById("inst").innerHTML = "Awesome! Now highlight any of these places to find out how far they are from you:";
+		document.getElementById("inst").innerHTML = "Awesome! Now <span class='lighter'>highlight</span> any of these places to find out how far they are from you:";
 		document.getElementById("inst").style.cursor = "auto";
         document.getElementById("places").style.display = "block";
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 	}
 	else {
 		showError(null);
@@ -401,3 +402,4 @@ var lastQuery = "";
 var queried = 0;
 // Start our magic!
 document.onmouseup = checkHighlight;
+document.ontouchend = checkHighlight;

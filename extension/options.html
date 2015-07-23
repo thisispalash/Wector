@@ -97,6 +97,34 @@
         .sliders {
             width:100px;
         }
+        #mapDiv {
+            position: relative;
+            float: left;
+            margin-top: 5px;
+        }
+        #overlay {
+            height: 300px;
+            width: 100%;
+            position: absolute;
+            top: 5px;
+            left: 0;
+            opacity: 0.75;
+            background: black;
+            color:white;
+            text-align:center;
+            font-size:20px;
+            display:none;
+        }
+        #overlayCont {
+            position:relative;
+            float:left;
+            width:100%;
+        }
+        #overlayMessage {
+            position:absolute;
+            top:135px;
+            width:100%;
+        }
     </style>
 </head>
 
@@ -107,7 +135,14 @@
         <button type = "button" id = "submit">Refresh</button>
         <button type = "button" id = "save">Save</button>
     </form>
-    <img src = "" id = "map" />
+    <div id = "mapDiv">
+        <img src = "" id = "map" />
+        <div id = "overlay">
+            <div id ="overlayCont">
+                <div id = "overlayMessage">Oops, it looks like you're offline! Try again later!</div>
+            </div>
+        </div>
+    </div>
     <div id = "saveAlert">Saved!</div>
     <br><br>
     <form action="" method = "POST" id = "speedForm">
