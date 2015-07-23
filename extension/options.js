@@ -113,7 +113,7 @@ function refreshMap() {
 		document.getElementById("map").src = oldSrc;
 		offlineMsg();
 	};
-	// Get map from Static Maps API (?) and show as image (Courtesy: Google)
+	// Get map from Static Maps API and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+address+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+address;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
@@ -202,6 +202,7 @@ function preInitialize() {
 }
 
 // Start of options.js
+console.log("Welcome to Wector! Visit us at Wector.ml");
 // Current Location
 var loc = "";
 window.addEventListener("load", preInitialize);

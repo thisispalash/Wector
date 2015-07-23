@@ -402,7 +402,7 @@ function haversine() {
 }
 
 // Start of content_script.js
-console.log("Welcome to Wector! Visit us at wector.ml");
+console.log("Welcome to Wector! Visit us at Wector.ml");
 // Icon Links
 var fa_link = document.createElement("link");
 fa_link.rel = "stylesheet";

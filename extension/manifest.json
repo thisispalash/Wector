@@ -2,7 +2,7 @@
   "name": "Wector Chrome Extension",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Highlight anything to find out how far it is!",
+  "description": "Highlight anything to know how far it is!",
   "options_ui": {
     "page": "options.html",
     "chrome_style": true

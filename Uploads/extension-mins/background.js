@@ -1,0 +1,1 @@
+chrome.runtime.onInstalled.addListener(function(){chrome.runtime.openOptionsPage()}),chrome.runtime.onMessage.addListener(function(e){"showOptions"==e.message&&chrome.runtime.openOptionsPage()});

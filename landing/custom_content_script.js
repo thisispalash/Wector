@@ -38,7 +38,7 @@ function checkHighlight() {
  * @params: txt - Selected text
  */
 function main(txt) {
-	console.log("  " + latsrc + "," + lonsrc + "    " + home + "\n" + maxWalkSpd + "  " + (maxWalkTimeH*60+maxWalkTimeM)/60.0 + " " + maxWalkDist + " " + maxWalkTimeH+":"+maxWalkTimeM + "\n" + maxBikeSpd + "  " + (maxBikeTimeH*60+maxBikeTimeM)/60.0 + " " + maxBikeDist + " " + maxBikeTimeH+":"+maxBikeTimeM + "\n")
+	//console.log("  " + latsrc + "," + lonsrc + "    " + home + "\n" + maxWalkSpd + "  " + (maxWalkTimeH*60+maxWalkTimeM)/60.0 + " " + maxWalkDist + " " + maxWalkTimeH+":"+maxWalkTimeM + "\n" + maxBikeSpd + "  " + (maxBikeTimeH*60+maxBikeTimeM)/60.0 + " " + maxBikeDist + " " + maxBikeTimeH+":"+maxBikeTimeM + "\n")
     var text = txt;
     lastQuery = text;
     var dest = text;
@@ -49,7 +49,7 @@ function main(txt) {
 	    url:      "/distance?lat="+latsrc+"&lon="+lonsrc+"&dst="+dest,
 	    success: function(data){
 	    	data = JSON.parse(data);
-	    	console.log(data);
+	    	//console.log(data);
 	        var rows = data['rows'][0];
 		    var elements = rows['elements'][0];
 	 	    var status = elements['status'];
@@ -65,10 +65,10 @@ function main(txt) {
 					url: "/geocode?dst="+dest,
 					success: function (dstdata) {
 						dstdata = JSON.parse(dstdata);
-						console.log(dstdata);
+						//console.log(dstdata);
 						latdst = dstdata['results'][0]['geometry']['location']['lat'];
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
-						console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+						//console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
 						var flight = "<i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
 						if (flightTime != 1) {
@@ -113,7 +113,7 @@ function main(txt) {
 		    		// Biking
 		    		var bikeTime = dist['value']/(maxBikeSpd);
 		    		var bH = bikeTime|0;
-		    		console.log(bH);
+		    		//console.log(bH);
 		    		var bikeHour;
 		    		if(bikeTime < 1.0) {
 		    			bikeHour = " ";
@@ -154,7 +154,7 @@ function main(txt) {
 							dstdata = JSON.parse(dstdata);
 							latdst = dstdata['results'][0]['geometry']['location']['lat'];
 							londst = dstdata['results'][0]['geometry']['location']['lng'];
-							console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
+							//console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 							var flightTime = getFlight(latdst, londst, latsrc, lonsrc)
 							flight += flightTime + " hour";
 							if (flightTime != 1) {
@@ -379,6 +379,7 @@ function haversine() {
 
 
 // Start of custom_content_script.js
+console.log("Welcome to Wector! Made with <3 by khaaliDimaag!")
 /* Global Variables */
 // Getting home location
 var weknowhome = false;
