@@ -39,6 +39,7 @@ body {
   	width: 98.4%;
   	background: black;
   	color: white;
+  	cursor:pointer;
 }
 
 #inst, #insta {
@@ -244,4 +245,30 @@ a:hover {
 
 [tooltip]:not([tooltip-persistent]):before {
     pointer-events: none;
+}
+
+#slideImg0, #slideImg1, #slideImg2, #slideImg3 {
+	max-width:800px;
+	margin:20px 10px;
+	border:3px solid black;
+	display:none;
+}
+
+#slideImg0 {
+	display:inline;
+}
+
+#slideNext {
+	background:#222;
+	color:white;
+	font-size:22px;
+	padding:5px;
+	box-shadow: 0px 5px 1px #111;
+	margin:15px auto;
+	cursor:pointer;
+}
+
+#slideNext:hover {
+	background:#111;
+	box-shadow:0px 5px 1px #222;
 }

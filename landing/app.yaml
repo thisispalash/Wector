@@ -16,5 +16,8 @@ handlers:
 - url: /jss
   script: custom_content_script.js
 
+- url: /use
+  script: use.html
+
 - url: /.*
   script: main.html
