@@ -1,3 +1,13 @@
+==== 
+Palash
+
 Highlight and Find! 
 
 Going out for dinner and are searching on Yelp for places to eat? Don't want to open a new tab or open Google Maps to find out the duration of travel? Worry not! Wector has got you covered! Just highlight the address of the restaurant and watch as the familiar black bar tells you how much time it'll take to get there! Want to find the route to the place as well? Trust Wector! Just click the link button and Volia! the route will be opened in a new tab!
+
+----
+
+==== 
+Karun
+
+----
