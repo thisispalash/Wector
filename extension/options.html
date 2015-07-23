@@ -10,6 +10,9 @@
     <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.0.2/css/material-design-iconic-font.min.css">
     <style>
+        ::-webkit-scrollbar { 
+            display: none; 
+        }
         #whereAmIInput {
             width:59.7%;
             float:left;
@@ -126,10 +129,21 @@
             top:135px;
             width:100%;
         }
+        #welcome {
+            width: 100%;
+            float: left;
+            font-size: 22px;
+            text-align: center;
+            display:none;
+        }
+        #check {
+            color:#25aa25
+        }
     </style>
 </head>
 
 <body>
+    <div id="welcome">Thanks for installing Wector! <i class="fa fa-check" id="check"></i></div>
     <div class = "head">Set Home</div>
     <form action="" method = "POST" id = "homeForm">
         <input id = "whereAmIInput" type = "text" name = "whereAmI" value = "">
@@ -140,7 +154,7 @@
         <img src = "" id = "map" />
         <div id = "overlay">
             <div id ="overlayCont">
-                <div id = "overlayMessage">Oops, it looks like you're offline! Try again later!</div>
+                <div id = "overlayMessage"></div>
             </div>
         </div>
     </div>

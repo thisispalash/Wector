@@ -369,7 +369,7 @@ function atWectorML() {
 		}
 	}
 	catch(err) {
-		console.log(err);
+		console.log("Wector Error: "+err);
 	}
 }
 
@@ -402,7 +402,7 @@ function haversine() {
 }
 
 // Start of content_script.js
-console.log("Welcome to Wector! Visit us at Wector.ml");
+console.log("Thanks for using Wector! Visit us at http://wector.ml");
 // Icon Links
 var fa_link = document.createElement("link");
 fa_link.rel = "stylesheet";

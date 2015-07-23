@@ -129,6 +129,16 @@ function refreshMap() {
 function offlineMsg() {
 	document.getElementById("map").style.webkitFilter = "blur(5px)";
 	document.getElementById("overlay").style.display = "block";
+	document.getElementById("overlayMessage").innerHTML = "Oops, it looks like you're offline! Try again later! <i class='fa fa-frown-o'></i>";
+}
+
+/*
+ * Called when the entered place is not found. Displays not found message
+ */
+function notFoundMsg() {
+	document.getElementById("map").style.webkitFilter = "blur(5px)";
+	document.getElementById("overlay").style.display = "block";
+	document.getElementById("overlayMessage").innerHTML = "We couldn't find that place - try again! <i class='fa fa-frown-o'></i>";
 }
 
 /*
@@ -143,7 +153,7 @@ function saveSpeedTimeSettings() {
 	var bikingTime = document.getElementById("bikingTimeSlider").value;
 	var mBTH = getH(bikingTime);
 	var mBTM = getM(bikingTime);
-	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM}, function () {
+	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM, exists:true}, function () {
 		; //saved
 	});
 }
@@ -160,18 +170,32 @@ function save() {
 		type:"GET",
 		url: "https://maps.googleapis.com/maps/api/geocode/json?address="+address,
 		success: function (adddata) {
-			var latadd = adddata['results'][0]['geometry']['location']['lat'];
-			var lonadd = adddata['results'][0]['geometry']['location']['lng'];
-			var format = adddata['results'][0]['formatted_address'];
-			// Set the found address as the current location
-			chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
-				document.getElementById("save").innerHTML = "Save";
-				var a = document.getElementById("saveAlert");
-				a.innerHTML = "Saved Home as "+format+"!  <i class = 'fa fa-thumbs-up'></i>";
-				document.getElementById("whereAmIInput").value = format;
-				$(a).fadeIn();
-				setInterval(function(){ $(a).fadeOut(); }, 5000);
-			});
+			var res = adddata['results'];
+			if (res.length > 0) {
+				var latadd = adddata['results'][0]['geometry']['location']['lat'];
+				var lonadd = adddata['results'][0]['geometry']['location']['lng'];
+				var format = adddata['results'][0]['formatted_address'];
+				// Set the found address as the current location
+				chrome.storage.sync.set({latitude:latadd, longitude:lonadd, address:format, exists:true}, function () {
+					document.getElementById("save").innerHTML = "Save";
+					var a = document.getElementById("saveAlert");
+					a.innerHTML = "Saved Home as "+format+"!  <i class = 'fa fa-thumbs-up'></i>";
+					document.getElementById("whereAmIInput").value = format;
+					$(a).fadeIn();
+					setInterval(function(){ $(a).fadeOut(); }, 5000);
+				});
+				document.getElementById("map").style.opacity = "1.0";
+				document.getElementById("map").style.webkitFilter = "none";
+				document.getElementById("overlay").style.display = "none";
+			}
+			else {
+				document.getElementById("map").onload = function () {
+					notFoundMsg();
+					document.getElementById("save").innerHTML = "Save";
+				};
+				var oldSrc = document.getElementById("map").src;
+				document.getElementById("map").src = oldSrc;
+			}
 		},
 		error: function () {
 			document.getElementById("save").innerHTML = "Save";
@@ -190,10 +214,13 @@ function preInitialize() {
 		event.preventDefault();
 		refreshMap();
 	});
-	chrome.storage.sync.get({address:"Cornell University", latitude:42.4534492, longitude:-76.4735027, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30}, function(items) {
+	chrome.storage.sync.get({address:"Cornell University", latitude:42.4534492, longitude:-76.4735027, mWS:5000, mBS:14000, mWTH:0, mBTH:0, mWTM:30, mBTM:30, exists:false}, function(items) {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
 		refreshSliders(items.mWS, items.mWTH, items.mWTM, items.mBS, items.mBTH, items.mBTM);
+		if (items.exists == false) {
+			document.getElementById("welcome").style.display = "block";
+		}
 	});
 	document.getElementById("walkingSpeedSlider").addEventListener("change", updateSpeeds);
 	document.getElementById("bikingSpeedSlider").addEventListener("change", updateSpeeds);
@@ -202,7 +229,7 @@ function preInitialize() {
 }
 
 // Start of options.js
-console.log("Welcome to Wector! Visit us at Wector.ml");
+console.log("Thanks for using Wector! Visit us at http://wector.ml");
 // Current Location
 var loc = "";
 window.addEventListener("load", preInitialize);
