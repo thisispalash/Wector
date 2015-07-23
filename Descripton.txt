@@ -10,4 +10,11 @@ Going out for dinner and are searching on Yelp for places to eat? Don't want to 
 ==== 
 Karun
 
+Highlight any place on any page to find out how far it is, and how you can get there!
+
+The Wector Chrome Extension integrates the power of Google Maps seamlessly into your browsing experience. Instead of having to constantly open new tabs to go to Google Maps, you can use Wector to get all the information you really need instantly: that too without leaving your page!
+
+Set your home location, and let Wector take it from there. Simply highlight any place on any page, and the extension will silently bring up information about it. This includes estimated durations for various modes of transport (flights, cars, biking and walking), and also a direct link to the route on Google Maps.
+
+Created by Karun Singh and Palash Agarwal - two CS undergraduate students at Cornell University. The idea came to us when we were searching for hackathons to attend, and found ourselves repeatedly checking how far the host universities were from Cornell.
 ----
