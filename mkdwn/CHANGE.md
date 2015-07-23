@@ -7,4 +7,4 @@ See new features added to Wector and reflected on the published extension.
 - For complete commit history, see [Commits](https://bitbucket.org/khaalidimaag/wector/commits/all "Commit History").
 
 > v 1.0.0
->> Initial Release of Wector Chrome Extension.
+>> Initial Release of Wector Chrome Extension and [Wector](http://wector.ml).

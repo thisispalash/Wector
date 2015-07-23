@@ -47,7 +47,7 @@ Made with <3 by
 * * *
 
 ## News 
-- Release Date: 21st July, 2015
+- Release Date: 23rd July, 2015
 
 * * *
 
