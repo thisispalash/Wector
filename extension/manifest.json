@@ -2,11 +2,12 @@
   "name": "Wector Chrome Extension",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Highlight anything to know how far it is!",
+  "description": "The quickest way to know where places are",
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
   },
+  "author": "khaaliDimaag",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
