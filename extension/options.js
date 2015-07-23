@@ -87,7 +87,7 @@ function refreshMapWithL(lat, lon) {
 		console.log("Found you asshole");
 		offlineMsg();
 	};
-	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
+	// Get map from Static Maps API and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lon+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+lat+","+lon;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
@@ -108,7 +108,7 @@ function refreshMap() {
 		console.log("Found you asshole");
 		offlineMsg();
 	};
-	// TODO: Get map from Google Maps API (?) and show as image (Courtesy: Google)
+	// Get map from Static Maps API (?) and show as image (Courtesy: Google)
 	document.getElementById("map").src = "https://maps.googleapis.com/maps/api/staticmap?center="+address+"&zoom=13&size=600x300&maptype=roadmap&markers=color:orange|"+address;
 	document.getElementById("map").onload = function () {
 		document.getElementById("map").style.opacity = "1.0";
