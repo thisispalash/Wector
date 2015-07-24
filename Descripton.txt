@@ -3,9 +3,11 @@ Palash
 
 Highlight any place on the web to find out how much time it'll take, and how you can get there!
 
-Tired of constantly opening a new tab, entering your home, going back to the page you were on, copying the address, going back to the tab with Google maps, and finally pasting it in the destination only to wait for the map to load the mode of transport you did not want to take?
+Simply highlight any place or address you want to visit and watch as Wector automagically queries Google Maps and seamlessly tells you the different ways by which you can reach there in a beautiful black bar at the bottom of your screen. If you want to see the route, Wector has you covered. Just click the external link icon and you'll be redirected to Google Maps.
 
-Well, Wector can help you. Simply highlight any place or address you want to visit and watch as Wector automagically queries Google Maps and seamlessly tells you the different ways by which you can reach there in a beautiful black bar at the bottom of your screen. If you want to see the route, Wector has you covered. Just click the external link icon and you'll be redirected to Google Maps.
+Who wants to constantly open a new tab, enter your home, go back to the page you were on, copy the address, go back to the tab with Google maps, and finally paste it in the destination only to wait for the map to load the mode of transport you did not want to take?
+
+Wector condenses the six steps to just one!
 
 Where can I use this?
 
@@ -26,7 +28,6 @@ Authors:
 Wector was conceptualized by two undergraduate students - Palash and Karun - who were discussing which hackathons to go to in the school year. Frustrated with the number of times Google Maps had to be loaded, we brought Wector into existence!
 
 (c) khaaliDimaag
-
 ----
 
 ==== 
@@ -39,4 +40,24 @@ The Wector Chrome Extension integrates the power of Google Maps seamlessly into 
 Set your home location, and let Wector take it from there. Simply highlight any place on any page, and the extension will silently bring up information about it. This includes estimated durations for various modes of transport (flights, cars, biking and walking), and also a direct link to the route on Google Maps.
 
 Created by Karun Singh and Palash Agarwal - two CS undergraduate students at Cornell University. The idea came to us when we were searching for hackathons to attend, and found ourselves repeatedly checking how far the host universities were from Cornell.
+----
+
+====
+Final:
+
+Highlight any place on the web to find out how much time it'll take, and how you can get there!
+
+Wector integrates the power of Google Maps seamlessly into your browsing experience. Highlight any place, and Wector will instantly tell you how far you are from it in a elegant bar at the bottom of your screen. Want to know how to get there? Just click the external link icon and you'll be shown the route on Google Maps!
+
+Current Features:
+- Know how far the highlighted place is, instantly
+- Click to see the route on Google Maps
+- Set your home location
+- Adjust biking and walking speeds
+
+Authors:
+Wector was conceptualized by two undergraduate students at Cornell - Palash Agarwal and Karun Singh.
+
+How did this start?
+While looking for hackathons to attend in the school year, we were frustrated by the number of times we had to check how far other universities are from Cornell. Hence, we came up with the idea of Wector: a browser extension that would automate this process for us, and condense six different steps into one.
 ----

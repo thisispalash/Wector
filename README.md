@@ -24,9 +24,7 @@ The quickest way to know where places are!
 
 ## About  
 
-Tired of constantly opening a new tab, entering your home, going back to the page you were on, copying the address, going back to the tab with Google maps, and finally pasting it in the destination only to wait for the map to load the mode of transport you did not want to take?
-
-Well, Wector can help you. Simply highlight any place or address you want to visit and watch as Wector automagically queries Google Maps and seamlessly tells you the different ways by which you can reach there in a beautiful black bar at the bottom of your screen. If you want to see the route, Wector has you covered. Just click the external link icon and you'll be redirected to Google Maps.
+Wector integrates the power of Google Maps seamlessly into your browsing experience. Highlight any place, and Wector will instantly tell you how far you are from it in a elegant bar at the bottom of your screen. Want to know how to get there? Just click the external link icon and you'll be shown the route on Google Maps!
 
 ### Updates
 
@@ -45,8 +43,6 @@ _Current Version_ : _v_1.0.0
 #### License 
 
 License: [MIT License](src/mkdwn/LICENSE.md "View License")
-
-\(c\)2015 [khaaliDimaag()](https://github.com/khaaliDimaag "GitHub")
 
 #### Authors 
 
