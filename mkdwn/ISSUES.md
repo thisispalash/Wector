@@ -3,5 +3,4 @@
 
 See the known bugs in Wector. These include resolved and unresolved issues.
 
-- Does not work on some sites
-> github.com; 
+- Font Awesome and Material Design Iconic Font icons don't load on github.com

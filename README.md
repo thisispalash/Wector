@@ -6,7 +6,7 @@
 
 # **Wector Chrome Extension** 
 
-The quickest way to know where places are!
+The quickest way to know where places are. Just highlight them!
 
 ***
 
@@ -30,11 +30,11 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 
 - [New Features](src/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
 - [Changelog](src/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
-- [Commits](https://bitbucket.org/khaalidimaag/wector/commits/all "Commit History"): Completele Commit History of Wector
+- [Commits](https://bitbucket.org/khaalidimaag/wector/commits/all "Commit History"): Complete Commit History of Wector
 
 ### Release Information
 
-The releases on Chrome Webstore will follow the following numbering convention:
+The releases will follow the following numbering convention:
 
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
 
