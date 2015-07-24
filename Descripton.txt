@@ -1,9 +1,31 @@
 ==== 
 Palash
 
-Highlight and Find! 
+Highlight any place on the web to find out how much time it'll take, and how you can get there!
 
-Going out for dinner and are searching on Yelp for places to eat? Don't want to open a new tab or open Google Maps to find out the duration of travel? Worry not! Wector has got you covered! Just highlight the address of the restaurant and watch as the familiar black bar tells you how much time it'll take to get there! Want to find the route to the place as well? Trust Wector! Just click the link button and Volia! the route will be opened in a new tab!
+Tired of constantly opening a new tab, entering your home, going back to the page you were on, copying the address, going back to the tab with Google maps, and finally pasting it in the destination only to wait for the map to load the mode of transport you did not want to take?
+
+Well, Wector can help you. Simply highlight any place or address you want to visit and watch as Wector automagically queries Google Maps and seamlessly tells you the different ways by which you can reach there in a beautiful black bar at the bottom of your screen. If you want to see the route, Wector has you covered. Just click the external link icon and you'll be redirected to Google Maps.
+
+Where can I use this?
+
+- Imagine you have to quickly decide a restaurant to go to for dinner. You want to see the reviews and also how much time it'd realistically take you to get there. What do you do? Merely highlight the addresses of the restaurants you wish to go to and choose one based on how far it is, from the comfort of the same page!
+- Imagine you are seeing a travel page with lots of exotic places you can visit. However, you don't know when you should leave to make the most out of your trip. Worry not! With Wector, you can keep highlighting the places you want to visit and Wector will tirelessly keep telling you how much time you will require to travel. And what's more? That boring 6 hour tiring plane trip could even become a day long fun roadtrip!
+
+What do I have to set?
+
+As soon as you install the extension, you will be taken to the options page where you must set your Home location. You may also alter the Walking and Cycling Speeds and/or Times. And that's it! Wector is now completely set up.
+
+Current Features:
+
+- Shows best ways to reach the highighted address
+- Direct link to the route on Google Maps
+
+Authors:
+
+Wector was conceptualized by two undergraduate students - Palash and Karun - who were discussing which hackathons to go to in the school year. Frustrated with the number of times Google Maps had to be loaded, we brought Wector into existence!
+
+(c) khaaliDimaag
 
 ----
 
