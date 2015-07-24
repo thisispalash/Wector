@@ -250,7 +250,7 @@ a:hover {
 #slideImg0, #slideImg1, #slideImg2, #slideImg3 {
 	max-width:640px;
 	margin:20px 10px;
-	border:3px solid black;
+	border:1.5px solid black;
 	display:none;
 }
 
@@ -259,16 +259,16 @@ a:hover {
 }
 
 #slideNext {
-	background:#222;
-	color:white;
-	font-size:22px;
-	padding:5px;
-	box-shadow: 0px 5px 1px #111;
+	background:#DFDFDF;
+	color:#111;
+	border-radius:5px;
+	font-size:19px;
+	padding:10px;
+	width:300px;
 	margin:15px auto;
 	cursor:pointer;
 }
 
 #slideNext:hover {
-	background:#111;
-	box-shadow:0px 5px 1px #222;
+	background:#CFCFCF;
 }
