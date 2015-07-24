@@ -379,7 +379,7 @@ function haversine() {
 
 
 // Start of custom_content_script.js
-console.log("Thanks for checking out Wector! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
+console.log("Thanks for checking out Wector.ml (v 1.0.0)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
 /* Global Variables */
 // Getting home location
 var weknowhome = false;
