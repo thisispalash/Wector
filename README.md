@@ -1,4 +1,5 @@
-![Wector Logo](http://wector-io.appspot.com/static/FullResLogo.png)
+
+![Wector Logo](https://github.com/khaaliDimaag/Wector/blob/master/landing/static/FullResLogo.png)
 
 # README
 
@@ -28,9 +29,9 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 
 ### Updates
 
-- [New Features](src/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
-- [Changelog](src/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
-- [Commits](https://bitbucket.org/khaalidimaag/wector/commits/all "Commit History"): Complete Commit History of Wector
+- [New Features](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
+- [Changelog](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
+- [Commits](https://github.com/khaaliDimaag/Wector/commits "Commit History"): Complete Commit History of Wector
 
 ### Release Information
 
@@ -38,11 +39,11 @@ The releases will follow the following numbering convention:
 
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
 
-_Current Version_ : _v_1.0.0
+_Current Version_ : _v_ 1.0.0
 
 #### License 
 
-License: [MIT License](src/mkdwn/LICENSE.md "View License")
+License: [MIT License](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/LICENSE.md "View License")
 
 #### Authors 
 
@@ -54,21 +55,21 @@ Made with <3 by
 * * *
 
 ## News 
-- Release Date: 24th July, 2015
+- 24th July, 2015 : Initial Release \(_v_ 1.0.0\)
 
 * * *
 
 ## Known Bugs  
-See [Issues](src/mkdwn/ISSUES.md "Known solved and unsolved issues")
+See [Issues](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/ISSUES.md "Known solved and unsolved issues")
 
 * * *
 
 ## Contributing
-See [Contribute](src/mkdwn/CONTRIBUTE.md "Contribute to our project")
+See [Contribute](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CONTRIBUTE.md "Contribute to our project")
 
 * * *
 
 ## Next Versions  
-See [Future](src/mkdwn/FUTURE.md "Plans for future versions")
+See [Future](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/FUTURE.md "Plans for future versions")
 
 * * * 
