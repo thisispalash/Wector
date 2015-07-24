@@ -153,7 +153,7 @@ function saveSpeedTimeSettings() {
 	var bikingTime = document.getElementById("bikingTimeSlider").value;
 	var mBTH = getH(bikingTime);
 	var mBTM = getM(bikingTime);
-	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM, exists:true}, function () {
+	chrome.storage.sync.set({mWS:mWS, mBS:mBS, mWTH:mWTH, mWTM:mWTM, mBTH:mBTH, mBTM:mBTM}, function () {
 		; //saved
 	});
 }
