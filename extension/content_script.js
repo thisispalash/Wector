@@ -7,24 +7,33 @@
  */
 
 /*
+ * Sets hide to false. 
+ */
+function setHide() {
+	hide = false;
+}
+
+/*
  * Takes the selected text and calls main() 
  */
 function checkHighlight() {
-	var text = "";
-	// TODO: Understand this!
-    if (window.getSelection) {
-        text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
-    }
+	if(!hide) {
+		var text = "";
+		// TODO: Understand this!
+	    if (window.getSelection) {
+	        text = window.getSelection().toString();
+	    } else if (document.selection && document.selection.type != "Control") {
+	        text = document.selection.createRange().text;
+	    }
 
-    if (text != "" && text.length < 50 && text != lastQuery) {
-    	initializeHome(1, function() {
-    		if (hasSet) {
-	    		main(text);
-	    	}
-    	});
-    }
+	    if (text != "" && text.length < 50 && text != lastQuery) {
+	    	initializeHome(1, function() {
+	    		if (hasSet) {
+		    		main(text);
+		    	}
+	    	});
+	    }
+	}
 }
 
 /*
@@ -279,6 +288,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 
 	// Remove display on click
 	a.onclick = function () {
+		hide = true;
 		lastQuery = "";
 		$(a).slideUp("fast", function() {document.body.removeChild(a);});
 	}
@@ -433,5 +443,8 @@ var lastQuery = "";
 atWectorML();
 // Initialise Home Settings
 initializeHome(0, function() {});
+// Show/Hide Alert
+var hide;
+window.onload = setHide;
 // Start our magic!
 document.onmouseup = checkHighlight;
