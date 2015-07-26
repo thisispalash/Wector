@@ -8,6 +8,7 @@ See new features added to Wector and reflected on the published extension.
 
 > v 1.0.0
 >> Initial Release of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "Add to Chrome").
+
 > v 1.0.1
 >> Added functionality: Click the bar to prevent it from appearing. Reload the page to show the bar again.
 
