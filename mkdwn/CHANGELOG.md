@@ -8,6 +8,7 @@ See new features added to Wector and reflected on the published extension.
 
 > v 1.0.0
 >> Initial Release of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "Add to Chrome").
+
 > v 1.0.1
 >> Fixed BUG: (Temporary solution) Bar always showed up, annoying users. Solution: The bar hides on click. It reappears when the page is reloaded.
 
