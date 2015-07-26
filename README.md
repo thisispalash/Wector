@@ -39,7 +39,7 @@ The releases will follow the following numbering convention:
 
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
 
-_Current Version_ : _v_ 1.0.0
+_Current Version_ : _v_ 1.0.1
 
 #### License 
 
@@ -55,7 +55,7 @@ Made with <3 by
 * * *
 
 ## News 
-- 24th July, 2015 : Initial Release \(_v_ 1.0.0\)
+- 24th July, 2015 : Initial Release \(_v_ 1.0.0\) [To testers]
 
 * * *
 
