@@ -3,6 +3,6 @@
 
 See the known bugs in Wector. These include resolved and unresolved issues.
 
-- [ ] Font Awesome and Material Design Iconic Font icons don't load on github.com
-- [x] Alert kept popping up on every highlight.
-- [ ] Options Page opens up on every update.
+- [ ] \(24th July\): Font Awesome and Material Design Iconic Font icons don't load on github.com
+- [x] \(26th July\): <del>Alert kept popping up on every highlight</del>.
+- [x] \(27th July\): <del>Options Page opens up on every update</del>.

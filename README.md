@@ -29,6 +29,8 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 
 ### Updates
 
+###### Version _v 1.0.2_ Released [To Testers]
+
 - [New Features](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
 - [Changelog](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
 - [Commits](https://github.com/khaaliDimaag/Wector/commits "Commit History"): Complete Commit History of Wector
@@ -39,7 +41,7 @@ The releases will follow the following numbering convention:
 
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
 
-_Current Version_ : _v_ 1.0.1
+_Current Version_ : _v 1.0.2_
 
 #### License 
 
@@ -56,6 +58,8 @@ Made with <3 by
 
 ## News 
 - 24th July, 2015 : Initial Release \(_v_ 1.0.0\) [To testers]
+- 26th July, 2015 : [_v 1.0.1_](#updates "See change") Released [To testers]
+- 27th July, 2015 : [_v 1.0.2_](#updates "See change") Released [To testers]
 
 * * *
 
