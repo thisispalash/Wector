@@ -183,6 +183,7 @@ function save() {
 					document.getElementById("whereAmIInput").value = format;
 					$(a).fadeIn();
 					setInterval(function(){ $(a).fadeOut(); }, 5000);
+					document.getElementById("welcome").style.display = "none";
 				});
 				document.getElementById("map").style.opacity = "1.0";
 				document.getElementById("map").style.webkitFilter = "none";
@@ -218,7 +219,7 @@ function preInitialize() {
 		document.getElementById("whereAmIInput").value = items.address;
 		refreshMapWithL(items.latitude, items.longitude);
 		refreshSliders(items.mWS, items.mWTH, items.mWTM, items.mBS, items.mBTH, items.mBTM);
-		if (items.exists == false) {
+		if (!items.exists) {
 			document.getElementById("welcome").style.display = "block";
 		}
 	});
