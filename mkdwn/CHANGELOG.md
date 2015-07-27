@@ -26,8 +26,11 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 >> Initial release of [Wector](http://wector.ml "Visit us!").
 
 > v 1.1.0
->> Improved the demo on [Wector](http://wector.ml "Check it out!") to include context-aware locations based on the user's location, instead of standard locations. Added [nearby.php](https://github.com/khaaliDimaag/Wector/commit/3be3435d05a95bf2d681ba39c948f5cbec09ae41#diff-9c1f9343faf0dbed8785062aa36c77e1, "See change") to query Google's [Places API Web Service](https://developers.google.com/places/webservice/ "Check it out!").
+>> Improved the demo on [Wector](http://wector.ml "Check it out!") to include context-aware locations based on the user's location, instead of standard locations. Added [nearby.php](https://github.com/khaaliDimaag/Wector/commit/3be3435d05a95bf2d681ba39c948f5cbec09ae41#diff-9c1f9343faf0dbed8785062aa36c77e1 "See change") to query Google's [Places API Web Service](https://developers.google.com/places/webservice/ "Check it out!").
 
->> Added color rotation to the Add to Chrome button in [use.html](https://github.com/khaaliDimaag/Wector/commit/3be3435d05a95bf2d681ba39c948f5cbec09ae41#diff-765cbd3ed9223af7bed943ed8ae101cf, "See change").
+>> Added color rotation to the Add to Chrome button in [use.html](https://github.com/khaaliDimaag/Wector/commit/3be3435d05a95bf2d681ba39c948f5cbec09ae41#diff-765cbd3ed9223af7bed943ed8ae101cf "See change").
+
+> v 1.1.1
+>> Added error messages for non-PC and non-Chrome users, when they try to install the extension through the 'Add to Chrome' buttons. Changes made to the buttons on [main.html](https://github.com/khaaliDimaag/Wector/commit/f5148ca03b6d6ac043eb53f1d51c48047482abb5#diff-09a9b01308685cccc534d2fc6de5e952 "See change") and [use.html](https://github.com/khaaliDimaag/Wector/commit/f5148ca03b6d6ac043eb53f1d51c48047482abb5#diff-765cbd3ed9223af7bed943ed8ae101cf "See change")
 
 * * *

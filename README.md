@@ -30,7 +30,7 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 ### Updates
 
 ###### Version _v 1.0.2_ of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "See on the Chrome Webstore") Released [To Testers]
-###### Version _v 1.1.0_ of [Wector.ml](http://wector.ml "Visit us!") deployed
+###### Version _v 1.1.1_ of [Wector.ml](http://wector.ml "Visit us!") deployed
 
 - [New Features](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
 - [Changelog](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
