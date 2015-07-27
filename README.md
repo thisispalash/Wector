@@ -29,7 +29,8 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 
 ### Updates
 
-###### Version _v 1.0.2_ Released [To Testers]
+###### Version _v 1.0.2_ of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "See on the Chrome Webstore") Released [To Testers]
+###### Version _v 1.1.0_ of [Wector.ml](http://wector.ml "Visit us!") deployed
 
 - [New Features](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
 - [Changelog](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGELOG.md "Complete Changelog"): Detailed changelog of Wector
@@ -40,8 +41,6 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 The releases will follow the following numbering convention:
 
 \(Major Update\).\(Minor Update\).\(Bug Fix\)
-
-_Current Version_ : _v 1.0.2_
 
 #### License 
 
@@ -56,24 +55,26 @@ Made with <3 by
 
 * * *
 
-## News 
+## News
+
 - 24th July, 2015 : Initial Release \(_v_ 1.0.0\) [To testers]
-- 26th July, 2015 : [_v 1.0.1_](#updates "See change") Released [To testers]
-- 27th July, 2015 : [_v 1.0.2_](#updates "See change") Released [To testers]
 
 * * *
 
-## Known Bugs  
+## Known Bugs
+
 See [Issues](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/ISSUES.md "Known solved and unsolved issues")
 
 * * *
 
 ## Contributing
+
 See [Contribute](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CONTRIBUTE.md "Contribute to our project")
 
 * * *
 
-## Next Versions  
+## Next Versions
+
 See [Future](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/FUTURE.md "Plans for future versions")
 
 * * * 
