@@ -305,6 +305,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
  * Initialses the home of the viewer by using geolocation
  */
 function initializeHome () {
+	document.getElementById("inst").innerHTML = "Creating a demo specially for you!  <i class = 'lighter fa fa-spinner fa-pulse'></i>";
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
@@ -323,6 +324,73 @@ function showError(error) {
 }
 
 /*
+ * Starts the demo
+ */
+function callAwesome () {
+	document.getElementById("inst").innerHTML = "Awesome! Now <span class='lighter'>highlight</span> any of these places to find out how far they are from you:";
+	document.getElementById("inst").style.cursor = "auto";
+    document.getElementById("places").style.display = "block";
+    document.getElementById("inst").onclick = function () {
+    	return;
+    }
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+}
+
+/*
+ * Shows other three local locations in the demo
+ */
+function getMore (latsrc, lonsrc, airport) {
+	$.ajax ({
+		type:"GET",
+		url: "/nearby?lat="+latsrc+"&lon="+lonsrc+"&word=*&rad=15000",
+		success: function (data) {
+			data = JSON.parse(data);
+			var places = [];
+			var j = 0;
+			for (var i = 0; i < 3; i++) {
+				var x = data['results'][j]['name'];
+				j++;
+				if (x != airport) {
+					var change = "p"+(i+1);
+					document.getElementById(change).innerHTML = x;
+				}
+				else {
+					i--;
+				}
+			}
+			callAwesome();
+		},
+		error: function (err) {
+			callAwesome();
+		}
+	});
+}
+
+/*
+ * Shows Airport on p4 in the demo 
+ */
+function showAirport(latsrc, lonsrc) {
+	$.ajax ({
+		type:"GET",
+		url: "/nearby?lat="+latsrc+"&lon="+lonsrc+"&word=airport&rad=50000",
+		success: function (data) {
+			data = JSON.parse(data);
+			if (data['results'].length == 0) {
+				getMore(latsrc, lonsrc, "");
+				return;
+			}
+			var airport = data['results'][0]['name'];
+			document.getElementById("p4").innerHTML = airport;
+			getMore(latsrc, lonsrc, airport);
+		},
+		error: function (err) {
+			getMore(latsrc, lonsrc, "");
+			callAwesome();
+		}
+	});
+}
+
+/*
  * Displays the places to demo the extension
  */
 function showPosition(position) {
@@ -338,10 +406,7 @@ function showPosition(position) {
 	maxBikeDist = (maxBikeSpd)*(maxBikeTimeH+maxBikeTimeM/60.0);
 	weknowhome = true;
 	if (latsrc && lonsrc) {
-		document.getElementById("inst").innerHTML = "Awesome! Now <span class='lighter'>highlight</span> any of these places to find out how far they are from you:";
-		document.getElementById("inst").style.cursor = "auto";
-        document.getElementById("places").style.display = "block";
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+		showAirport(latsrc, lonsrc);
 	}
 	else {
 		showError(null);
@@ -379,7 +444,7 @@ function haversine() {
 
 
 // Start of custom_content_script.js
-console.log("Thanks for checking out Wector.ml (v 1.0.0)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
+console.log("Thanks for checking out Wector.ml (v 1.1.0)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
 /* Global Variables */
 // Getting home location
 var weknowhome = false;

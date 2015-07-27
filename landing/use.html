@@ -18,7 +18,7 @@
 		<img src="static/screenshots/Johnson.png" id="slideImg2" />
 		<img src="static/screenshots/MLH.png" id="slideImg3" />
 		<div id="slideNext">I don't like Thai food.</div>
-		<div id="install" onclick="chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'slides');" style="margin-top:25px">
+		<div id="install" onclick="chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'slides');" style="margin-top:25px; color:#FFFF00;">
 			Add to Chrome <img src="static/chrome128.png" />
 		</div>
 	</div>
@@ -26,19 +26,19 @@
 <script>
 	var i = 0;
 	var fileNames = ['Yelp','Airport','Johnson','MLH'];
+	var colors = ['#FFFF00', '#25BD25','#00B2FF','#FF8800'];
 	var messages = ['I don\'t like Thai food.','I\'m never late to the airport.','What is a museum?','Take me back to the home page <i class = "fa fa-frown-o"></i>'];
 	slideNext.onclick = function () {
 		i++;
 		if (i == 4) {
 			window.location.href = ('/')
 		}
-		$("#install").fadeOut(400);
 		$("#slideImg"+(i-1)).fadeOut(400);
 		$("#slideNext").fadeOut(400, function () {
 			document.getElementById("slideNext").innerHTML = messages[i];
 			$("#slideImg"+(i)).fadeIn(400);
 			$("#slideNext").fadeIn(400);
-			$("#install").fadeIn(400);
+			document.getElementById("install").style.color = colors[i];
 		});
 	};
 </script>
