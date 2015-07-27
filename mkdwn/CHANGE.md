@@ -12,6 +12,9 @@ See new features added to Wector and reflected on the published extension.
 > v 1.0.1
 >> Added functionality: Click the bar to prevent it from appearing. Reload the page to show the bar again.
 
+> v 1.0.2
+>> The Options page does not open automatically on every update now.
+
 
 * * *
 
