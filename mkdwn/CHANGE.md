@@ -27,6 +27,9 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 >> Initial release of [Wector](http://wector.ml "Visit us!").
 
 > v 1.1.0
->> Added local locations for the demo on [Wector](http://wector.ml "Check it out!").
+>> Added local locations for the demo.
+
+> v 1.1.1
+>> Added error messages for mobile and non-Chrome users.
 
 * * *
