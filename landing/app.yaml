@@ -13,6 +13,9 @@ handlers:
 - url: /geocode
   script: geocode.php
 
+- url: /nearby
+  script: nearby.php
+
 - url: /jss
   script: custom_content_script.js
 
