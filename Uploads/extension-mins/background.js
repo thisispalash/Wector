@@ -1,1 +1,2 @@
-chrome.runtime.onInstalled.addListener(function(){chrome.runtime.openOptionsPage()}),chrome.runtime.onMessage.addListener(function(e){"showOptions"==e.message&&chrome.runtime.openOptionsPage()});
+/* Thanks to : http://javascript-minifier.com/ */
+console.log("Thanks for installing Wector! Fork us on GitHub: https://github.com/khaaliDimaag/Wector"),chrome.runtime.onInstalled.addListener(function(e){"install"==e.reason&&chrome.runtime.openOptionsPage()}),chrome.runtime.onMessage.addListener(function(e){"showOptions"==e.message&&chrome.runtime.openOptionsPage()});
