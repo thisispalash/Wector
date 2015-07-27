@@ -17,10 +17,10 @@
 <body>
 	<img src="static/FullResLogo.png" id="logo" />
 	<div id="tagline">the quickest way to know where places are.</div>
-	<div id="install" onclick="chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'without trying all 4');">
+	<div id="install" onclick="installChrome(this);">
 		Add to Chrome <img src="static/chrome128.png" />
 	</div>
-	<div id="installpl" onclick="chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'after trying all 4');">
+	<div id="installpl" onclick="installChrome(this);">
 		Add to Chrome <img src="static/chrome128.png" />
 	</div>
 	<div id="try">
@@ -46,6 +46,41 @@
 	</div>
 	<div id="thisIsForTheExtension" style="visibility:hidden;"></div>
 	<script>
+		var ua = navigator.userAgent;
+		var where = "";
+
+	    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile/i.test(ua)) {
+	       where = "mob";
+	    }
+	    else if (/Chrome/i.test(ua)) {
+	       where = "chrome";
+	    }
+	    else {
+	       where = "other";
+	    }
+
+		function installChrome (el) {
+			if (where == "chrome") {
+				chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'slides');
+			}
+			else if (where == "other") {
+				el.style.fontSize = "22px";
+				el.style.color = randomColor();
+				el.innerHTML = "Only available on Chrome <i class='fa fa-frown-o'></i>";
+			}
+			else {
+				el.style.fontSize = "20px";
+				el.style.color = randomColor();
+				el.innerHTML = "Only available on computers!";
+			}
+		}
+
+		function randomColor() {
+			var colors = ['#FFFF00', '#25BD25','#00B2FF','#FF8800'];
+			var max = 3;
+			var min = 0;
+			return colors[Math.floor(Math.random() * (max - min + 1)) + min];
+		}
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
