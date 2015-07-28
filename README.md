@@ -58,6 +58,7 @@ Made with <3 by
 ## News
 
 - 24th July, 2015 : Initial Release \(_v_ 1.0.0\) [To testers]
+- 28th July, 2015 : Initial Public Release \(_v_ 1.0.2\) of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "See on the Chrome Webstore")
 
 * * *
 
