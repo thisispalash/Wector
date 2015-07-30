@@ -272,3 +272,106 @@ a:hover {
 #slideNext:hover {
 	background:#CFCFCF;
 }
+
+#ph {
+	float:left;
+	width:100%;
+}
+
+#banner {
+	background:black;
+	float:left;
+	width:100%;
+	height:100px;
+	line-height:100px;
+}
+
+#l1, #l2 {
+	float:left;
+	width:9%;
+}
+
+#l1 img, #l2 img {
+	width:80px;
+	vertical-align: middle;
+}
+
+#header {
+	width:80%;
+	float:left;
+	color:white;
+	font-size:36px;
+}
+
+#l2 {
+	text-align:right;
+	margin-right:1%;
+}
+
+#l1 {
+	text-align:left;
+	margin-left:1%;
+}
+
+#message {
+	width:100%;
+	float:left;
+	height:50px;
+	line-height: 50px;
+	background:#222;
+	color:white;
+	font-size:22px;
+	display:none;
+}
+
+#header a {
+	text-decoration: none;
+	color:white;
+
+	-moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+#header a:hover {
+	color:#5898f1;
+}
+
+.heartbeat {
+	-webkit-animation: color_change 1s infinite alternate;
+	-moz-animation: color_change 1s infinite alternate;
+	-ms-animation: color_change 1s infinite alternate;
+	-o-animation: color_change 1s infinite alternate;
+	animation: color_change 1s infinite alternate;
+}
+
+@-webkit-keyframes color_change {
+	0% { color:white; }
+	50% { color:#da552f; }
+	100% { color:white; }
+}
+@-moz-keyframes color_change {
+	0% { color:white; }
+	50% { color:#da552f; }
+	100% { color:white; }
+}
+@-ms-keyframes color_change {
+	0% { color:white; }
+	50% { color:#da552f; }
+	100% { color:white; }
+}
+@-o-keyframes color_change {
+	0% { color:white; }
+	50% { color:#da552f; }
+	100% { color:white; }
+}
+@keyframes color_change {
+	0% { color:white; }
+	50% { color:#da552f; }
+	100% { color:white; }
+}
+
+.hl {
+	background:#AFD5FF;
+}
