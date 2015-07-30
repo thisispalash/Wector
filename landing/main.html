@@ -13,10 +13,19 @@
 	<script src="jss"></script>
 	<meta name="google-site-verification" content="dsiEE_zjwduAKxJZORt6RZqv4ZXS7fdx7Pf7MMve3SE" />
 	<meta charset="UTF-8">
+	<meta name="Description" content="The quickest way to know where places are. Just highlight them!">
 </head>
 <body>
+	<div id="ph">
+		<div id="banner">
+			<div id="l1"><img src="static/WhiteLogo.png" /></div>
+			<div id="header">Welcome, <a href="http://www.producthunt.com/tech/wector-chrome-extension" target="_blank">Product Hunters!</a></div>
+			<div id="l2"><img src="static/PHLogo.png" /></div>
+		</div>
+		<div id="message">We've created a special demo just for you! <i class="fa fa-heart heartbeat"></i></div>
+	</div>
 	<img src="static/FullResLogo.png" id="logo" />
-	<div id="tagline">the quickest way to know where places are.</div>
+	<div id="tagline">The quickest way to know where places are. Just <span class="hl">highlight</span> them!</div>
 	<div id="install" onclick="installChrome(this);">
 		Add to Chrome <img src="static/chrome128.png" />
 	</div>
@@ -81,6 +90,21 @@
 			var min = 0;
 			return colors[Math.floor(Math.random() * (max - min + 1)) + min];
 		}
+
+		window.onload = function () {
+			setTimeout(function () {
+				if (document.getElementById("install").style.display == "none") {
+					document.getElementById("message").innerHTML = "Thanks for using Wector! <i class='heartbeat fa fa-heart'></i>";
+				}
+				else {
+					$("#message").click(function () {
+						$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+					});
+				}
+				document.getElementById("message").style.display = "block";
+			}, 200);
+		};
+		
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
