@@ -15,6 +15,11 @@ See new features added to Wector and reflected on the published extension.
 > v 1.0.2
 >> Fixed BUG: Options page opened automatically on every update. Fixed by checking for reason of install in [backgroud.js](https://github.com/khaaliDimaag/Wector/commit/8f3106d30e37bb2475c54015b30dc4dea36fdbd6#diff-99e282bfd699d9216408244ef482df6a "See change").
 
+> v 1.0.3
+>>
+- Fixed BUG: Wector's CSS IDs and classes caused change in layout on websites. Fixed by changing names in [content.css](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-238175df7f8b5f8ff0ecb210b7064619 "See change") and [content_script.js](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193a "See change").
+- Fixed BUG: Wector's bar would be dismissed and would not show until page page was reloaded. Fixed by changing onClick event listeners to `address` and `info` `<div>`s in lines [314](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193aR314 "See change"), [315](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193aR315 "See change"), [337](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193aR337 "See change"), and [338](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193aR338 "See change") of [content_script.js](https://github.com/khaaliDimaag/Wector/commit/6b6fe4f7f4cabf8fd9b0efce27a10b820ae412cb#diff-38d45d4b8390f2e44ce64c261829193a "See change").
+
 * * *
 
 See new features added to the [Wector.ml](http://wector.ml "Visit us!").

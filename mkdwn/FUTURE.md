@@ -18,6 +18,5 @@ Plans for the future versions of Wector:
 At [Wector.ml](http://wector.ml "Visit us!"):
 
 - [ ] Add a user guide / FAQ section
-- [ ] Add functionality for users not providing their location
 
 * * * 

@@ -29,7 +29,7 @@ Wector integrates the power of Google Maps seamlessly into your browsing experie
 
 ### Updates
 
-###### Version _v 1.0.2_ of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "See on the Chrome Webstore") Released To Public
+###### Version _v 1.0.3_ of [Wector Chrome Extension](https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde "See on the Chrome Webstore") Released To Public
 ###### Version _v 1.1.1_ of [Wector.ml](http://wector.ml "Visit us!") deployed
 
 - [New Features](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/CHANGE.md "Changelog for Users"): New Features added to Wector
@@ -50,8 +50,8 @@ License: [MIT License](https://github.com/khaaliDimaag/Wector/blob/master/mkdwn/
 
 Made with <3 by
 
-- _Karun Singh_: [GitHub](https://github.com/karunsingh), [Facebook](https://facebook.com/karun1710), [LinkedIn](https://www.linkedin.com/in/karun17)
-- _Palash Agarwal_: [GitHub](https://github.com/palash96rox), [Facebook](https://www.facebook.com/palash.96), [LinkedIn](https://www.linkedin.com/in/palash27a)
+- _Karun Singh_: [GitHub](https://github.com/karunsingh), [Facebook](https://facebook.com/karun1710), [LinkedIn](https://www.linkedin.com/in/karun17), [Twitter](https://twitter.com/arsenalians)
+- _Palash Agarwal_: [GitHub](https://github.com/palash96rox), [Facebook](https://www.facebook.com/palash.96), [LinkedIn](https://www.linkedin.com/in/palash27a), [Twitter](https://twitter.com/palash96_a)
 
 * * *
 
