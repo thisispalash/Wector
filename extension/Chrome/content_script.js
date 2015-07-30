@@ -1,9 +1,10 @@
 /*
- * Icon list (from Font-Awesome-4.0.3 and Material-Design-Iconic-Font) :
-  * Flight: "<i class='fa fa-paper-plane-o'></i>  "
-  * Car: "<i class='fa fa-car'></i>  "
-  * Bike: "<i class='fa fa-bicycle'></i>  "
-  * Walk: "<i class='zmdi zmdi-directions-walk'></i>  "
+ * Icon list (from Font-Awesome-4.0.3 and Material-Design-Iconic-Font) + Custom CSS:
+  * Flight: "<i class='fa fa-paper-plane-o Wector-plane'></i>  "
+  * Car: "<i class='fa fa-car Wector-car'></i>  "
+  * Bike: "<i class='fa fa-bicycle Wector-cycle'></i>  "
+  * Walk: "<i class='zmdi zmdi-directions-walk Wector-walk'></i>  "
+  * External Link: "<i class='fa fa-external-link Wector-map'>  "
  */
 
 /*
@@ -43,7 +44,7 @@ function displaySettingsAlert() {
 	var a = document.createElement("div");
 	var iconURL = chrome.extension.getURL("/logo48w.png");
 	a.innerHTML = "<img src = '"+iconURL+"' style='width:40px; vertical-align:middle;' /> needs to know where you are to show you travel estimates. Click here to set it up!";
-	a.id = "setAlert"
+	a.id = "WectorSetAlert"
 	a.style.position = "fixed";
 	a.style.bottom = "0";
 	a.style.left = "0";
@@ -98,7 +99,7 @@ function main(txt) {
 						londst = dstdata['results'][0]['geometry']['location']['lng'];
 						//console.log(latdst + " " + londst + "\n" + latsrc + " " + lonsrc);
 						var flightTime = getFlight(latdst, londst, latsrc, lonsrc);
-						var flight = "<i class='fa fa-paper-plane-o'></i>  " + flightTime + " hour";
+						var flight = "<i class='fa fa-paper-plane-o Wector-plane'></i>  " + flightTime + " hour";
 						if (flightTime != 1) {
 							flight+="s";
 						}
@@ -113,10 +114,10 @@ function main(txt) {
 		    	var dur = elements['duration'];
 
 		    	// Set Text
-		    	var car=" <i class='fa fa-car'></i>  " + dur['text'];
-		    	var flight=" <i class='fa fa-paper-plane-o'></i>  ";
-		    	var walk=" <i class='zmdi zmdi-directions-walk'></i>  ";
-		    	var bike=" <i class='fa fa-bicycle'></i>  ";
+		    	var car=" <i class='fa fa-car Wector-car'></i>  " + dur['text'];
+		    	var flight=" <i class='fa fa-paper-plane-o Wector-plane'></i>  ";
+		    	var walk=" <i class='zmdi zmdi-directions-walk Wector-walk'></i>  ";
+		    	var bike=" <i class='fa fa-bicycle Wector-cycle'></i>  ";
 
 		    	// Walking && Biking (Max: 3hours)
 		    	if((0.95*dist['value'])<=Math.max(maxWalkDist, maxBikeDist)) {
@@ -228,17 +229,17 @@ function main(txt) {
  */
 function findWidth (a, b, c, d) {
 	var sum = a+b+c+d;
-	return (sum == 10) ? "four" : (sum == 6) ? "three" : (sum == 3) ? "two" : "one";
+	return (sum == 10) ? "Wector4" : (sum == 6) ? "Wector3" : (sum == 3) ? "Wector2" : "Wector1";
 }
 
 /*
  * Reset function
  */
 function resetBodyClass () {
-	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bone\b/,'');
-	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\btwo\b/,'');
-	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bthree\b/,'');
-	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bfour\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bWector1\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bWector2\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bWector3\b/,'');
+	document.getElementsByTagName("body")[0].className = document.getElementsByTagName("body")[0].className.replace(/\bWector4\b/,'');
 }
 
 /*
@@ -246,19 +247,19 @@ function resetBodyClass () {
  */
 function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, priority_b, priority_w) {
 	var map_link = "https://www.google.com/maps/dir/"+src+"/"+dst;
-	dst = "<div id = 'address'>"+dst+"</div>";
+	dst = "<div id = 'WectorAddress'>"+dst+"</div>";
 	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	var text = dst;
 
-	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
-	show_link = "<div id = 'links'>" + show_link + "</div>";
+	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link Wector-map'></i></a>";
+	show_link = "<div id = 'WectorLinks'>" + show_link + "</div>";
 
-	text += "<div id = 'info'>";
+	text += "<div id = 'WectorInfo'>";
 
-	car = "<div class = 'mode'>"+car+"</div>";
-	flight = "<div class = 'mode'>"+flight+"</div>";
-	bike = "<div class = 'mode'>"+bike+"</div>";
-	walk = "<div class = 'mode'>"+walk+"</div>";
+	car = "<div class = 'WectorMode'>"+car+"</div>";
+	flight = "<div class = 'WectorMode'>"+flight+"</div>";
+	bike = "<div class = 'WectorMode'>"+bike+"</div>";
+	walk = "<div class = 'WectorMode'>"+walk+"</div>";
 
 	// Add the display to (var)text according to priority
 	text += (priority_c == 1) ? car : (priority_f == 1) ? flight : (priority_b == 1) ? bike : (priority_w == 1) ? walk : "";
@@ -288,10 +289,9 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 
 	// Remove display on click
 	a.onclick = function () {
-		hide = true;
 		lastQuery = "";
 		$(a).slideUp("fast", function() {document.body.removeChild(a);});
-	}
+	};
 
 	var previous = document.getElementById("Wector");
 	if (previous == null) {
@@ -299,19 +299,20 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 		document.getElementsByTagName("body")[0].className += widthOfEachMode;
 		document.body.appendChild(a);
 		$(a).slideDown("fast", function () {
-			var setHeightTo = $("#address").height();
-			document.getElementById("info").style.lineHeight = setHeightTo+"px";
-			document.getElementById("links").style.lineHeight = setHeightTo+"px";
+			var setHeightTo = $("#WectorAddress").height();
+			document.getElementById("WectorInfo").style.lineHeight = setHeightTo+"px";
+			document.getElementById("WectorLinks").style.lineHeight = setHeightTo+"px";
 			// Fix for corner case websites:
-			var ourBar = $("#address").width() + $("#info").width() + $("#links").width();
+			var ourBar = $("#WectorAddress").width() + $("#WectorInfo").width() + $("#WectorLinks").width();
 			var wholeScreen = $(this).width();
 			if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
-				document.getElementById("address").style.width = "36%";
-				document.getElementById("info").style.width = "60%";
-				document.getElementById("links").style.width = "4%";
+				document.getElementById("WectorAddress").style.width = "36%";
+				document.getElementById("WectorInfo").style.width = "60%";
+				document.getElementById("WectorLinks").style.width = "4%";
 			}
 		});
-		
+		document.getElementById("WectorAddress").onclick = function () {hide = true;};
+		document.getElementById("WectorInfo").onclick = function () {hide = true;};
 		setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
 	}
 	else {
@@ -321,18 +322,20 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			document.getElementsByTagName("body")[0].className += widthOfEachMode;
 			document.body.appendChild(a);
 			$(a).slideDown("fast", function () {
-				var setHeightTo = $("#address").height();
-				document.getElementById("info").style.lineHeight = setHeightTo+"px";
-				document.getElementById("links").style.lineHeight = setHeightTo+"px";
+				var setHeightTo = $("#WectorAddress").height();
+				document.getElementById("WectorInfo").style.lineHeight = setHeightTo+"px";
+				document.getElementById("WectorLinks").style.lineHeight = setHeightTo+"px";
 				//fix for corner case websites:
-				var ourBar = $("#address").width() + $("#info").width() + $("#links").width();
+				var ourBar = $("#WectorAddress").width() + $("#WectorInfo").width() + $("#WectorLinks").width();
 				var wholeScreen = $(this).width();
 				if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
-					document.getElementById("address").style.width = "36%";
-					document.getElementById("info").style.width = "60%";
-					document.getElementById("links").style.width = "4%";
+					document.getElementById("WectorAddress").style.width = "36%";
+					document.getElementById("WectorInfo").style.width = "60%";
+					document.getElementById("WectorLinks").style.width = "4%";
 				}
 			});
+			document.getElementById("WectorAddress").onclick = function () {hide = true;};
+			document.getElementById("WectorInfo").onclick = function () {hide = true;};
 			setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
 		});
 	}

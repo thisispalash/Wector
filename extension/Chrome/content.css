@@ -1,64 +1,64 @@
-.zmdi-directions-walk {
+.Wector-walk {
 	color : #FFFF00;
 }
 
-.fa-paper-plane-o {
+.Wector-plane {
 	color : #FF8800;
 }
 
-.fa-car {
+.Wector-car {
 	color : #00B2FF;
 }
 
-.fa-bicycle {
+.Wector-cycle {
 	color : #25BD25;
 }
 
-.fa-external-link {
+.Wector-map {
 	color : #F8F8FF;
 }
 
-#info {
+#WectorInfo {
 	padding:0.5%;
 	width:59%;
 	float:left;
 }
 
-#address {
+#WectorAddress {
 	padding:0.5%;
 	background:#222222;
 	float:left;
 	width:35%;
 }
 
-#links {
+#WectorLinks {
 	background:#181F38;
 	float:left;
 	width:3%;
 	padding:0.5%;
 }
 
-#setAlert {
+#WectorSetAlert {
 	background:rgba(0,0,0,0.85);
 	cursor:pointer;
 }
 
-.mode {
+.WectorMode {
 	float:left;
 }
 
-body.one .mode {
+body.Wector1 .WectorMode {
 	width:100%;
 }
 
-body.two .mode {
+body.Wector2 .WectorMode {
 	width:50%;
 }
 
-body.three .mode{
+body.Wector3 .WectorMode{
 	width:33%;
 }
 
-body.four .mode{
+body.Wector4 .WectorMode{
 	width:25%;
 }
