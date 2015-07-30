@@ -276,6 +276,7 @@ a:hover {
 #ph {
 	float:left;
 	width:100%;
+	display:none;
 }
 
 #banner {
