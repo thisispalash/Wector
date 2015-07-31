@@ -214,8 +214,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	var text = dst;
 
-	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link'></i></a>";
-	show_link = "<div id = 'links' tooltip='See route' tooltip-persistent>" + show_link + "</div>";
+	var show_link = "<i class='zmdi zmdi-directions Wector-map'></i>  Route";
+	show_link = "<div id = 'links'>" + show_link + "</div>";
 
 	text += "<div id = 'info'>";
 
@@ -274,7 +274,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 				document.getElementById("links").style.width = "4%";
 			}
 		});
-		
+		document.getElementById("links").onclick = function () {window.open(map_link, "_blank");};
 		setTimeout(function(){$(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);});}, 6660); // 6.66Os
 	}
 	else {
@@ -296,6 +296,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 					document.getElementById("links").style.width = "4%";
 				}
 			});
+			document.getElementById("links").onclick = function () {window.open(map_link, "_blank");};
 			setTimeout(function(){$(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);});}, 6660); // 6.66Os						
 		});
 	}
@@ -444,7 +445,7 @@ function haversine() {
 
 
 // Start of custom_content_script.js
-console.log("Thanks for checking out Wector.ml (v 1.1.1)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
+console.log("Thanks for checking out Wector.ml (v 1.2.1)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
 /* Global Variables */
 // Getting home location
 var weknowhome = false;

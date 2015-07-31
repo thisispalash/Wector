@@ -20,7 +20,7 @@
 
 #info {
 	padding:0.5%;
-	width:59%;
+	width:47%;
 	float:left;
 }
 
@@ -34,8 +34,9 @@
 #links {
 	background:#181F38;
 	float:left;
-	width:3%;
+	width:15%;
 	padding:0.5%;
+	cursor:pointer;
 }
 
 #setAlert {
