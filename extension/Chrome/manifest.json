@@ -1,6 +1,6 @@
 {
   "name": "Wector Chrome Extension",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "manifest_version": 2,
   "description": "The quickest way to know where places are. Just highlight them!",
   "options_ui": {
