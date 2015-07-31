@@ -251,7 +251,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 	var widthOfEachMode = " "+findWidth(priority_w, priority_b, priority_f, priority_c);
 	var text = dst;
 
-	var show_link = "<a href='"+map_link+"' target='_blank' ><i class='fa fa-external-link Wector-map'></i></a>";
+	var show_link = "<i class='zmdi zmdi-directions Wector-map'></i>  Route";
 	show_link = "<div id = 'WectorLinks'>" + show_link + "</div>";
 
 	text += "<div id = 'WectorInfo'>";
@@ -313,6 +313,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 		});
 		document.getElementById("WectorAddress").onclick = function () {hide = true;};
 		document.getElementById("WectorInfo").onclick = function () {hide = true;};
+		document.getElementById("WectorLinks").onclick = function () {window.open(map_link, "_blank");};
 		setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os
 	}
 	else {
@@ -336,6 +337,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			});
 			document.getElementById("WectorAddress").onclick = function () {hide = true;};
 			document.getElementById("WectorInfo").onclick = function () {hide = true;};
+			document.getElementById("WectorLinks").onclick = function () {window.open(map_link, "_blank");};
 			setTimeout(function(){ $(a).slideUp("fast", function(){if (document.contains(a)) document.body.removeChild(a);}); }, 6660); // 6.66Os						
 		});
 	}
