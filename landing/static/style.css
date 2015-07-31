@@ -279,6 +279,11 @@ a:hover {
 	display:none;
 }
 
+#hh {
+	float:left;
+	width:100%;
+}
+
 #banner {
 	background:black;
 	float:left;
@@ -298,7 +303,7 @@ a:hover {
 }
 
 #header {
-	width:80%;
+	width:100%;
 	float:left;
 	color:white;
 	font-size:36px;
@@ -349,27 +354,27 @@ a:hover {
 
 @-webkit-keyframes color_change {
 	0% { color:white; }
-	50% { color:#da552f; }
+	50% { color:#41BF62; }
 	100% { color:white; }
 }
 @-moz-keyframes color_change {
 	0% { color:white; }
-	50% { color:#da552f; }
+	50% { color:#41BF62; }
 	100% { color:white; }
 }
 @-ms-keyframes color_change {
 	0% { color:white; }
-	50% { color:#da552f; }
+	50% { color:#41BF62; }
 	100% { color:white; }
 }
 @-o-keyframes color_change {
 	0% { color:white; }
-	50% { color:#da552f; }
+	50% { color:#41BF62; }
 	100% { color:white; }
 }
 @keyframes color_change {
 	0% { color:white; }
-	50% { color:#da552f; }
+	50% { color:#41BF62; }
 	100% { color:white; }
 }
 
