@@ -20,6 +20,8 @@ See changes made to Wector and reflected on the published extension.
 - Wector changed the layout of some websites.
 - Bar was dismissed and hidden even when the external link was clicked
 
+> v 1.1.0
+>> Minor UI changes.
 
 * * *
 
@@ -36,5 +38,8 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 
 > v 1.1.1
 >> Added error messages for mobile and non-Chrome users.
+
+> v 1.2.0
+>> Reflected new UI of Wector Chrome Extension v 1.1.0
 
 * * *
