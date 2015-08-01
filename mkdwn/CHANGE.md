@@ -23,6 +23,9 @@ See changes made to Wector and reflected on the published extension.
 > v 1.1.0
 >> Minor UI changes.
 
+> v 1.1.1
+>> Fixed error: UI of the bar was messed up
+
 * * *
 
 See new features added to the [Wector.ml](http://wector.ml "Visit us!").
@@ -41,5 +44,8 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 
 > v 1.2.0
 >> Reflected new UI of Wector Chrome Extension v 1.1.0
+
+> v 1.2.1
+>> Reflected UI fix of Wector Chrome Extension v 1.1.1
 
 * * *

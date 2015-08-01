@@ -25,6 +25,9 @@ See new features added to Wector and reflected on the published extension.
 - Changed the width of `WectorLinks` and `WectorInfo` `<div>`s in [content.css](https://github.com/khaaliDimaag/Wector/commit/04b440b6729357649cef6ff52520498d91098b22#diff-238175df7f8b5f8ff0ecb210b7064619 "See change") and changed the text of `WectorLinks` `<div>` in line [254](https://github.com/khaaliDimaag/Wector/commit/04b440b6729357649cef6ff52520498d91098b22#diff-38d45d4b8390f2e44ce64c261829193aR254 "See change").
 - Changed the linking style of external links to google maps from icon to entire `<div>` in the `WectorLinks` `<div>` in lines [316](https://github.com/khaaliDimaag/Wector/commit/04b440b6729357649cef6ff52520498d91098b22#diff-38d45d4b8390f2e44ce64c261829193aR316 "See change") and [340](https://github.com/khaaliDimaag/Wector/commit/04b440b6729357649cef6ff52520498d91098b22#diff-38d45d4b8390f2e44ce64c261829193aR340 "See change") in [content_script.js](https://github.com/khaaliDimaag/Wector/commit/04b440b6729357649cef6ff52520498d91098b22#diff-38d45d4b8390f2e44ce64c261829193a "See change").
 
+> v 1.1.1
+>> UI fix [overlooked in change in v 1.1.0] : Changed the width of `WectorLinks` and `WectorInfo` `<div`s in lines [310](https://github.com/khaaliDimaag/Wector/commit/43a4b19991a7786ccd46503f5ac0166728380463#diff-38d45d4b8390f2e44ce64c261829193aR310 "See change"), [311](https://github.com/khaaliDimaag/Wector/commit/43a4b19991a7786ccd46503f5ac0166728380463#diff-38d45d4b8390f2e44ce64c261829193aR311 "See change"), [334](https://github.com/khaaliDimaag/Wector/commit/43a4b19991a7786ccd46503f5ac0166728380463#diff-38d45d4b8390f2e44ce64c261829193aR334 "See change"), and [335](https://github.com/khaaliDimaag/Wector/commit/43a4b19991a7786ccd46503f5ac0166728380463#diff-38d45d4b8390f2e44ce64c261829193aR335 "See change") of [content_script.js](https://github.com/khaaliDimaag/Wector/commit/43a4b19991a7786ccd46503f5ac0166728380463#diff-38d45d4b8390f2e44ce64c261829193a "See change").
+
 * * *
 
 See new features added to the [Wector.ml](http://wector.ml "Visit us!").
@@ -45,5 +48,9 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 
 > v 1.2.0
 >> Changed [custom_content_script.js](https://github.com/khaaliDimaag/Wector/commit/bdb6ed153f260ed2046de8384a789c953e08e845#diff-e9775483b064445e38c52b29f8bdbc27 "See change") and [custom_content.css](https://github.com/khaaliDimaag/Wector/commit/bdb6ed153f260ed2046de8384a789c953e08e845#diff-4bc52035aa979bb55b15421296ae4048 "See change") to reflect same changes as in v 1.1.0 of Wector Chrome Extension.
+
+> v 1.2.1
+>> Changed [custom_content_script.js](https://github.com/khaaliDimaag/Wector/commit/66372165e58b6f80f214da01b8a8ccb001492f3e?diff=unified#diff-e9775483b064445e38c52b29f8bdbc27 "See change") reflect same changes as in v 1.1.1 of Wector Chrome Extension.
+>> `Change not required on Wector.ml, but made to maintain consistency in code.`
 
 * * *

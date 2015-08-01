@@ -8,6 +8,7 @@ See the known bugs in Wector. These include resolved and unresolved issues.
 - [x] \(27th July\): <del>Options Page opens up on every update</del>.
 - [x] \(29th July\): <del>CSS Nomenclature of classes and IDs interfere with websites</del>.
 - [x] \(30th July\): <del>Bar hidden on clicking external link</del>.
+- [x] \(1st August\): <del>Bar structered on many layers for no reason on some sites</del>.
 
 * * *
 
