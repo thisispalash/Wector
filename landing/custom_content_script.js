@@ -270,8 +270,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			var wholeScreen = $(this).width();
 			if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
 				document.getElementById("address").style.width = "36%";
-				document.getElementById("info").style.width = "60%";
-				document.getElementById("links").style.width = "4%";
+				document.getElementById("info").style.width = "48%";
+				document.getElementById("links").style.width = "16%";
 			}
 		});
 		document.getElementById("links").onclick = function () {window.open(map_link, "_blank");};
@@ -292,8 +292,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 				var wholeScreen = $(this).width();
 				if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
 					document.getElementById("address").style.width = "36%";
-					document.getElementById("info").style.width = "60%";
-					document.getElementById("links").style.width = "4%";
+					document.getElementById("info").style.width = "48%";
+					document.getElementById("links").style.width = "16%";
 				}
 			});
 			document.getElementById("links").onclick = function () {window.open(map_link, "_blank");};
