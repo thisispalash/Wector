@@ -307,8 +307,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 			var wholeScreen = $(this).width();
 			if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
 				document.getElementById("WectorAddress").style.width = "36%";
-				document.getElementById("WectorInfo").style.width = "60%";
-				document.getElementById("WectorLinks").style.width = "4%";
+				document.getElementById("WectorInfo").style.width = "48%";
+				document.getElementById("WectorLinks").style.width = "16%";
 			}
 		});
 		document.getElementById("WectorAddress").onclick = function () {hide = true;};
@@ -331,8 +331,8 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
 				var wholeScreen = $(this).width();
 				if (Math.abs(1.03*ourBar - wholeScreen) > 5) {
 					document.getElementById("WectorAddress").style.width = "36%";
-					document.getElementById("WectorInfo").style.width = "60%";
-					document.getElementById("WectorLinks").style.width = "4%";
+					document.getElementById("WectorInfo").style.width = "48%";
+					document.getElementById("WectorLinks").style.width = "16%";
 				}
 			});
 			document.getElementById("WectorAddress").onclick = function () {hide = true;};
