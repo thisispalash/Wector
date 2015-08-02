@@ -53,4 +53,7 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 >> Changed [custom_content_script.js](https://github.com/khaaliDimaag/Wector/commit/66372165e58b6f80f214da01b8a8ccb001492f3e?diff=unified#diff-e9775483b064445e38c52b29f8bdbc27 "See change") reflect same changes as in v 1.1.1 of Wector Chrome Extension.
 >> `Change not required on Wector.ml, but made to maintain consistency in code.`
 
+> v 1.3.0
+>> Added detailed Google Analytics Event Tracking to track all the possible events on the site in [custom_content_script.js](https://github.com/khaaliDimaag/Wector/commit/706896fafe5bba681b34f4b34bd045bee50ba6b2#diff-e9775483b064445e38c52b29f8bdbc27 "See change"), [main.html](https://github.com/khaaliDimaag/Wector/commit/706896fafe5bba681b34f4b34bd045bee50ba6b2#diff-09a9b01308685cccc534d2fc6de5e952 "See change"), and [use.html](https://github.com/khaaliDimaag/Wector/commit/706896fafe5bba681b34f4b34bd045bee50ba6b2#diff-765cbd3ed9223af7bed943ed8ae101cf "See change")
+
 * * *

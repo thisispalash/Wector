@@ -48,4 +48,7 @@ See new features added to the [Wector.ml](http://wector.ml "Visit us!").
 > v 1.2.1
 >> Reflected UI fix of Wector Chrome Extension v 1.1.1
 
+> v 1.3.0
+>> Added Event tracking functionality on the landing page(s)
+
 * * *
