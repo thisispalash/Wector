@@ -1,0 +1,32 @@
+Google Analytics Tracking Info :
+
+- Page Views:
+* "Not Installed" == Page('/') viewed when extension not installed
+* "Installed" == Page('/') viewed after installation
+* "Unconvinced" == Page('/use') viewed after highlighting 4 times
+
+- Events:
+* Body -
+	Highlight:
+	- (label), (value)
+	- <text>, <queried> == Highlighted <text>; Number of times total highlighted = <queried>;
+* Button -
+	Install: (Installing - hopefully)
+	- (label), (value)
+	- 'main', N/A == Installed on page('/')
+	- 'slides', <counter> == Installed on page('/use') after seeing <counter> screenshots
+	Want: (Want to install, but are unable to)
+	- (label), (value)
+	- 'main_'+<where>, N/A == Want to install on browser <where> at page('/')
+	- 'main_mobile', N/A == Want to install on mobile at page('/')
+	- 'slides_'+<where>, <counter> == Want to install on browser <where> at page('/use')
+	- 'slides_mobile', <counter> == Want to install on mobile at page('/use')
+	Installed: (Installed and using)
+	- (label)
+	- 'email' == Sent Feedback through mail
+	- 'code' == Saw code on GitHub
+	- 'karun' == Saw Karun's LinkedIn
+	- 'palash' == Saw Palash's LinkedIn
+* Div -
+	Tried: (Tried the demo)
+	Unconvinced: (Unconvinced by the demo)
