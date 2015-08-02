@@ -354,27 +354,27 @@ a:hover {
 
 @-webkit-keyframes color_change {
 	0% { color:white; }
-	50% { color:#41BF62; }
+	50% { color:#ce0000; }
 	100% { color:white; }
 }
 @-moz-keyframes color_change {
 	0% { color:white; }
-	50% { color:#41BF62; }
+	50% { color:#ce0000; }
 	100% { color:white; }
 }
 @-ms-keyframes color_change {
 	0% { color:white; }
-	50% { color:#41BF62; }
+	50% { color:#ce0000; }
 	100% { color:white; }
 }
 @-o-keyframes color_change {
 	0% { color:white; }
-	50% { color:#41BF62; }
+	50% { color:#ce0000; }
 	100% { color:white; }
 }
 @keyframes color_change {
 	0% { color:white; }
-	50% { color:#41BF62; }
+	50% { color:#ce0000; }
 	100% { color:white; }
 }
 
