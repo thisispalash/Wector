@@ -24,68 +24,72 @@
 	</div>
 </body>
 <script>
-	var i = 0;
+	// Slideshow
+	var counter = 0;
 	var fileNames = ['Yelp','Airport','Johnson','MLH'];
 	var colors = ['#FFFF00', '#25BD25','#00B2FF','#FF8800'];
 	var messages = ['I don\'t like Thai food.','I\'m never late to the airport.','What is a museum?','Take me back to the home page <i class = "fa fa-frown-o"></i>'];
 	slideNext.onclick = function () {
-		i++;
-		if (i == 4) {
+		counter++;
+		if (counter == 4) {
 			window.location.href = ('/')
 		}
-		$("#slideImg"+(i-1)).fadeOut(400);
+		$("#slideImg"+(counter-1)).fadeOut(400);
 		$("#slideNext").fadeOut(400, function () {
-			document.getElementById("slideNext").innerHTML = messages[i];
-			$("#slideImg"+(i)).fadeIn(400);
+			document.getElementById("slideNext").innerHTML = messages[counter];
+			$("#slideImg"+(counter)).fadeIn(400);
 			$("#slideNext").fadeIn(400);
-			document.getElementById("install").style.color = colors[i];
+			document.getElementById("install").style.color = colors[counter];
 		});
 	};
 
+	// Detect Browser
 	var ua = navigator.userAgent;
 	var where = "";
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile/i.test(ua)) {
        where = "mob";
-    }
-    else if (/Chrome/i.test(ua)) {
+    } else if (/Chrome/i.test(ua)) {
        where = "chrome";
-    }
-    else {
+    } else if (/Firefox/i.test(ua)) {
+    	where = "firefox";
+    } else if (/Safari/i.test(ua)) {
+    	where = "safari";
+    } else {
        where = "other";
     }
-
 	function installChrome (el) {
 		if (where == "chrome") {
-			chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'slides');
-		}
-		else if (where == "other") {
+			chrome.webstore.install('https://chrome.google.com/webstore/detail/fnhndnmiikmadhdpfajepacocmeaikde', function (e) { window.location.href = '/';}); ga('send', 'event', 'button', 'install', 'slides', counter);
+		} else if (where == "firefox" || where == "safari" || where == "other") {
 			el.style.fontSize = "22px";
 			el.style.color = randomColor();
 			el.innerHTML = "Only available on Chrome <i class='fa fa-frown-o'></i>";
-		}
-		else {
+			ga('send', 'event', 'button', 'want', 'slides_'+where, counter);
+		} else {
 			el.style.fontSize = "20px";
 			el.style.color = randomColor();
 			el.innerHTML = "Only available on computers!";
+			ga('send', 'event', 'button', 'want', 'slides_mobile', counter);
 		}
 	}
-
 	function randomColor() {
 		var colors = ['#FFFF00', '#25BD25','#00B2FF','#FF8800'];
 		var max = 3;
 		var min = 0;
 		return colors[Math.floor(Math.random() * (max - min + 1)) + min];
 	}
-</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-65210998-1', 'auto');
-  ga('send', 'pageview');
+	// Google Analytics
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-65210998-1', 'auto');
+	ga('send', {
+		'hitType': 'pageview',
+		'page': '/use',
+		'title': 'Unconvinced'
+	});
 
 </script>
 </html>

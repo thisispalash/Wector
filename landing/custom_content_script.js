@@ -307,6 +307,7 @@ function alertUser (src, dst, car, flight, bike, walk, priority_c, priority_f, p
  */
 function initializeHome () {
 	document.getElementById("inst").innerHTML = "Creating a demo specially for you!  <i class = 'lighter fa fa-spinner fa-pulse'></i>";
+	ga('send', 'event', 'div', 'tried');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
@@ -445,7 +446,6 @@ function haversine() {
 
 
 // Start of custom_content_script.js
-console.log("Thanks for checking out Wector.ml (v 1.2.1)! See our code on GitHub: https://github.com/khaaliDimaag/Wector");
 /* Global Variables */
 // Getting home location
 var weknowhome = false;
