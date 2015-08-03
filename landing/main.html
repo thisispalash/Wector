@@ -83,21 +83,6 @@
 			var min = 0;
 			return colors[Math.floor(Math.random() * (max - min + 1)) + min];
 		}
-
-		// Display appropriate Landing
-		window.onload = function () {
-			setTimeout(function () {
-				if (document.getElementById("install").style.display == "none") {
-					document.getElementById("message").innerHTML = "Thanks for using Wector! <i class='heartbeat fa fa-heart'></i>";
-				}
-				else {
-					$("#message").click(function () {
-						$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-					});
-				}
-				document.getElementById("message").style.display = "block";
-			}, 200);
-		};
 		
 		// Anchor Links
 		function email () {

@@ -99,7 +99,15 @@ a {
 	cursor:pointer;
 }
 
+#p4a a {
+	cursor:pointer;
+}
+
 a:hover {
+	color:silver;
+}
+
+#p1a:hover {
 	color:silver;
 }
 
