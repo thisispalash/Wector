@@ -27,7 +27,7 @@ function checkHighlight() {
 	        text = document.selection.createRange().text;
 	    }
 
-	    if (text != "" && text.length < 50 && text != lastQuery) {
+	    if (text != "" && text.length < 50 && text != lastQuery && !trie.exists(text)) {
 	    	initializeHome(1, function() {
 	    		if (hasSet) {
 		    		main(text);
@@ -420,6 +420,83 @@ function haversine() {
        return R * c;
 }
 
+/*
+ * Read words from dictionary.txt, insert them in the dictionary trie
+ */
+function initializeDictionary () {
+	trie = new suffixTree ();
+	var list = ['america'];
+	trie.insertList(list);
+}
+
+/*
+ * Suffix tree module:
+ */
+ var suffixTreeNode = function (data, keys, next, isEnd, words) {
+    this.data = data;
+    this.keys = keys;
+    this.next = next;
+    this.isEnd = isEnd;
+    this.words = words;
+};
+
+var suffixTree = function () {
+    this.root = new suffixTreeNode(' ', [], [], false, []);
+}
+
+suffixTree.prototype.insertList = function (x) {
+    for (var i = 0; i < x.length; i++) {
+        this.insertWord(x[i], i);
+    }
+}
+
+suffixTree.prototype.insertWord = function (s, index) {
+    if (s.length == 0) {
+        return;
+    }
+    else {
+        var current = this.root;
+        for (var i = 0; i < s.length; i++) {
+            var ch = s[i];
+            ch = ch.toLowerCase();
+            var find = current.keys.indexOf(ch);
+            if (find == -1) {
+                current.keys.push(ch);
+                current.next.push(new suffixTreeNode(ch, [], [], false, []));
+                current = current.next[current.next.length-1];
+            }
+            else {
+                current = current.next[find];
+            }
+            current.isEnd = true;
+            if (current.words.indexOf(index) == -1) current.words.push(index);
+        }
+    }
+}
+
+suffixTree.prototype.exists = function (s) {
+    s = s.toLowerCase();
+    var current = this.root;
+    for (var i = 0; i < s.length; i++) {
+        var ch = s[i];
+        var find = current.keys.indexOf(ch);
+        if (find == -1) {
+            return false;
+        }
+        else {
+            current = current.next[find];
+        }
+    }
+    if (current.isEnd) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// End of suffix tree module
+
 // Start of content_script.js
 // Icon Links
 var fa_link = document.createElement("link");
@@ -447,10 +524,14 @@ var maxWalkDist;
 var maxBikeDist;
 // Stores last text highlighted.
 var lastQuery = "";
+// Dictionary trie
+var trie;
 // Check if Extentsion is installed
 atWectorML();
 // Initialise Home Settings
 initializeHome(0, function() {});
+// Instantiate dictionary
+initializeDictionary();
 // Show/Hide Alert
 var hide;
 window.onload = setHide;
