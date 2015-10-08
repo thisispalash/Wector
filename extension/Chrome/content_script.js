@@ -26,7 +26,6 @@ function checkHighlight() {
 	    } else if (document.selection && document.selection.type != "Control") {
 	        text = document.selection.createRange().text;
 	    }
-
 	    if (text != "" && text.length < 50 && text != lastQuery && !trie.exists(text)) {
 	    	initializeHome(1, function() {
 	    		if (hasSet) {
@@ -425,8 +424,7 @@ function haversine() {
  */
 function initializeDictionary () {
 	trie = new suffixTree ();
-	var list = ['america'];
-	trie.insertList(list);
+	trie.insertList(words);
 }
 
 /*

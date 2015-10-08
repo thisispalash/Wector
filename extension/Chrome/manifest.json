@@ -12,7 +12,7 @@
     {
       "matches": ["<all_urls>"],
       "css": ["content.css"],
-      "js": ["content_script.js", "jquery-1.11.3.min.js"]
+      "js": ["words.js", "suffixTree.js", "content_script.js", "jquery-1.11.3.min.js"]
     }
   ],
   "permissions":["storage"],
