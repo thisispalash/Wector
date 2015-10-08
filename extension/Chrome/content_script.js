@@ -26,7 +26,7 @@ function checkHighlight() {
 	    } else if (document.selection && document.selection.type != "Control") {
 	        text = document.selection.createRange().text;
 	    }
-	    if (text != "" && text.length < 50 && text != lastQuery && !trie.exists(text)) {
+	    if (text != "" && text.length < 50 && text != lastQuery && !trie.exists(text) && !isTwoDigitisOnly(text)) {
 	    	initializeHome(1, function() {
 	    		if (hasSet) {
 		    		main(text);
@@ -34,6 +34,12 @@ function checkHighlight() {
 	    	});
 	    }
 	}
+}
+
+function isTwoDigitisOnly(text) {
+	if(text.length <= 2 && !isNaN(text))
+		return true;
+	return false;
 }
 
 /*
