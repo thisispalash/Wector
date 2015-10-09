@@ -26,7 +26,7 @@ function checkHighlight() {
 	    } else if (document.selection && document.selection.type != "Control") {
 	        text = document.selection.createRange().text;
 	    }
-	    if (text != "" && text.length < 50 && text != lastQuery && !trie.exists(text) && !isTwoDigitisOnly(text)) {
+	    if (text != "" && text.length < 50 && text != lastQuery && (!trie.exists(text) || isFirstLetterCapital(text)) && !isThreeDigitisOrLess(text)) {
 	    	initializeHome(1, function() {
 	    		if (hasSet) {
 		    		main(text);
@@ -36,8 +36,12 @@ function checkHighlight() {
 	}
 }
 
-function isTwoDigitisOnly(text) {
-	if(text.length <= 2 && !isNaN(text))
+function isFirstLetterCapital(string) {
+  return string.charAt(0) === string.charAt(0).toUpperCase();
+}
+
+function isThreeDigitisOrLess(text) {
+	if(text.length <= 3 && !isNaN(text))
 		return true;
 	return false;
 }
